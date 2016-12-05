@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.springframework.javaconfig:spring-javaconfig:1.0.0.m3">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.javaconfig/spring-javaconfig/1.0.0.m3/c9d5f1fb2603a85c40fb5ba40b42e64b78469ef9/spring-javaconfig-1.0.0.m3.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.javaconfig/spring-javaconfig/1.0.0.m3/ad964f9015a1b800187acbbaf5399c5b83598911/spring-javaconfig-1.0.0.m3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
