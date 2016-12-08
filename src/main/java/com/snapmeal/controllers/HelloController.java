@@ -17,7 +17,7 @@ import javax.ws.rs.core.Response;
  */
 
 @Component
-@Path("/")
+@Path("/hello")
 public class HelloController {
 
     @Autowired

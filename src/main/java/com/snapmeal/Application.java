@@ -1,6 +1,7 @@
 package com.snapmeal;
 
 import com.snapmeal.configuration.SpringConfiguration;
+import com.snapmeal.controllers.HelloController;
 import com.snapmeal.services.HelloService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -12,6 +13,7 @@ public class Application {
     public static void main(String[] args) {
         ApplicationContext appContext = new AnnotationConfigApplicationContext(SpringConfiguration.class);
         HelloService helloService = (HelloService) appContext.getBean("helloService");
+        HelloController helloController = (HelloController) appContext.getBean("helloController");
         System.out.println(helloService.hello());
     }
 }
