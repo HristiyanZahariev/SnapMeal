@@ -28,7 +28,7 @@
 
     <!-- configure the Jersey-Sring servlet -->
     <servlet>
-        <servlet-name>RestuarantApplication</servlet-name>
+        <servlet-name>SnapMeal</servlet-name>
         <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
         <init-param>
             <param-name>javax.ws.rs.Application</param-name>
@@ -37,7 +37,7 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
-        <servlet-name>RestuarantApplication</servlet-name>
+        <servlet-name>SnapMeal</servlet-name>
         <url-pattern>/*</url-pattern>
     </servlet-mapping>
 </web-app>
