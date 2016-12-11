@@ -17,7 +17,29 @@ public class Recipe {
 
     private String name;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Recipe recipe = (Recipe) o;
+
+        if (id != null ? !id.equals(recipe.id) : recipe.id != null) return false;
+        if (name != null ? !name.equals(recipe.name) : recipe.name != null) return false;
+        return description != null ? description.equals(recipe.description) : recipe.description == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        return result;
+    }
+
     public Long getId() {
+
         return id;
     }
 
