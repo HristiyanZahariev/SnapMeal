@@ -1,8 +1,11 @@
 package com.snapmeal.controllers;
 
+import com.snapmeal.dao.Recipe;
+import com.snapmeal.repositories.RecipeRepository;
 import com.snapmeal.services.HelloService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
@@ -22,6 +25,8 @@ public class HelloController {
 
     @Autowired
     HelloService helloService;
+
+    RecipeRepository repository;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
