@@ -16,4 +16,8 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
     compile 'org.glassfish.jersey.media:jersey-media-json-jackson:2.19'
     compile 'org.glassfish.jersey.ext:jersey-spring3:2.24.1'
+    compile 'com.zaxxer:HikariCP:2.5.1'
+    compile group: 'org.springframework', name: 'spring-orm', version: '4.3.4.RELEASE'
+    compile group: 'org.hibernate', name: 'hibernate-entitymanager', version: '5.2.4.Final'
+    compile group: 'org.springframework.data', name: 'spring-data-jpa', version: '1.10.5.RELEASE'
 }
