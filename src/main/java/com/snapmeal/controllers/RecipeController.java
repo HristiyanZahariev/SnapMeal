@@ -1,18 +1,13 @@
 package com.snapmeal.controllers;
 
-import com.snapmeal.dao.Recipe;
-import com.snapmeal.repositories.RecipeRepository;
-import com.snapmeal.services.HelloService;
+import com.snapmeal.entity.Recipe;
+import com.snapmeal.repository.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.List;
 
 /**
  * Created by hristiyan on 07.12.16.
@@ -41,7 +36,6 @@ public class RecipeController {
 
 
     @POST
-    @Path("/new")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response postRecipe(Recipe recipe) {
