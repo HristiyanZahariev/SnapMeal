@@ -1,4 +1,4 @@
-package com.snapmeal.dao;
+package com.snapmeal.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,7 +21,7 @@ public class User {
     private String password;
 
     @Override
-    public String toString() {
+public String toString() {
         return "User{" +
                 "id=" + id +
                 ", fName='" + fName + '\'' +

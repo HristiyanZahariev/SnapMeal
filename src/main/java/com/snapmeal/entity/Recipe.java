@@ -1,9 +1,6 @@
-package com.snapmeal.dao;
+package com.snapmeal.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created by hristiyan on 11.12.16.
