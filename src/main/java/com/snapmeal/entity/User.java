@@ -15,8 +15,8 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private String fName;
-    private String lName;
+    private String firstName;
+    private String lastName;
     private String email;
     private String password;
 
@@ -24,8 +24,8 @@ public class User {
 public String toString() {
         return "User{" +
                 "id=" + id +
-                ", fName='" + fName + '\'' +
-                ", lName='" + lName + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 '}';
@@ -39,8 +39,8 @@ public String toString() {
         User user = (User) o;
 
         if (id != user.id) return false;
-        if (fName != null ? !fName.equals(user.fName) : user.fName != null) return false;
-        if (lName != null ? !lName.equals(user.lName) : user.lName != null) return false;
+        if (firstName != null ? !firstName.equals(user.firstName) : user.firstName != null) return false;
+        if (lastName != null ? !lastName.equals(user.lastName) : user.lastName != null) return false;
         if (email != null ? !email.equals(user.email) : user.email != null) return false;
         return password != null ? password.equals(user.password) : user.password == null;
 
@@ -49,8 +49,8 @@ public String toString() {
     @Override
     public int hashCode() {
         int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + (fName != null ? fName.hashCode() : 0);
-        result = 31 * result + (lName != null ? lName.hashCode() : 0);
+        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
+        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
         return result;
@@ -61,12 +61,12 @@ public String toString() {
         return id;
     }
 
-    public String getfName() {
-        return fName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public String getlName() {
-        return lName;
+    public String getLastName() {
+        return lastName;
     }
 
     public String getEmail() {
@@ -82,12 +82,12 @@ public String toString() {
         this.id = id;
     }
 
-    public void setfName(String fName) {
-        this.fName = fName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public void setlName(String lName) {
-        this.lName = lName;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public void setEmail(String email) {
@@ -102,10 +102,10 @@ public String toString() {
 
     }
 
-    public User(String fName, String lName, String email, String password) {
+    public User(String firstName, String lName, String email, String password) {
 
-        this.fName = fName;
-        this.lName = lName;
+        this.firstName = firstName;
+        this.lastName = lName;
         this.email = email;
         this.password = password;
     }
