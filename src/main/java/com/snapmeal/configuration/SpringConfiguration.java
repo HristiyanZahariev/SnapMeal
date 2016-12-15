@@ -1,9 +1,14 @@
 package com.snapmeal.configuration;
 
 import com.snapmeal.controllers.RecipeController;
+import com.snapmeal.entity.Recipe;
+import com.snapmeal.service.RecipeService;
+import com.snapmeal.service.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+
+import java.util.List;
 
 
 /**
@@ -18,5 +23,14 @@ public class SpringConfiguration {
         return new RecipeController();
     }
 
+    @Bean(name = "recpieService")
+    RecipeService recipeService() {
+        return new RecipeService();
+    }
+
+    @Bean(name = "userService")
+    UserService userService() {
+        return new UserService();
+    }
 
 }

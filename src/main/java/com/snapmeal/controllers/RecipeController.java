@@ -2,6 +2,7 @@ package com.snapmeal.controllers;
 
 import com.snapmeal.entity.Recipe;
 import com.snapmeal.repository.RecipeRepository;
+import com.snapmeal.service.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,17 +14,16 @@ import javax.ws.rs.core.Response;
  * Created by hristiyan on 07.12.16.
  */
 
-@Component
 @Path("/recipe")
 public class RecipeController {
 
     @Autowired
-    private RecipeRepository repository;
+    RecipeService recipeInstance;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllRecipes() {
-       return Response.ok(repository.findAll()).build();
+       return Response.ok(recipeInstance.getAllRecipes()).build();
     }
 
     @GET
@@ -31,16 +31,15 @@ public class RecipeController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getRecipeById(@PathParam("id") String id) {
         long idx = Long.valueOf(id).longValue();
-        return Response.status(200).entity(repository.findOne(idx)).build();
+        return Response.status(200).entity(recipeInstance.findRecipeById(idx)).build();
     }
 
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response postRecipe(Recipe recipe) {
-        Recipe something = repository.save(recipe);
-        return Response.ok(something).build();
+    public Response createRecipe(Recipe recipe) {
+        return Response.ok(recipeInstance.createRecipe(recipe)).build();
 
     }
 
