@@ -3,6 +3,7 @@ package com.snapmeal.controllers;
 
 import com.snapmeal.entity.User;
 import com.snapmeal.repository.UserRepository;
+import com.snapmeal.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,21 +19,27 @@ import javax.ws.rs.core.Response;
 public class UserController {
 
     @Autowired
-    private UserRepository repository;
+    private UserService userInstance;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllUsers() {
-        return Response.ok(repository.findAll()).build();
+        return Response.ok(userInstance.getAllUsers()).build();
     }
 
     @POST
-    @Path("/new")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response postRecipe(User user) {
-        User something = repository.save(user);
-        return Response.ok(something).build();
+    public Response createUser(User user) {
+        return Response.ok(userInstance.createUser(user)).build();
 
+    }
+
+    @GET
+    @Path("{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getRecipeById(@PathParam("id") String id) {
+        long idx = Long.valueOf(id).longValue();
+        return Response.status(200).entity(userInstance.findUserById(idx)).build();
     }
 }
