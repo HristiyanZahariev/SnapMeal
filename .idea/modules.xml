@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/SnapMeal.iml" filepath="$PROJECT_DIR$/.idea/modules/SnapMeal.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/SnapMeal_main.iml" filepath="$PROJECT_DIR$/.idea/modules/SnapMeal_main.iml" group="SnapMeal" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/SnapMeal_test.iml" filepath="$PROJECT_DIR$/.idea/modules/SnapMeal_test.iml" group="SnapMeal" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/snapmeal.iml" filepath="$PROJECT_DIR$/.idea/modules/snapmeal.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/snapmeal_main.iml" filepath="$PROJECT_DIR$/.idea/modules/snapmeal_main.iml" group="snapmeal" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/snapmeal_test.iml" filepath="$PROJECT_DIR$/.idea/modules/snapmeal_test.iml" group="snapmeal" />
     </modules>
   </component>
 </project>

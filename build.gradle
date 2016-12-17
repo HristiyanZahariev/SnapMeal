@@ -21,6 +21,9 @@ dependencies {
     compile group: 'org.springframework', name: 'spring-orm', version: '4.3.4.RELEASE'
     compile group: 'org.hibernate', name: 'hibernate-core', version: '5.2.2.Final'
     compile group: 'org.springframework.data', name: 'spring-data-jpa', version: '1.10.5.RELEASE'
+    compile group: 'org.springframework.security', name: 'spring-security-web', version: '4.2.0.RELEASE'
+    compile group: 'org.springframework.security', name: 'spring-security-config', version: '4.2.0.RELEASE'
+    compile group: 'com.clarifai.clarifai-api2', name: 'core', version: '2.2.1'
     compile 'com.h2database:h2:1.4.193'
 
 }

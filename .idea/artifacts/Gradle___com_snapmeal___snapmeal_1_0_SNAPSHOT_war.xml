@@ -1,14 +1,14 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="Gradle : com.snapmeal : SnapMeal-1.0-SNAPSHOT.war (exploded)">
-    <output-path>$PROJECT_DIR$/out/artifacts/SnapMeal/exploded/SnapMeal-1.0-SNAPSHOT.war</output-path>
+  <artifact type="war" name="Gradle : com.snapmeal : snapmeal-1.0-SNAPSHOT.war">
+    <output-path>$PROJECT_DIR$/out/artifacts/snapmeal</output-path>
     <properties id="gradle-properties">
       <options external-project-path="$PROJECT_DIR$" />
     </properties>
-    <root id="root">
-      <element id="javaee-facet-resources" facet="SnapMeal_main/web/Web Gradle : SnapMeal-1.0-SNAPSHOT.war" />
+    <root id="archive" name="snapmeal-1.0-SNAPSHOT.war">
+      <element id="javaee-facet-resources" facet="snapmeal_main/web/Web Gradle : snapmeal-1.0-SNAPSHOT.war" />
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
-          <element id="module-output" name="SnapMeal_main" />
+          <element id="module-output" name="snapmeal_main" />
           <element id="dir-copy" path="$PROJECT_DIR$/build/resources/main" />
         </element>
         <element id="directory" name="lib">
@@ -17,7 +17,11 @@
           <element id="library" level="project" name="Gradle: org.glassfish.jersey.ext:jersey-spring3:2.24.1" />
           <element id="library" level="project" name="Gradle: com.zaxxer:HikariCP:2.2.5" />
           <element id="library" level="project" name="Gradle: org.springframework:spring-test:4.0.5.RELEASE" />
+          <element id="library" level="project" name="Gradle: org.springframework:spring-orm:4.3.4.RELEASE" />
+          <element id="library" level="project" name="Gradle: org.hibernate:hibernate-core:5.2.2.Final" />
           <element id="library" level="project" name="Gradle: org.springframework.data:spring-data-jpa:1.10.5.RELEASE" />
+          <element id="library" level="project" name="Gradle: org.springframework.security:spring-security-web:4.2.0.RELEASE" />
+          <element id="library" level="project" name="Gradle: org.springframework.security:spring-security-config:4.2.0.RELEASE" />
           <element id="library" level="project" name="Gradle: com.h2database:h2:1.4.193" />
           <element id="library" level="project" name="Gradle: cglib:cglib-nodep:2.1_3" />
           <element id="library" level="project" name="Gradle: org.glassfish.jersey.ext:jersey-entity-filtering:2.19" />
@@ -28,16 +32,24 @@
           <element id="library" level="project" name="Gradle: org.glassfish.jersey.containers:jersey-container-servlet-core:2.24.1" />
           <element id="library" level="project" name="Gradle: org.glassfish.hk2:hk2:2.5.0-b05" />
           <element id="library" level="project" name="Gradle: org.glassfish.hk2:spring-bridge:2.5.0-b05" />
-          <element id="library" level="project" name="Gradle: org.springframework:spring-web:3.2.3.RELEASE" />
           <element id="library" level="project" name="Gradle: javax.ws.rs:javax.ws.rs-api:2.0.1" />
+          <element id="library" level="project" name="Gradle: org.springframework:spring-jdbc:4.3.4.RELEASE" />
+          <element id="library" level="project" name="Gradle: org.springframework:spring-tx:4.3.4.RELEASE" />
           <element id="library" level="project" name="Gradle: org.jboss.logging:jboss-logging:3.3.0.Final" />
+          <element id="library" level="project" name="Gradle: org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final" />
+          <element id="library" level="project" name="Gradle: antlr:antlr:2.7.7" />
+          <element id="library" level="project" name="Gradle: org.apache.geronimo.specs:geronimo-jta_1.1_spec:1.1.1" />
+          <element id="library" level="project" name="Gradle: org.jboss:jandex:2.0.0.Final" />
+          <element id="library" level="project" name="Gradle: com.fasterxml:classmate:1.3.0" />
           <element id="library" level="project" name="Gradle: dom4j:dom4j:1.6.1" />
           <element id="library" level="project" name="Gradle: org.hibernate.common:hibernate-commons-annotations:5.0.1.Final" />
-          <element id="library" level="project" name="Gradle: org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final" />
-          <element id="library" level="project" name="Gradle: org.apache.geronimo.specs:geronimo-jta_1.1_spec:1.1.1" />
+          <element id="library" level="project" name="Gradle: javax.enterprise:cdi-api:1.1" />
           <element id="library" level="project" name="Gradle: org.springframework.data:spring-data-commons:1.12.5.RELEASE" />
           <element id="library" level="project" name="Gradle: org.aspectj:aspectjrt:1.8.9" />
           <element id="library" level="project" name="Gradle: org.slf4j:jcl-over-slf4j:1.7.21" />
+          <element id="library" level="project" name="Gradle: aopalliance:aopalliance:1.0" />
+          <element id="library" level="project" name="Gradle: org.springframework.security:spring-security-core:4.2.0.RELEASE" />
+          <element id="library" level="project" name="Gradle: org.springframework:spring-expression:4.3.4.RELEASE" />
           <element id="library" level="project" name="Gradle: javax.annotation:javax.annotation-api:1.2" />
           <element id="library" level="project" name="Gradle: org.glassfish.hk2:osgi-resource-locator:1.0.1" />
           <element id="library" level="project" name="Gradle: com.fasterxml.jackson.core:jackson-core:2.5.1" />
@@ -52,23 +64,20 @@
           <element id="library" level="project" name="Gradle: org.glassfish.hk2:hk2-config:2.5.0-b05" />
           <element id="library" level="project" name="Gradle: org.glassfish.hk2:hk2-runlevel:2.5.0-b05" />
           <element id="library" level="project" name="Gradle: org.glassfish.hk2:class-model:2.5.0-b05" />
-          <element id="library" level="project" name="Gradle: aopalliance:aopalliance:1.0" />
-          <element id="library" level="project" name="Gradle: antlr:antlr:2.7.7" />
-          <element id="library" level="project" name="Gradle: org.jboss:jandex:2.0.0.Final" />
-          <element id="library" level="project" name="Gradle: com.fasterxml:classmate:1.3.0" />
-          <element id="library" level="project" name="Gradle: javax.enterprise:cdi-api:1.1" />
+          <element id="library" level="project" name="Gradle: javax.el:el-api:2.2" />
+          <element id="library" level="project" name="Gradle: org.jboss.spec.javax.interceptor:jboss-interceptors-api_1.1_spec:1.0.0.Beta1" />
+          <element id="library" level="project" name="Gradle: javax.annotation:jsr250-api:1.0" />
           <element id="library" level="project" name="Gradle: javax.inject:javax.inject:1" />
           <element id="library" level="project" name="Gradle: org.jvnet:tiger-types:1.4" />
           <element id="library" level="project" name="Gradle: org.glassfish.hk2.external:bean-validator:2.5.0-b05" />
           <element id="library" level="project" name="Gradle: org.glassfish.hk2.external:asm-all-repackaged:2.5.0-b05" />
-          <element id="library" level="project" name="Gradle: javax.el:el-api:2.2" />
-          <element id="library" level="project" name="Gradle: org.jboss.spec.javax.interceptor:jboss-interceptors-api_1.1_spec:1.0.0.Beta1" />
-          <element id="library" level="project" name="Gradle: javax.annotation:jsr250-api:1.0" />
+          <element id="library" level="project" name="Gradle: org.springframework:spring-beans:4.3.4.RELEASE" />
+          <element id="library" level="project" name="Gradle: org.springframework:spring-core:4.3.4.RELEASE" />
           <element id="library" level="project" name="Gradle: org.javassist:javassist:3.20.0-GA" />
-          <element id="library" level="project" name="Gradle: org.springframework:spring-context:4.2.8.RELEASE" />
-          <element id="library" level="project" name="Gradle: org.springframework:spring-expression:4.2.8.RELEASE" />
-          <element id="library" level="project" name="Gradle: org.springframework:spring-aop:4.2.8.RELEASE" />
+          <element id="library" level="project" name="Gradle: org.springframework:spring-context:4.3.4.RELEASE" />
+          <element id="library" level="project" name="Gradle: org.springframework:spring-aop:4.3.4.RELEASE" />
           <element id="library" level="project" name="Gradle: org.slf4j:slf4j-api:1.7.21" />
+          <element id="library" level="project" name="Gradle: org.springframework:spring-web:4.3.4.RELEASE" />
           <element id="library" level="project" name="Gradle: org.glassfish.jersey.core:jersey-common:2.24.1" />
           <element id="library" level="project" name="Gradle: org.glassfish.hk2:hk2-api:2.5.0-b05" />
           <element id="library" level="project" name="Gradle: org.glassfish.hk2.external:aopalliance-repackaged:2.5.0-b05" />
@@ -76,16 +85,14 @@
           <element id="library" level="project" name="Gradle: org.glassfish.hk2:hk2-locator:2.5.0-b05" />
           <element id="library" level="project" name="Gradle: commons-logging:commons-logging:1.2" />
           <element id="library" level="project" name="Gradle: org.glassfish.jersey.bundles.repackaged:jersey-guava:2.24.1" />
-          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-orm/4.3.4.RELEASE/f83034fb7ab21434bdb8367fba81d08cfc44556a/spring-orm-4.3.4.RELEASE.jar" />
-          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.hibernate/hibernate-core/5.2.2.Final/8e547af334b6346233a8293e50a2932e47936c9b/hibernate-core-5.2.2.Final.jar" />
-          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-jdbc/4.3.4.RELEASE/42175d194cf6aa7c716c0887f30255e5c0a5262c/spring-jdbc-4.3.4.RELEASE.jar" />
-          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-tx/4.3.4.RELEASE/303d00338193c04312426325121572d2fc1d4ec5/spring-tx-4.3.4.RELEASE.jar" />
-          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-beans/4.3.4.RELEASE/4fbf4327d6c7f81c821f2d56e8695d394c7b930a/spring-beans-4.3.4.RELEASE.jar" />
-          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework/spring-core/4.3.4.RELEASE/da373e491d3863477568896089ee9457bc316783/spring-core-4.3.4.RELEASE.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.clarifai.clarifai-api2/core/2.2.1/b45a6827097f1f6b312bee69000d5a439c0a09fa/core-2.2.1.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.7/751f548c85fa49f330cecbb1875893f971b33c4e/gson-2.7.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.4.1/c7c4f9e35c2fd5900da24f9872e3971801f08ce0/okhttp-3.4.1.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.9.0/f824591a0016efbaeddb8300bee54832a1398cfa/okio-1.9.0.jar" />
         </element>
       </element>
       <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/out/artifacts/SnapMeal/exploded/SnapMeal-1.0-SNAPSHOT.war/META-INF/MANIFEST.MF" />
+        <element id="file-copy" path="$PROJECT_DIR$/out/artifacts/snapmeal/exploded/snapmeal-1.0-SNAPSHOT.war/META-INF/MANIFEST.MF" />
       </element>
     </root>
   </artifact>
