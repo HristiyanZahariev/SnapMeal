@@ -34,7 +34,6 @@ public class MicrosoftService {
             System.out.println(request);
 
             // Request body
-            String url = new String("http://oi64.tinypic.com/2n9di5d.jpg");
             StringEntity params = new StringEntity("{\"url\":\"" + imageUrl + "\"} ");
             request.setEntity(params);
 
