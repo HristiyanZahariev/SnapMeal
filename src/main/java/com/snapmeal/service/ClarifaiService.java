@@ -15,7 +15,7 @@ import java.util.List;
  * Created by hristiyan on 17.12.16.
  */
 @Component
-public class ImageRecognizerService {
+public class ClarifaiService {
     // Provide your Client ID
     private final static String CLIENT_ID = "vGz9hODtY7dmjEfUQmp_cXY3XNPLbMPnBcSKovJm";
 
