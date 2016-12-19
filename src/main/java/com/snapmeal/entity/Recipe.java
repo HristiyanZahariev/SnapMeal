@@ -24,6 +24,12 @@ public class Recipe {
 
     public Recipe() {}
 
+    //Made it to test the class
+    public Recipe(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
     public Recipe(String name, String description, List<Ingredient> ingredients) {
         this.name = name;
         this.description = description;
@@ -62,7 +68,6 @@ public class Recipe {
         this.ingredients = ingredients;
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -72,8 +77,7 @@ public class Recipe {
 
         if (id != null ? !id.equals(recipe.id) : recipe.id != null) return false;
         if (name != null ? !name.equals(recipe.name) : recipe.name != null) return false;
-        if (description != null ? !description.equals(recipe.description) : recipe.description != null) return false;
-        return ingredients != null ? ingredients.equals(recipe.ingredients) : recipe.ingredients == null;
+        return description != null ? description.equals(recipe.description) : recipe.description == null;
 
     }
 
@@ -82,7 +86,6 @@ public class Recipe {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + (ingredients != null ? ingredients.hashCode() : 0);
         return result;
     }
 
@@ -92,7 +95,6 @@ public class Recipe {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", ingredients=" + ingredients +
                 '}';
     }
 }

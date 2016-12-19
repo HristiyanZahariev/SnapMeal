@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by hristiyan on 12.12.16.
  */
@@ -26,7 +29,9 @@ public class TestUserRepository {
         User secondUser = new User("Gencho", "Genchov", "gencho@test.com", "foobar");
         userRepository.save(secondUser);
 
-        Assert.assertEquals(firstUser, userRepository.findByFirstName("Pesho"));
+        List<User> testUser = new ArrayList<>();
+        testUser.add(firstUser);
+        Assert.assertEquals(testUser, userRepository.findByFirstName("Pesho"));
 
 
     }
