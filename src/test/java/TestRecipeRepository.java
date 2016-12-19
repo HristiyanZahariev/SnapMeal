@@ -1,7 +1,10 @@
 
 import com.snapmeal.configuration.PersistenceConfiguration;
+import com.snapmeal.entity.Ingredient;
 import com.snapmeal.entity.Recipe;
 import com.snapmeal.repository.RecipeRepository;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,6 +26,7 @@ public class TestRecipeRepository {
     @Autowired
     RecipeRepository repository;
 
+    @LazyCollection(value = LazyCollectionOption.EXTRA)
     @Test
     public void sampleTestCase() {
         Recipe recipe = new Recipe("Musaka", "Something very useful");
