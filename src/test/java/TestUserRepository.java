@@ -23,10 +23,10 @@ public class TestUserRepository {
 
     @Test
     public void testCase() {
-        User firstUser = new User("Pesho", "Petrov", "something@test.com", "foobar");
+        User firstUser = new User("Jadaq123","Pesho", "Petrov", "something@test.com", "foobar");
         userRepository.save(firstUser);
 
-        User secondUser = new User("Gencho", "Genchov", "gencho@test.com", "foobar");
+        User secondUser = new User("Jadaq321","Gencho", "Genchov", "gencho@test.com", "foobar");
         userRepository.save(secondUser);
 
         List<User> testUser = new ArrayList<>();
