@@ -23,6 +23,7 @@
     <orderEntry type="library" name="Gradle: com.microsoft.projectoxford:vision:aar:0.5.0" level="project" />
     <orderEntry type="library" name="Gradle: com.clarifai.clarifai-api2:core:2.2.1" level="project" />
     <orderEntry type="library" name="Gradle: io.jsonwebtoken:jjwt:0.4" level="project" />
+    <orderEntry type="library" name="Gradle: javax.servlet:servlet-api:3.0-alpha-1" level="project" />
     <orderEntry type="library" name="Gradle: org.apache.httpcomponents:httpclient:4.5.2" level="project" />
     <orderEntry type="library" name="Gradle: com.h2database:h2:1.4.193" level="project" />
     <orderEntry type="library" name="Gradle: junit:junit:4.11" level="project" />
