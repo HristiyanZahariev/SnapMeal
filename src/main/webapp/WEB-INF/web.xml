@@ -22,7 +22,7 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>
             com.snapmeal.configuration.SpringConfiguration
-            com.snapmeal.configuration.SpringSecurityConfiguration
+            com.snapmeal.security.SecurityConfiguration
         </param-value>
     </context-param>
 
