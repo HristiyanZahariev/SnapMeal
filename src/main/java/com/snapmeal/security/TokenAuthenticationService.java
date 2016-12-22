@@ -19,13 +19,16 @@ public class TokenAuthenticationService {
 
     public String addAuthentication(HttpServletResponse response, UserAuthentication authentication) {
         com.snapmeal.entity.User user = authentication.getDetails();
+        System.out.println(user);
         String token = tokenHandler.createTokenForUser(user);
         response.addHeader(AUTH_HEADER_NAME, token);
+        System.out.println(token);
         return token;
     }
 
     public Authentication getAuthentication(HttpServletRequest request) {
         final String token = request.getHeader(AUTH_HEADER_NAME);
+        System.out.println(token);
         if (token != null) {
             final User user = tokenHandler.parseUserFromToken(token);
             if (user != null) {

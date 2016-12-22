@@ -1,11 +1,16 @@
-package com.snapmeal.configuration;
+package com.snapmeal.security;
 
+import com.snapmeal.entity.User;
+import com.snapmeal.repository.UserRepository;
 import com.snapmeal.security.StatelessAuthenticationFilter;
 import com.snapmeal.security.TokenAuthenticationService;
 import com.snapmeal.service.UserService;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -13,13 +18,16 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.filter.CharacterEncodingFilter;
+
+import javax.servlet.Filter;
 
 /**
  * Created by hristiyan on 20.12.16.
  */
 @Configuration
 @EnableWebSecurity
-@Order(2)
+@Order(1)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private UserService userService;
@@ -37,22 +45,28 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
 
-                // Allow anonymous resource requests
+                //allow anonymous resource requests
                 .antMatchers("/").permitAll()
                 .antMatchers("/favicon.ico").permitAll()
-                .antMatchers("**/*.html").permitAll()
-                .antMatchers("**/*.css").permitAll()
-                .antMatchers("**/*.js").permitAll()
+                .antMatchers("/resources/**").permitAll()
 
-                // Allow anonymous logins
-                .antMatchers("/auth/**").permitAll()
+                //allow anonymous POSTs to login
+                .antMatchers(HttpMethod.POST, "/api/login").permitAll()
 
-                // All other request need to be authenticated
-                .anyRequest().authenticated().and()
+                //allow anonymous GETs to API
+                .antMatchers(HttpMethod.GET, "/api/**").permitAll()
 
-                // Custom Token based authentication based on the header previously given to the client
-                .addFilterBefore(new StatelessAuthenticationFilter(tokenAuthenticationService),
-                        UsernamePasswordAuthenticationFilter.class);
+                //defined Admin only API area
+                .antMatchers("/admin/**").hasRole("ADMIN")
+
+                //all other request need to be authenticated
+                .anyRequest().hasRole("USER").and()
+
+                // custom JSON based authentication by POST of {"username":"<name>","password":"<password>"} which sets the token header upon authentication
+                .addFilterBefore(new StatelessLoginFilter("/api/login", tokenAuthenticationService, userService, authenticationManager()), UsernamePasswordAuthenticationFilter.class)
+
+                // custom Token based authentication based on the header previously given to the client
+                .addFilterBefore(new StatelessAuthenticationFilter(tokenAuthenticationService), UsernamePasswordAuthenticationFilter.class);
     }
 
     @Override
