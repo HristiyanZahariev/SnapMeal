@@ -1,27 +1,44 @@
 package com.snapmeal.entity;
-
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import java.util.Date;
+import java.util.EnumSet;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Collection;
-import java.util.HashSet;
+import javax.validation.constraints.Size;
 
-/**
- * Created by hristiyan on 12.12.16.
- */
+import org.springframework.security.core.userdetails.UserDetails;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Entity
+@Table(name = "User", uniqueConstraints = @UniqueConstraint(columnNames = { "username" }))
 public class User implements UserDetails {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    public User() {
+    }
 
+    public User(String username) {
+        this.username = username;
+    }
+
+    public User(String username, Date expires) {
+        this.username = username;
+        this.expires = expires.getTime();
+    }
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long id;
+
+    @NotNull
+    @Size(min = 4, max = 30)
     private String username;
-    private String firstName;
-    private String lastName;
-    private String email;
+
+    @NotNull
+    @Size(min = 4, max = 100)
     private String password;
 
     @Transient
@@ -39,131 +56,128 @@ public class User implements UserDetails {
     @NotNull
     private boolean accountEnabled;
 
+    @Transient
+    private String newPassword;
 
-    public long getId() {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER, orphanRemoval = true)
+    private Set<UserAuthority> authorities;
 
+    public Long getId() {
         return id;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public String getEmail() {
-        return email;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return new HashSet<GrantedAuthority>();
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setId(long id) {
-
-        this.id = id;
+    public String getUsername() {
+        return username;
     }
 
     public void setUsername(String username) {
         this.username = username;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    @Override
+    @JsonIgnore
+    public String getPassword() {
+        return password;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
+    @JsonProperty
     public void setPassword(String password) {
         this.password = password;
     }
 
-    public User() {
-
+    @JsonIgnore
+    public String getNewPassword() {
+        return newPassword;
     }
 
-    public User(String username, String firstName, String lName, String email, String password) {
-
-        this.username = username;
-        this.firstName = firstName;
-        this.lastName = lName;
-        this.email = email;
-        this.password = password;
+    @JsonProperty
+    public void setNewPassword(String newPassword) {
+        this.newPassword = newPassword;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        User user = (User) o;
-
-        if (id != user.id) return false;
-        if (username != null ? !username.equals(user.username) : user.username != null) return false;
-        if (firstName != null ? !firstName.equals(user.firstName) : user.firstName != null) return false;
-        if (lastName != null ? !lastName.equals(user.lastName) : user.lastName != null) return false;
-        if (email != null ? !email.equals(user.email) : user.email != null) return false;
-        return password != null ? password.equals(user.password) : user.password == null;
-
+    public void setAuthorities(Set<UserAuthority> authorities) {
+        this.authorities = authorities;
     }
 
     @Override
-    public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + (username != null ? username.hashCode() : 0);
-        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
-        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
-        result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + (password != null ? password.hashCode() : 0);
-        return result;
+    @JsonIgnore
+    public Set<UserAuthority> getAuthorities() {
+        return authorities;
+    }
+
+    // Use Roles as external API
+    public Set<UserRole> getRoles() {
+        Set<UserRole> roles = EnumSet.noneOf(UserRole.class);
+        if (authorities != null) {
+            for (UserAuthority authority : authorities) {
+                roles.add(UserRole.valueOf(authority));
+            }
+        }
+        return roles;
+    }
+
+    public void setRoles(Set<UserRole> roles) {
+        for (UserRole role : roles) {
+            grantRole(role);
+        }
+    }
+
+    public void grantRole(UserRole role) {
+        if (authorities == null) {
+            authorities = new HashSet<UserAuthority>();
+        }
+        authorities.add(role.asAuthorityFor(this));
+    }
+
+    public void revokeRole(UserRole role) {
+        if (authorities != null) {
+            authorities.remove(role.asAuthorityFor(this));
+        }
+    }
+
+    public boolean hasRole(UserRole role) {
+        return authorities.contains(role.asAuthorityFor(this));
     }
 
     @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                '}';
-    }
-
-    @Override
+    @JsonIgnore
     public boolean isAccountNonExpired() {
         return !accountExpired;
     }
 
     @Override
+    @JsonIgnore
     public boolean isAccountNonLocked() {
         return !accountLocked;
     }
 
     @Override
+    @JsonIgnore
     public boolean isCredentialsNonExpired() {
         return !credentialsExpired;
     }
 
     @Override
+    @JsonIgnore
     public boolean isEnabled() {
         return !accountEnabled;
+    }
+
+    public long getExpires() {
+        return expires;
+    }
+
+    public void setExpires(long expires) {
+        this.expires = expires;
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + ": " + getUsername();
     }
 }

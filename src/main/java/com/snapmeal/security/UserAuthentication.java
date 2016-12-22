@@ -6,6 +6,7 @@ import com.snapmeal.entity.User;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 
+
 public class UserAuthentication implements Authentication {
 
     private final User user;

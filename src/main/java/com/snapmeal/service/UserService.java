@@ -2,6 +2,7 @@ package com.snapmeal.service;
 
 
 import com.snapmeal.entity.User;
+import com.snapmeal.entity.UserRole;
 import com.snapmeal.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AccountStatusUserDetailsChecker;
@@ -33,6 +34,7 @@ public class UserService implements UserDetailsService {
     }
 
     public User createUser(User user) {
+        user.grantRole(UserRole.USER);
         return repository.save(user);
     }
 
