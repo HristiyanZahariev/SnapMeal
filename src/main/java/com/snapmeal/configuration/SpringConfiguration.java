@@ -42,5 +42,4 @@ public class SpringConfiguration {
         return new MicrosoftService();
     }
 
-
 }

@@ -1,8 +1,10 @@
-package com.snapmeal.security;
+package com.snapmeal.configuration;
 
 import com.snapmeal.entity.User;
+import com.snapmeal.entity.UserRole;
 import com.snapmeal.repository.UserRepository;
 import com.snapmeal.security.StatelessAuthenticationFilter;
+import com.snapmeal.security.StatelessLoginFilter;
 import com.snapmeal.security.TokenAuthenticationService;
 import com.snapmeal.service.UserService;
 import org.springframework.beans.factory.InitializingBean;
@@ -43,6 +45,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+
                 .authorizeRequests()
 
                 //allow anonymous resource requests
@@ -89,5 +92,38 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     public TokenAuthenticationService tokenAuthenticationService() {
         return tokenAuthenticationService;
+    }
+
+    @Bean
+    public InitializingBean insertDefaultUsers() {
+        return new InitializingBean() {
+            @Autowired
+            private UserRepository userRepository;
+
+            @Override
+            public void afterPropertiesSet() {
+                addUser("admin", "admin");
+                addUser("user", "user");
+            }
+
+            private void addUser(String username, String password) {
+                User user = new User();
+                user.setUsername(username);
+                BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+                String hashedPassword = passwordEncoder.encode(password);
+                user.setPassword(hashedPassword);
+                System.out.println("Hashedh pass" + hashedPassword);
+                user.grantRole(username.equals("admin") ? UserRole.ADMIN : UserRole.USER);
+                userRepository.save(user);
+            }
+        };
+    }
+
+    @Bean
+    public Filter characterEncodingFilter() {
+        CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
+        characterEncodingFilter.setEncoding("UTF-8");
+        characterEncodingFilter.setForceEncoding(true);
+        return characterEncodingFilter;
     }
 }

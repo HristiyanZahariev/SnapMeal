@@ -42,4 +42,6 @@ public class UserController {
         long idx = Long.valueOf(id).longValue();
         return Response.status(200).entity(userInstance.findUserById(idx)).build();
     }
+
+
 }
