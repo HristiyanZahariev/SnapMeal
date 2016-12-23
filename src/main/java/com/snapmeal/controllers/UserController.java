@@ -3,8 +3,11 @@ package com.snapmeal.controllers;
 
 import com.snapmeal.entity.User;
 import com.snapmeal.repository.UserRepository;
+import com.snapmeal.security.UserAuthentication;
 import com.snapmeal.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 import javax.ws.rs.*;
@@ -22,6 +25,18 @@ public class UserController {
     private UserService userInstance;
 
     @GET
+    @Path("/api/users/current")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getCurrent() {
+        final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication instanceof UserAuthentication) {
+            return Response.ok(((UserAuthentication) authentication).getDetails()).build();
+        }
+        return Response.ok(new User(authentication.getName())).build(); //anonymous user support
+    }
+
+    @GET
+    @Path("/all")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllUsers() {
         return Response.ok(userInstance.getAllUsers()).build();
