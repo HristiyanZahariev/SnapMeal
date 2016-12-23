@@ -27,10 +27,10 @@ public class SpringConfiguration {
         return new RecipeService();
     }
 
-    @Bean(name = "userService")
-    UserService userService() {
-        return new UserService();
-    }
+//    @Bean(name = "userService")
+//    UserService userService() {
+//        return new UserService();
+//    }
 
     @Bean(name = "ClarifaiService")
     ClarifaiService imageRecognizerService() {

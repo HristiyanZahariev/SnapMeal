@@ -21,13 +21,13 @@ public class TokenAuthenticationService {
         final User user = authentication.getDetails();
         String token = tokenHandler.createTokenForUser(user);
         response.addHeader(AUTH_HEADER_NAME, token);
-        //System.out.println(token);
+        System.out.println("AddAuthentication token: " + token);
         return token;
     }
 
     public Authentication getAuthentication(HttpServletRequest request) {
         final String token = request.getHeader(AUTH_HEADER_NAME);
-        //System.out.println(token);
+        System.out.println("GetAuthentication token: " + token);
         if (token != null) {
             final User user = tokenHandler.parseUserFromToken(token);
             if (user != null) {
