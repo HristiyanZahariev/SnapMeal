@@ -25,6 +25,7 @@
     <orderEntry type="library" name="Gradle: io.jsonwebtoken:jjwt:0.4" level="project" />
     <orderEntry type="library" name="Gradle: javax.servlet:servlet-api:3.0-alpha-1" level="project" />
     <orderEntry type="library" name="Gradle: org.apache.httpcomponents:httpclient:4.5.2" level="project" />
+    <orderEntry type="library" name="Gradle: mysql:mysql-connector-java:6.0.5" level="project" />
     <orderEntry type="library" name="Gradle: com.h2database:h2:1.4.193" level="project" />
     <orderEntry type="library" name="Gradle: junit:junit:4.11" level="project" />
     <orderEntry type="library" name="Gradle: cglib:cglib-nodep:2.1_3" level="project" />

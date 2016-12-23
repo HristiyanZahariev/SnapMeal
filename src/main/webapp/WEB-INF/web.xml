@@ -22,7 +22,6 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>
             com.snapmeal.configuration.SpringConfiguration
-            com.snapmeal.configuration.SpringSecurityConfiguration
         </param-value>
     </context-param>
 
@@ -49,7 +48,6 @@
     <filter-mapping>
         <filter-name>springSecurityFilterChain</filter-name>
         <url-pattern>/*</url-pattern>
-        <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
 
     <listener>
