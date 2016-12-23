@@ -1,8 +1,9 @@
 package com.snapmeal.entity;
 
+import com.snapmeal.entity.enums.IngredientType;
+
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by hristiyan on 16.12.16.

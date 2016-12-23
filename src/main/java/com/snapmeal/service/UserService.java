@@ -2,14 +2,13 @@ package com.snapmeal.service;
 
 
 import com.snapmeal.entity.User;
-import com.snapmeal.entity.UserRole;
+import com.snapmeal.entity.enums.UserRole;
 import com.snapmeal.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AccountStatusUserDetailsChecker;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 

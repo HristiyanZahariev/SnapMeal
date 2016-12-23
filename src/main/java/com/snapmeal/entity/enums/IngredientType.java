@@ -1,4 +1,4 @@
-package com.snapmeal.entity;
+package com.snapmeal.entity.enums;
 
 /**
  * Created by hristiyan on 16.12.16.

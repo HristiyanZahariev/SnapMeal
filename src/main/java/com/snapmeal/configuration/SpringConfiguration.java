@@ -1,13 +1,13 @@
 package com.snapmeal.configuration;
 
 import com.snapmeal.controllers.RecipeController;
-import com.snapmeal.service.ClarifaiService;
-import com.snapmeal.service.MicrosoftService;
+import com.snapmeal.service.imageRecognition.ImageRecognitionService;
 import com.snapmeal.service.RecipeService;
-import com.snapmeal.service.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
 
 /**
@@ -15,6 +15,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @ComponentScan("com.snapmeal.configuration")
+@PropertySource("classpath:config.properties")
 public class SpringConfiguration {
 
     @Bean(name = "recipeController")
@@ -32,14 +33,13 @@ public class SpringConfiguration {
 //        return new UserService();
 //    }
 
-    @Bean(name = "ClarifaiService")
-    ClarifaiService imageRecognizerService() {
-        return new ClarifaiService();
-    }
-
     @Bean(name = "MicrosoftService")
-    MicrosoftService microsoftService() {
-        return new MicrosoftService();
+    ImageRecognitionService microsoftService() {
+        return new ImageRecognitionService();
     }
 
+    @Bean
+    public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
+        return new PropertySourcesPlaceholderConfigurer();
+    }
 }

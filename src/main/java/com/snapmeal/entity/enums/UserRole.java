@@ -1,4 +1,7 @@
-package com.snapmeal.entity;
+package com.snapmeal.entity.enums;
+
+import com.snapmeal.entity.User;
+import com.snapmeal.entity.UserAuthority;
 
 /**
  * Created by hristiyan on 22.12.16.
