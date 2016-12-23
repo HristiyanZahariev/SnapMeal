@@ -11,7 +11,6 @@ import org.springframework.security.core.GrantedAuthority;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@IdClass(UserAuthority.class)
 public class UserAuthority implements GrantedAuthority {
 
     @NotNull
