@@ -42,7 +42,7 @@ public class User implements UserDetails {
     @Size(min = 4, max = 100)
     private String password;
 
-    @NotNull
+    //@NotNull
     @Size(min = 4, max = 128)
     private String email;
 
@@ -55,16 +55,16 @@ public class User implements UserDetails {
     @Transient
     private long expires;
 
-    @NotNull
+    //@NotNull
     private boolean accountExpired;
 
-    @NotNull
+    //@NotNull
     private boolean accountLocked;
 
-    @NotNull
+    //@NotNull
     private boolean credentialsExpired;
 
-    @NotNull
+    //@NotNull
     private boolean accountEnabled;
 
     @Transient
@@ -88,6 +88,14 @@ public class User implements UserDetails {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override

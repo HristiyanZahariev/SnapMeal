@@ -43,6 +43,7 @@ public class UserController {
     }
 
     @POST
+    @Path("/register")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createUser(User user) {

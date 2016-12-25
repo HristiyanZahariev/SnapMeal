@@ -1,5 +1,7 @@
 package com.snapmeal.entity;
 
+import org.springframework.data.elasticsearch.annotations.Document;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
@@ -8,6 +10,7 @@ import java.util.Set;
  * Created by hristiyan on 11.12.16.
  */
 @Entity
+@Document(indexName = "recipe",type = "recipe")
 public class Recipe {
 
     @Id

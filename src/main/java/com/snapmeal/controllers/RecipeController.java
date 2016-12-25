@@ -4,6 +4,7 @@ import com.snapmeal.entity.Recipe;
 import com.snapmeal.repository.RecipeRepository;
 import com.snapmeal.service.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 
 import javax.ws.rs.*;
@@ -41,6 +42,13 @@ public class RecipeController {
     public Response createRecipe(Recipe recipe) {
         return Response.ok(recipeInstance.createRecipe(recipe)).build();
 
+    }
+
+    @GET
+    @Path("/search")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getRecipeByDescription() {
+        return Response.ok(recipeInstance.getRecipeByDescription("Very Tasty", new PageRequest(0, 10))).build();
     }
 
 }

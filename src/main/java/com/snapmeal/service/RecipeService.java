@@ -3,6 +3,7 @@ package com.snapmeal.service;
 import com.snapmeal.entity.Recipe;
 import com.snapmeal.repository.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,7 @@ public class RecipeService {
     @Autowired
     private RecipeRepository repository;
 
-    public List<Recipe> getAllRecipes() {
+    public Iterable<Recipe> getAllRecipes() {
         return repository.findAll();
     }
 
@@ -27,5 +28,9 @@ public class RecipeService {
 
     public Recipe createRecipe(Recipe recipe) {
         return repository.save(recipe);
+    }
+
+    public Iterable<Recipe> getRecipeByDescription(String description, Pageable pageable) {
+        return repository.findByDescription(description, pageable);
     }
 }
