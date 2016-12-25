@@ -4,6 +4,7 @@ import com.snapmeal.entity.enums.IngredientType;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by hristiyan on 16.12.16.
@@ -25,9 +26,9 @@ public class Ingredient {
     private int carbs;
     private int calories;
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "ingredients")
-    private List<Recipe> recipes;
+    private Set<Recipe> recipes;
 
-    public Ingredient(String name, IngredientType type, int protein, int fats, int carbs, int calories, List<Recipe> recipes) {
+    public Ingredient(String name, IngredientType type, int protein, int fats, int carbs, int calories, Set<Recipe> recipes) {
         this.name = name;
         this.type = type;
         this.protein = protein;
@@ -38,11 +39,11 @@ public class Ingredient {
     }
 
 
-    public List<Recipe> getRecipes() {
+    public Set<Recipe> getRecipes() {
         return recipes;
     }
 
-    public void setRecipes(List<Recipe> recipes) {
+    public void setRecipes(Set<Recipe> recipes) {
         this.recipes = recipes;
     }
 

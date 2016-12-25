@@ -42,6 +42,16 @@ public class User implements UserDetails {
     @Size(min = 4, max = 100)
     private String password;
 
+    @NotNull
+    @Size(min = 4, max = 128)
+    private String email;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "UserDiet", joinColumns = { @JoinColumn(name = "UserId") },
+            inverseJoinColumns = { @JoinColumn(name = "DietId") })
+    private Set<Diet> diets;
+
+
     @Transient
     private long expires;
 

@@ -18,9 +18,17 @@ public class Recipe {
     private String description;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "recipe_ingredient", joinColumns = { @JoinColumn(name = "recipe_id") },
-            inverseJoinColumns = { @JoinColumn(name = "ingredient_id") })
-    private List<Ingredient> ingredients;
+    @JoinTable(name = "RecipeIngredient", joinColumns = { @JoinColumn(name = "RecipeId") },
+            inverseJoinColumns = { @JoinColumn(name = "IngredientId") })
+    private Set<Ingredient> ingredients;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "RecipeDiet", joinColumns = { @JoinColumn(name = "RecipeId") },
+            inverseJoinColumns = { @JoinColumn(name = "DietId") })
+    private Set<Diet> diets;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Author author;
 
     public Recipe() {}
 
@@ -30,7 +38,7 @@ public class Recipe {
         this.description = description;
     }
 
-    public Recipe(String name, String description, List<Ingredient> ingredients) {
+    public Recipe(String name, String description, Set<Ingredient> ingredients) {
         this.name = name;
         this.description = description;
         this.ingredients = ingredients;
@@ -60,12 +68,28 @@ public class Recipe {
         this.description = description;
     }
 
-    public List<Ingredient> getIngredients() {
+    public Set<Ingredient> getIngredients() {
         return ingredients;
     }
 
-    public void setIngredients(List<Ingredient> ingredients) {
+    public void setIngredients(Set<Ingredient> ingredients) {
         this.ingredients = ingredients;
+    }
+
+    public Set<Diet> getDiets() {
+        return diets;
+    }
+
+    public void setDiets(Set<Diet> diets) {
+        this.diets = diets;
+    }
+
+    public Author getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Author author) {
+        this.author = author;
     }
 
     @Override
