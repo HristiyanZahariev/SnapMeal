@@ -24,7 +24,7 @@ public class Ingredient {
     private int fats;
     private int carbs;
     private int calories;
-    @ManyToMany(mappedBy = "ingredients", cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "ingredients")
     private List<Recipe> recipes;
 
     public Ingredient(String name, IngredientType type, int protein, int fats, int carbs, int calories, List<Recipe> recipes) {

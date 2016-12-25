@@ -17,7 +17,7 @@ public class Recipe {
     private String name;
     private String description;
 
-    @ManyToMany(targetEntity = Ingredient.class, cascade = {CascadeType.MERGE})
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "recipe_ingredient", joinColumns = { @JoinColumn(name = "recipe_id") },
             inverseJoinColumns = { @JoinColumn(name = "ingredient_id") })
     private List<Ingredient> ingredients;
