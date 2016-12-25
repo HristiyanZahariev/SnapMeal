@@ -1,6 +1,7 @@
 package com.snapmeal.entity;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -17,10 +18,10 @@ public class Recipe {
     private String name;
     private String description;
 
-    @ManyToMany(targetEntity = Ingredient.class, cascade = {CascadeType.MERGE})
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "recipe_ingredient", joinColumns = { @JoinColumn(name = "recipe_id") },
             inverseJoinColumns = { @JoinColumn(name = "ingredient_id") })
-    private List<Ingredient> ingredients;
+    private Set<Ingredient> ingredients;
 
     public Recipe() {}
 
@@ -30,7 +31,7 @@ public class Recipe {
         this.description = description;
     }
 
-    public Recipe(String name, String description, List<Ingredient> ingredients) {
+    public Recipe(String name, String description, Set<Ingredient> ingredients) {
         this.name = name;
         this.description = description;
         this.ingredients = ingredients;
@@ -60,11 +61,11 @@ public class Recipe {
         this.description = description;
     }
 
-    public List<Ingredient> getIngredients() {
+    public Set<Ingredient> getIngredients() {
         return ingredients;
     }
 
-    public void setIngredients(List<Ingredient> ingredients) {
+    public void setIngredients(Set<Ingredient> ingredients) {
         this.ingredients = ingredients;
     }
 

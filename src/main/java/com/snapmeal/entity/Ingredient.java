@@ -3,6 +3,7 @@ package com.snapmeal.entity;
 import com.snapmeal.entity.enums.IngredientType;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -24,10 +25,10 @@ public class Ingredient {
     private int fats;
     private int carbs;
     private int calories;
-    @ManyToMany(mappedBy = "ingredients", cascade = CascadeType.ALL)
-    private List<Recipe> recipes;
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "ingredients")
+    private Collection<Recipe> recipes;
 
-    public Ingredient(String name, IngredientType type, int protein, int fats, int carbs, int calories, List<Recipe> recipes) {
+    public Ingredient(String name, IngredientType type, int protein, int fats, int carbs, int calories, Collection<Recipe> recipes) {
         this.name = name;
         this.type = type;
         this.protein = protein;
@@ -38,11 +39,11 @@ public class Ingredient {
     }
 
 
-    public List<Recipe> getRecipes() {
+    public Collection<Recipe> getRecipes() {
         return recipes;
     }
 
-    public void setRecipes(List<Recipe> recipes) {
+    public void setRecipes(Collection<Recipe> recipes) {
         this.recipes = recipes;
     }
 

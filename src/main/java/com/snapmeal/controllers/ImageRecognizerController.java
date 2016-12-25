@@ -18,7 +18,6 @@ public class ImageRecognizerController {
     ImageRecognitionService imageRecognitionService;
 
     @GET
-    @Path("/microsoft")
     @Produces(MediaType.APPLICATION_JSON)
     public Response recognizeImageMicrosoft() {
         String imageUrl = "http://oi64.tinypic.com/2n9di5d.jpg";
