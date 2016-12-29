@@ -18,7 +18,7 @@ import javax.ws.rs.core.Response;
  * Created by hristiyan on 12.12.16.
  */
 @Component
-@Path("/user")
+@Path("/userp")
 public class UserController {
 
     @Autowired
