@@ -39,7 +39,10 @@ public class UserController {
     @Path("/all")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllUsers() {
-        return Response.ok(userInstance.getAllUsers()).build();
+        return Response.ok(userInstance.getAllUsers())
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                .build();
     }
 
     @POST
