@@ -11,6 +11,7 @@ public class JerseyConfiguration extends ResourceConfig {
 
         packages("com.snapmeal.controllers");
 
+        register(CORSResponseFilter.class);
         register(JacksonFeature.class);
     }
 }

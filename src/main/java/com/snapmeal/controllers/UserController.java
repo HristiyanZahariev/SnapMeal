@@ -40,8 +40,6 @@ public class UserController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllUsers() {
         return Response.ok(userInstance.getAllUsers())
-                .header("Access-Control-Allow-Origin", "*")
-                .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
                 .build();
     }
 
@@ -50,7 +48,8 @@ public class UserController {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createUser(User user) {
-        return Response.ok(userInstance.createUser(user)).build();
+        return Response.ok(userInstance.createUser(user))
+                .build();
 
     }
 
