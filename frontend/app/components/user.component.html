@@ -1,0 +1,14 @@
+<button (click)="toogleUsers()">{{showUsers ? "Hide Users" : "Show Users"}}</button>
+<div *ngIf="showUsers">
+    <div *ngFor="let user of users">
+        Username: {{user.username}} With email
+        {{user.email}}
+    </div>
+</div>
+
+
+  <p>Add username: <input type="text" name="username" [(ngModel)]="username">
+  <p>Add username: <input type="text" name="password" [(ngModel)]="password">
+  <p>Add username: <input type="text" name="email" [(ngModel)]="email">
+
+  <button (click)="NewUser(username, password, email)">Save</button></p>
