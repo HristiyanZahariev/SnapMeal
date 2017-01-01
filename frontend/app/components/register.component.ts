@@ -9,7 +9,6 @@ import { UserService } from '../services/user.service';
 })
 
 export class RegisterComponent  { 
-	users :User[];
 	showUsers: boolean;
 	username: string;
 	email: string;
