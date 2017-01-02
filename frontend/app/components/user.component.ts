@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -10,9 +10,7 @@ import { UserService } from '../services/user.service';
 export class UserComponent  { 
 	users :User[];
 	showUsers: boolean;
-	username: string;
-	email: string;
-	password: string;
+	@ViewChild("fileInput") fileInput: any;
 
 	constructor(private userService: UserService) {
 		this.showUsers = false;
@@ -32,31 +30,17 @@ export class UserComponent  {
 		}
 	}
 
-	NewUser(username: string, password: string, email: string) {
-	let user = {
-		username: username, 
-		password: password, 
-		email: email
+	addFile(): void {
+	    let fi = this.fileInput.nativeElement;
+	    if (fi.files && fi.files[0]) {
+	        let fileToUpload = fi.files[0];
+	        this.userService
+	            .upload(fileToUpload)
+	            .subscribe(res => {
+	                console.log(res);
+	            });
+	    }
 	}
-	console.log(user);
-    this.userService.createUser(user).subscribe(
-       data => {
-         // refresh the list
-         console.log("fiki");
-         return true;
-       },
-       error => {
-         console.error("Error saving User!");
-       }
-    );
-  }
-}
-
-
-interface address {
-	street: string;
-	city: string;
-	state: string;
 }
 
 interface User {

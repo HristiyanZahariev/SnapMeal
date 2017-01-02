@@ -18,7 +18,7 @@ export class RegisterComponent  {
 		this.userService = userService;
 	}
 
-	NewUser(username: string, password: string, email: string) {
+	createUser(username: string, password: string, email: string) {
 	let user = {
 		username: username, 
 		password: password, 
@@ -28,7 +28,6 @@ export class RegisterComponent  {
 	console.log(user);
     this.userService.createUser(user).subscribe(
        data => {
-         // refresh the list
          return true;
        },
        error => {

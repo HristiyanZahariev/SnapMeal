@@ -23,4 +23,12 @@ export class UserService {
 	    return this.http.post(url, body, options).map(res =>  res.json().data);
 
 	}
+
+	upload(fileToUpload: any) {
+    let input = new FormData();
+    input.append("file", fileToUpload);
+
+    return this.http
+        .post("http://localhost:8080/snapmeal/image/upload", input);
+}
 }

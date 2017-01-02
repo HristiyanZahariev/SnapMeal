@@ -1,6 +1,7 @@
 package com.snapmeal.configuration;
 
 import org.glassfish.jersey.jackson.JacksonFeature;
+import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 
 /**
@@ -11,7 +12,8 @@ public class JerseyConfiguration extends ResourceConfig {
 
         packages("com.snapmeal.controllers");
 
-        register(CORSResponseFilter.class);
         register(JacksonFeature.class);
+        register(CORSResponseFilter.class);
+        register(MultiPartFeature.class);
     }
 }
