@@ -37,7 +37,6 @@ public class ImageRecognitionService {
         HttpClient httpclient = HttpClients.createDefault();
         try {
             URIBuilder builder = new URIBuilder("https://api.projectoxford.ai/vision/v1.0/analyze");
-            System.out.println(subKeyMicrosoftApi);
             builder.setParameter("visualFeatures", "Description");
             builder.setParameter("language", "en");
 
@@ -45,7 +44,6 @@ public class ImageRecognitionService {
             HttpPost request = new HttpPost(uri);
             request.setHeader("Content-Type", "application/json");
             request.setHeader("Ocp-Apim-Subscription-Key", subKeyMicrosoftApi);
-            System.out.println(request);
 
             // Request body
             StringEntity params = new StringEntity("{\"url\":\"" + imageUrl + "\"} ");
@@ -79,14 +77,13 @@ public class ImageRecognitionService {
         }
     }
 
-    public String getImgurContent(String imageFolder) throws Exception {
+    public String getImgurContent(String imageDirectory) throws Exception {
         URL url;
         url = new URL("https://api.imgur.com/3/image");
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        System.out.println(imgurKey);
         //create base64 image
         BufferedImage image = null;
-        File file = new File(imageFolder);
+        File file = new File(imageDirectory);
         //read image
         image = ImageIO.read(file);
         ByteArrayOutputStream byteArray = new ByteArrayOutputStream();
@@ -117,10 +114,13 @@ public class ImageRecognitionService {
         while ((line = rd.readLine()) != null) {
             stb.append(line).append("\n");
         }
+        //worst code ever .... Must rework
+        int start = stb.indexOf("http");
+        int end = stb.indexOf("\"}", start);
         wr.close();
         rd.close();
-
-        return stb.toString();
+        System.out.println(stb.toString());
+        return stb.substring(start, end);
     }
 }
 

@@ -23,20 +23,12 @@ import java.net.URLEncoder;
 @Path("/image")
 public class ImageRecognizerController {
 
-    String path = "/home/hristiyan/SnapMealDatabase";
+    String path = "/home/hristiyan/SnapMealDatabase/";
 
     @Autowired
     ImageRecognitionService imageRecognitionService;
 
-    @GET
-    @Path("/microsoft")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response recognizeImageMicrosoft() {
-        String imageUrl = "http://oi64.tinypic.com/2n9di5d.jpg";
-
-        return Response.ok(imageRecognitionService.recognize(imageUrl)).build();
-    }
-
+    
     @POST
     @Path("/upload")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
@@ -48,9 +40,10 @@ public class ImageRecognizerController {
 
         imageRecognitionService.saveFile(fileInputStream, filePath);
 
-        String output = "File saved to server location : " + filePath;
-        System.out.println(imageRecognitionService.getImgurContent(filePath));
-        return Response.status(200).entity(output).build();
+        String imageUrl = imageRecognitionService.getImgurContent(filePath);
+
+        System.out.println(imageRecognitionService.recognize(imageUrl));
+        return Response.ok(imageRecognitionService.recognize(imageUrl)).build();
     }
 
 }
