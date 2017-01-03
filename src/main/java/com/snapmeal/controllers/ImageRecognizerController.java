@@ -23,7 +23,7 @@ import java.net.URLEncoder;
 @Path("/image")
 public class ImageRecognizerController {
 
-    String path = "/home/hristiyan/";
+    String path = "/home/hristiyan/SnapMealDatabase";
 
     @Autowired
     ImageRecognitionService imageRecognitionService;
