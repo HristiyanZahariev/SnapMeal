@@ -46,25 +46,25 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/favicon.ico").permitAll()
                 .antMatchers("/resources/**").permitAll();
 
-//                //allow anonymous POSTs to login
-//                .antMatchers(HttpMethod.POST, "/api/login").permitAll()
-//
-//                //allow anonymous GETs to API
-//                .antMatchers(HttpMethod.GET, "/api/**").permitAll()
-//
-//                //defined Admin only API area
-//                .antMatchers("/admin/**").hasRole("ADMIN")
-//
-//
-//                //all other request need to be authenticated
-//                .anyRequest().hasRole("USER").and()
-//
-//                // custom JSON based authentication by POST of {"username":"<name>","password":"<password>"} which sets the token header upon authentication
-//                .addFilterBefore(new StatelessLoginFilter("/api/login", tokenAuthenticationService, userService, authenticationManager()), UsernamePasswordAuthenticationFilter.class)
-//
-//                // custom Token based authentication based on the header previously given to the client
-//                .addFilterBefore(new StatelessAuthenticationFilter(tokenAuthenticationService), UsernamePasswordAuthenticationFilter.class);
-//    }
+                //allow anonymous POSTs to login
+                .antMatchers(HttpMethod.POST, "/api/login").permitAll()
+
+                //allow anonymous GETs to API
+                .antMatchers(HttpMethod.GET, "/api/**").permitAll()
+
+                //defined Admin only API area
+                .antMatchers("/admin/**").hasRole("ADMIN")
+
+
+                //all other request need to be authenticated
+                .anyRequest().hasRole("USER").and()
+
+                // custom JSON based authentication by POST of {"username":"<name>","password":"<password>"} which sets the token header upon authentication
+                .addFilterBefore(new StatelessLoginFilter("/api/login", tokenAuthenticationService, userService, authenticationManager()), UsernamePasswordAuthenticationFilter.class)
+
+                // custom Token based authentication based on the header previously given to the client
+                .addFilterBefore(new StatelessAuthenticationFilter(tokenAuthenticationService), UsernamePasswordAuthenticationFilter.class);
+    }
     }
 
     @Override
