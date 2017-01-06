@@ -19,20 +19,20 @@ export class RegisterComponent  {
 	}
 
 	createUser(username: string, password: string, email: string) {
-	let user = {
-		username: username, 
-		password: password, 
-		email: email
-	}
+		let user = {
+			username: username, 
+			password: password, 
+			email: email
+		}
 
-	console.log(user);
-    this.userService.createUser(user).subscribe(
-       data => {
-         return true;
-       },
-       error => {
-         console.error("Error saving User!");
-       }
-    );
-  }
+		console.log(user);
+	    this.userService.createUser(user).subscribe(
+	       data => {
+	         return true;
+	       },
+	       error => {
+	         console.error("Error saving User!");
+	       }
+	    );
+  	}
 }
