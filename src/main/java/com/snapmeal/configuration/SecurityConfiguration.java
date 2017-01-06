@@ -16,6 +16,12 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
 
 /**
  * Created by hristiyan on 20.12.16.
@@ -36,21 +42,22 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Override
+    @CrossOrigin(origins = "http://localhost:3000")
     protected void configure(HttpSecurity http) throws Exception {
         http
-
+                .cors().and()
                 .authorizeRequests()
 
                 //allow anonymous resource requests
                 .antMatchers("/").permitAll()
                 .antMatchers("/favicon.ico").permitAll()
-                .antMatchers("/resources/**").permitAll();
+                .antMatchers("/resources/**").permitAll()
 
                 //allow anonymous POSTs to login
-                .antMatchers(HttpMethod.POST, "/api/login").permitAll()
+                .antMatchers(HttpMethod.POST, "/login").permitAll()
 
-                //allow anonymous GETs to API
-                .antMatchers(HttpMethod.GET, "/api/**").permitAll()
+                //allow anonymous GETs to Site
+                .antMatchers(HttpMethod.GET, "/**").permitAll()
 
                 //defined Admin only API area
                 .antMatchers("/admin/**").hasRole("ADMIN")
@@ -60,12 +67,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .anyRequest().hasRole("USER").and()
 
                 // custom JSON based authentication by POST of {"username":"<name>","password":"<password>"} which sets the token header upon authentication
-                .addFilterBefore(new StatelessLoginFilter("/api/login", tokenAuthenticationService, userService, authenticationManager()), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new StatelessLoginFilter("/login", tokenAuthenticationService, userService, authenticationManager()), UsernamePasswordAuthenticationFilter.class)
 
                 // custom Token based authentication based on the header previously given to the client
                 .addFilterBefore(new StatelessAuthenticationFilter(tokenAuthenticationService), UsernamePasswordAuthenticationFilter.class);
     }
-    }
+
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -96,36 +103,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return tokenAuthenticationService;
     }
 
-//    @Bean
-//    public InitializingBean insertDefaultUsers() {
-//        return new InitializingBean() {
-//            @Autowired
-//            private UserRepository userRepository;
-//
-//            @Override
-//            public void afterPropertiesSet() {
-//                addUser("admin", "admin");
-//                addUser("user", "user");
-//            }
-//
-//            private void addUser(String username, String password) {
-//                User user = new User();
-//                user.setUsername(username);
-//                BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-//                String hashedPassword = passwordEncoder.encode(password);
-//                user.setPassword(hashedPassword);
-//                System.out.println("Hashedh pass" + hashedPassword);
-//                user.grantRole(username.equals("admin") ? UserRole.ADMIN : UserRole.USER);
-//                userRepository.save(user);
-//            }
-//        };
-//    }
-//
-//    @Bean
-//    public Filter characterEncodingFilter() {
-//        CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
-//        characterEncodingFilter.setEncoding("UTF-8");
-//        characterEncodingFilter.setForceEncoding(true);
-//        return characterEncodingFilter;
-//    }
+    //used for enabling cors
+    @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList("*"));
+        configuration.setAllowedMethods(Arrays.asList("GET","POST"));
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
 }
