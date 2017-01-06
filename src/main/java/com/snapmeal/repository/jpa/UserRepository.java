@@ -1,4 +1,4 @@
-package com.snapmeal.repository;
+package com.snapmeal.repository.jpa;
 
 import com.snapmeal.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;

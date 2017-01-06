@@ -2,7 +2,6 @@ package com.snapmeal.controllers;
 
 
 import com.snapmeal.entity.User;
-import com.snapmeal.repository.UserRepository;
 import com.snapmeal.security.UserAuthentication;
 import com.snapmeal.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

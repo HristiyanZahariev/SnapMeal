@@ -10,7 +10,7 @@ import java.util.Set;
  * Created by hristiyan on 11.12.16.
  */
 @Entity
-@Document(indexName = "recipe",type = "recipe")
+@Document(indexName = "snapmeal",type = "recipe")
 public class Recipe {
 
     @Id

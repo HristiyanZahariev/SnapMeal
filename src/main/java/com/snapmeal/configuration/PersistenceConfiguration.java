@@ -1,6 +1,7 @@
 package com.snapmeal.configuration;
 
 import org.elasticsearch.client.Client;
+import org.elasticsearch.client.node.NodeClient;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.node.NodeBuilder;
 import org.slf4j.Logger;
@@ -27,9 +28,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Properties;
+import java.util.UUID;
 
-@EnableJpaRepositories("com.snapmeal.repository")
-@EnableElasticsearchRepositories(basePackages = "com.snapmeal.repository")
+import static org.elasticsearch.node.NodeBuilder.nodeBuilder;
+
+@EnableJpaRepositories("com.snapmeal.repository.jpa")
+@EnableElasticsearchRepositories(basePackages = "com.snapmeal.repository.elasticsearch")
 @Configuration
 @EnableTransactionManagement
 @PropertySource("classpath:persistence-mysql.properties")
@@ -37,6 +41,9 @@ public class PersistenceConfiguration {
 
     @Value("${elasticsearch.home:/home/hristiyan/ElasticSearch/elasticsearch/2.3.1}")
     private String elasticsearchHome;
+
+    @Value("${esearch.port:9200}") int port;
+    @Value("${esearch.host:node-1}") String hostname;
 
     @Bean
     DataSource dataSource(Environment env) {
@@ -99,32 +106,20 @@ public class PersistenceConfiguration {
         return entityManagerFactoryBean;
     }
 
-    private static Logger logger = LoggerFactory.getLogger(PersistenceConfiguration.class);
 
     @Bean
     public Client client() {
-        try {
-            final Path tmpDir = Files.createTempDirectory(Paths.get(System.getProperty("java.io.tmpdir")), "elasticsearch_data");
-            logger.debug(tmpDir.toAbsolutePath().toString());
 
-            // @formatter:off
+        final Settings.Builder elasticsearchSettings =
+                Settings.settingsBuilder().put("http.enabled", "true")
+                        .put("path.home", elasticsearchHome);
 
-            final Settings.Builder elasticsearchSettings =
-                    Settings.settingsBuilder().put("http.enabled", "false")
-                            .put("path.data", tmpDir.toAbsolutePath().toString())
-                            .put("path.home", elasticsearchHome);
+        return new NodeBuilder()
+                .local(true)
+                .settings(elasticsearchSettings)
+                .node()
+                .client();
 
-            return new NodeBuilder()
-                    .local(true)
-                    .settings(elasticsearchSettings)
-                    .node()
-                    .client();
-
-            // @formatter:on
-        } catch (final IOException ioex) {
-            logger.error("Cannot create temp dir", ioex);
-            throw new RuntimeException();
-        }
     }
 
     @Bean

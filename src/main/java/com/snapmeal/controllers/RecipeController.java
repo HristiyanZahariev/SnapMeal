@@ -1,11 +1,9 @@
 package com.snapmeal.controllers;
 
 import com.snapmeal.entity.Recipe;
-import com.snapmeal.repository.RecipeRepository;
 import com.snapmeal.service.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.stereotype.Component;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -22,6 +20,7 @@ public class RecipeController {
     RecipeService recipeInstance;
 
     @GET
+    @Path("/all")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllRecipes() {
        return Response.ok(recipeInstance.getAllRecipes()).build();
@@ -48,7 +47,7 @@ public class RecipeController {
     @Path("/search")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getRecipeByDescription() {
-        return Response.ok(recipeInstance.getRecipeByDescription("Very Tasty", new PageRequest(0, 10))).build();
+        return Response.ok(recipeInstance.getRecipeByDescription("Also", new PageRequest(0, 10))).build();
     }
 
 }

@@ -1,13 +1,10 @@
 package com.snapmeal.service;
 
 import com.snapmeal.entity.Recipe;
-import com.snapmeal.repository.RecipeRepository;
+import com.snapmeal.repository.elasticsearch.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * Created by hristiyan on 12.12.16.

@@ -30,6 +30,12 @@ public class User implements UserDetails {
         this.expires = expires.getTime();
     }
 
+    public User(String username, String password, String email) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;

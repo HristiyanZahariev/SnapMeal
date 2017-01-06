@@ -1,4 +1,4 @@
-package com.snapmeal.repository;
+package com.snapmeal.repository.elasticsearch;
 
 import com.snapmeal.entity.Recipe;
 import org.springframework.data.domain.Page;
