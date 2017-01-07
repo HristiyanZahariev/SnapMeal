@@ -1,11 +1,14 @@
 package com.snapmeal.controllers;
 
+import com.snapmeal.entity.elasticsearch.RecipeEs;
+import com.snapmeal.service.RecipeService;
 import com.snapmeal.service.imageRecognition.ImageRecognitionService;
 import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.PageRequest;
 
 import javax.imageio.ImageIO;
 import javax.ws.rs.*;
@@ -28,6 +31,9 @@ public class ImageRecognizerController {
     @Autowired
     ImageRecognitionService imageRecognitionService;
 
+    @Autowired
+    RecipeService recipeService;
+
     
     @POST
     @Path("/upload")
@@ -40,9 +46,11 @@ public class ImageRecognizerController {
 
         imageRecognitionService.saveFile(fileInputStream, filePath);
 
-        String imageUrl = imageRecognitionService.getImgurContent(filePath);
+        String imgurContent = imageRecognitionService.getImgurContent(filePath);
 
-        System.out.println(imageRecognitionService.recognize(imageUrl));
+        String imageUrl = imageRecognitionService.getImageLink(imgurContent);
+
+
         return Response.ok(imageRecognitionService.recognize(imageUrl)).build();
     }
 

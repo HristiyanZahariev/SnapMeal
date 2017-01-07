@@ -107,20 +107,23 @@ public class ImageRecognitionService {
         wr.write(data);
         wr.flush();
 
-        // Get the response
+//      Get the response
         BufferedReader rd = new BufferedReader(
                 new InputStreamReader(conn.getInputStream()));
         String line;
         while ((line = rd.readLine()) != null) {
             stb.append(line).append("\n");
         }
-        //worst code ever .... Must rework
-        int start = stb.indexOf("http");
-        int end = stb.indexOf("\"}", start);
         wr.close();
         rd.close();
-        System.out.println(stb.toString());
-        return stb.substring(start, end);
+
+        return stb.toString();
+    }
+
+    public String getImageLink(String imgurContent) {
+        int start = imgurContent.indexOf("http");
+        int end = imgurContent.indexOf("\"}", start);
+        return imgurContent.substring(start, end);
     }
 }
 
