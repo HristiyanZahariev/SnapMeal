@@ -1,4 +1,4 @@
-package com.snapmeal.entity;
+package com.snapmeal.entity.jpa;
 
 import javax.persistence.*;
 import java.util.Set;

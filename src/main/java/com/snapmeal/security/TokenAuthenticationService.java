@@ -1,6 +1,6 @@
 package com.snapmeal.security;
 
-import com.snapmeal.entity.User;
+import com.snapmeal.entity.jpa.User;
 import com.snapmeal.service.UserService;
 import org.springframework.security.core.Authentication;
 

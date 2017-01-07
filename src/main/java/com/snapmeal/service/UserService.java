@@ -1,7 +1,7 @@
 package com.snapmeal.service;
 
 
-import com.snapmeal.entity.User;
+import com.snapmeal.entity.jpa.User;
 import com.snapmeal.entity.enums.UserRole;
 import com.snapmeal.repository.jpa.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

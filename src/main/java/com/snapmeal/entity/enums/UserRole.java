@@ -1,7 +1,7 @@
 package com.snapmeal.entity.enums;
 
-import com.snapmeal.entity.User;
-import com.snapmeal.entity.UserAuthority;
+import com.snapmeal.entity.jpa.User;
+import com.snapmeal.entity.jpa.UserAuthority;
 
 /**
  * Created by hristiyan on 22.12.16.

@@ -1,6 +1,7 @@
 package com.snapmeal.controllers;
 
-import com.snapmeal.entity.Recipe;
+import com.snapmeal.entity.elasticsearch.RecipeEs;
+import com.snapmeal.entity.jpa.Recipe;
 import com.snapmeal.service.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -30,15 +31,14 @@ public class RecipeController {
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getRecipeById(@PathParam("id") String id) {
-        long idx = Long.valueOf(id).longValue();
-        return Response.status(200).entity(recipeInstance.findRecipeById(idx)).build();
+        return Response.status(200).entity(recipeInstance.findRecipeById(id)).build();
     }
 
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response createRecipe(Recipe recipe) {
+    public Response createRecipe(RecipeEs recipe) {
         return Response.ok(recipeInstance.createRecipe(recipe)).build();
 
     }
@@ -47,7 +47,7 @@ public class RecipeController {
     @Path("/search")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getRecipeByDescription() {
-        return Response.ok(recipeInstance.getRecipeByDescription("Also", new PageRequest(0, 10))).build();
+        return Response.ok(recipeInstance.getRecipeByDescription("This", new PageRequest(0, 10))).build();
     }
 
 }

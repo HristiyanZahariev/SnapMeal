@@ -1,4 +1,4 @@
-package com.snapmeal.entity;
+package com.snapmeal.entity.jpa;
 import java.util.Date;
 import java.util.EnumSet;
 import java.util.HashSet;

@@ -10,8 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.snapmeal.entity.User;
-import com.snapmeal.entity.UserAuthority;
+import com.snapmeal.entity.jpa.User;
 import com.snapmeal.service.UserService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

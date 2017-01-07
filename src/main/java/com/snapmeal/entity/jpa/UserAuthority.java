@@ -1,4 +1,4 @@
-package com.snapmeal.entity;
+package com.snapmeal.entity.jpa;
 
 /**
  * Created by hristiyan on 22.12.16.

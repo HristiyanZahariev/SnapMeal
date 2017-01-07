@@ -1,7 +1,8 @@
 package com.snapmeal.service;
 
-import com.snapmeal.entity.Recipe;
-import com.snapmeal.repository.elasticsearch.RecipeRepository;
+import com.snapmeal.entity.elasticsearch.RecipeEs;
+
+import com.snapmeal.repository.elasticsearch.RecipeEsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
@@ -13,21 +14,21 @@ import org.springframework.stereotype.Component;
 public class RecipeService {
 
     @Autowired
-    private RecipeRepository repository;
+    private RecipeEsRepository repository;
 
-    public Iterable<Recipe> getAllRecipes() {
+    public Iterable<RecipeEs> getAllRecipes() {
         return repository.findAll();
     }
 
-    public Recipe findRecipeById(long id) {
+    public RecipeEs findRecipeById(String id) {
         return repository.findOne(id);
     }
 
-    public Recipe createRecipe(Recipe recipe) {
+    public RecipeEs createRecipe(RecipeEs recipe) {
         return repository.save(recipe);
     }
 
-    public Iterable<Recipe> getRecipeByDescription(String description, Pageable pageable) {
+    public Iterable<RecipeEs> getRecipeByDescription(String description, Pageable pageable) {
         return repository.findByDescription(description, pageable);
     }
 }

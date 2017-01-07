@@ -1,16 +1,13 @@
-package com.snapmeal.entity;
+package com.snapmeal.entity.jpa;
 
-import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 /**
  * Created by hristiyan on 11.12.16.
  */
 @Entity
-@Document(indexName = "snapmeal",type = "recipe")
 public class Recipe {
 
     @Id

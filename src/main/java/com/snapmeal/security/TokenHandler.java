@@ -1,6 +1,6 @@
 package com.snapmeal.security;
 ;
-import com.snapmeal.entity.User;
+import com.snapmeal.entity.jpa.User;
 import com.snapmeal.service.UserService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
