@@ -50,6 +50,9 @@ public class ImageRecognizerController {
 
         String imageUrl = imageRecognitionService.getImageLink(imgurContent);
 
+        String recognizedContent = imageRecognitionService.recognize(imageUrl);
+
+//        System.out.println(imageRecognitionService.getDescription(recognizedContent));
 
         return Response.ok(imageRecognitionService.recognize(imageUrl)).build();
     }

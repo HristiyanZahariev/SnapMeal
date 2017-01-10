@@ -61,6 +61,12 @@ public class ImageRecognitionService {
         return null;
     }
 
+//    public String getDescription(String entity) throws IOException {
+//        int start = entity.indexOf("text");
+//        int end = entity.indexOf("\"}", start);
+//        return entity.substring(start, end);
+//    }
+
     public void saveFile(InputStream uploadedInputStream, String serverLocation) {
         try {
             OutputStream outpuStream = new FileOutputStream(new File(serverLocation));

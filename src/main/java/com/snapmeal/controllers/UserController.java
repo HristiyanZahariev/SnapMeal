@@ -24,7 +24,7 @@ public class UserController {
     private UserService userInstance;
 
     @GET
-    @Path("/api/users/current")
+    @Path("/current")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getCurrent() {
         final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

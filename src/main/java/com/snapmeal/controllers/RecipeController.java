@@ -3,6 +3,7 @@ package com.snapmeal.controllers;
 import com.snapmeal.entity.elasticsearch.RecipeEs;
 import com.snapmeal.entity.jpa.Recipe;
 import com.snapmeal.service.RecipeService;
+import com.snapmeal.service.imageRecognition.ImageRecognitionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 
@@ -19,7 +20,7 @@ public class RecipeController {
 
     @Autowired
     RecipeService recipeInstance;
-
+    
     @GET
     @Path("/all")
     @Produces(MediaType.APPLICATION_JSON)
