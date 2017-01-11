@@ -1,11 +1,11 @@
 package com.snapmeal.service.imageRecognition;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.StringEntity;
@@ -32,6 +32,10 @@ public class ImageRecognitionService {
 
     @Value("${imgur.subKey}")
     private String imgurKey;
+
+    String url = "https://api.projectoxford.ai/vision/v1.0/analyze";
+
+    ObjectMapper mapper = new ObjectMapper();
 
     public String recognize(String imageUrl) {
         HttpClient httpclient = HttpClients.createDefault();
@@ -126,10 +130,11 @@ public class ImageRecognitionService {
         return stb.toString();
     }
 
-    public String getImageLink(String imgurContent) {
-        int start = imgurContent.indexOf("http");
-        int end = imgurContent.indexOf("\"}", start);
-        return imgurContent.substring(start, end);
+    public String getImageLink(String imgurContent) throws IOException {
+        ImgurResponse imgurResponse = mapper.readValue(imgurContent, ImgurResponse.class);
+
+        return imgurResponse.getData().getLink().toString();
     }
+
 }
 
