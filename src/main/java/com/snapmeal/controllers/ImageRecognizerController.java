@@ -19,6 +19,7 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.List;
 
 /**
  * Created by hristiyan on 17.12.16.
@@ -49,10 +50,10 @@ public class ImageRecognizerController {
         String imgurContent = imageRecognitionService.getImgurContent(filePath);
 
         String imageUrl = imageRecognitionService.getImageLink(imgurContent);
-        
+
         String recognizedContent = imageRecognitionService.recognize(imageUrl);
-//
-//        System.out.println(imageRecognitionService.getDescription(recognizedContent));
+
+        List<String> tags = imageRecognitionService.getTags(recognizedContent);
 
         return Response.ok(imageRecognitionService.recognize(imageUrl)).build();
     }

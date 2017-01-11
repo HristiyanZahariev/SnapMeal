@@ -21,6 +21,7 @@ import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.List;
 
 /**
  * Created by hristiyan on 18.12.16.
@@ -65,11 +66,10 @@ public class ImageRecognitionService {
         return null;
     }
 
-//    public String getDescription(String entity) throws IOException {
-//        int start = entity.indexOf("text");
-//        int end = entity.indexOf("\"}", start);
-//        return entity.substring(start, end);
-//    }
+    public List<String> getTags(String recognizedContent) throws IOException {
+        IRResponse irResponse = mapper.readValue(recognizedContent, IRResponse.class);
+        return irResponse.getDescription().getTags();
+    }   
 
     public void saveFile(InputStream uploadedInputStream, String serverLocation) {
         try {
