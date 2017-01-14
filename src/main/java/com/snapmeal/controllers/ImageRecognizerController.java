@@ -27,7 +27,7 @@ import java.util.List;
 @Path("/image")
 public class ImageRecognizerController {
 
-    String path = "/home/hristiyan/SnapMealDatabase/";
+//    String path = "/home/hristiyan/SnapMealDatabase/";
 
     @Autowired
     ImageRecognitionService imageRecognitionService;
@@ -43,11 +43,11 @@ public class ImageRecognizerController {
             @FormDataParam("file") InputStream fileInputStream,
             @FormDataParam("file") FormDataContentDisposition contentDispositionHeader) throws Exception {
 
-        String filePath = path + contentDispositionHeader.getFileName();
+//        String filePath = path + contentDispositionHeader.getFileName();
+//
+//        imageRecognitionService.saveFile(fileInputStream, filePath);
 
-        imageRecognitionService.saveFile(fileInputStream, filePath);
-
-        String imgurContent = imageRecognitionService.getImgurContent(filePath);
+        String imgurContent = imageRecognitionService.getImgurContent(fileInputStream);
 
         String imageUrl = imageRecognitionService.getImageLink(imgurContent);
 

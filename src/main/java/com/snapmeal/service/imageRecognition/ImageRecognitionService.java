@@ -87,15 +87,13 @@ public class ImageRecognitionService {
         }
     }
 
-    public String getImgurContent(String imageDirectory) throws Exception {
+    public String getImgurContent(InputStream inputImage) throws Exception {
         URL url;
         url = new URL("https://api.imgur.com/3/image");
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         //create base64 image
         BufferedImage image = null;
-        File file = new File(imageDirectory);
-        //read image
-        image = ImageIO.read(file);
+        image = ImageIO.read(inputImage);
         ByteArrayOutputStream byteArray = new ByteArrayOutputStream();
         ImageIO.write(image, "png", byteArray);
         byte[] byteImage = byteArray.toByteArray();
