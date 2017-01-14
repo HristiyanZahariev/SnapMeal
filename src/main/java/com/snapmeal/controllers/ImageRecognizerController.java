@@ -1,24 +1,15 @@
 package com.snapmeal.controllers;
 
-import com.snapmeal.entity.elasticsearch.RecipeEs;
 import com.snapmeal.service.RecipeService;
-import com.snapmeal.service.imageRecognition.ImageRecognitionService;
-import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
+import com.snapmeal.service.imageRecognition.imgur.ImageRecognitionService;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.PageRequest;
 
-import javax.imageio.ImageIO;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.awt.image.BufferedImage;
 import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
 import java.util.List;
 
 /**

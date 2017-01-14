@@ -1,8 +1,6 @@
-package com.snapmeal.service.imageRecognition;
+package com.snapmeal.service.imageRecognition.imgur;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import javax.xml.crypto.Data;
 
 /**
  * Created by hristiyan on 11.01.17.

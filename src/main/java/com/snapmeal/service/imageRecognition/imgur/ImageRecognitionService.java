@@ -1,7 +1,8 @@
-package com.snapmeal.service.imageRecognition;
+package com.snapmeal.service.imageRecognition.imgur;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.snapmeal.service.imageRecognition.microsoft.IRResponse;
 import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
