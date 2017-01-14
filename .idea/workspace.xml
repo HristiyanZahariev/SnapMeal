@@ -2,20 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d9a44270-8f0c-459d-a9dc-1f16fc660813" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/snapmeal/service/imageRecognition/ImgurResponse.java" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/snapmeal/service/imageRecognition/IRCaption.java" afterPath="$PROJECT_DIR$/src/main/java/com/snapmeal/service/imageRecognition/microsoft/IRCaption.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/snapmeal/service/imageRecognition/IRDescription.java" afterPath="$PROJECT_DIR$/src/main/java/com/snapmeal/service/imageRecognition/microsoft/IRDescription.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/snapmeal/service/imageRecognition/IRResponse.java" afterPath="$PROJECT_DIR$/src/main/java/com/snapmeal/service/imageRecognition/microsoft/IRResponse.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/snapmeal/service/imageRecognition/ImageRecognitionService.java" afterPath="$PROJECT_DIR$/src/main/java/com/snapmeal/service/imageRecognition/imgur/ImageRecognitionService.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/snapmeal/service/imageRecognition/ImgurData.java" afterPath="$PROJECT_DIR$/src/main/java/com/snapmeal/service/imageRecognition/imgur/ImgurData.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.13/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.13/taskArtifacts/cache.properties.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.13/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.13/taskArtifacts/fileHashes.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.13/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.13/taskArtifacts/fileSnapshots.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.13/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.13/taskArtifacts/taskArtifacts.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/com/snapmeal/service/imageRecognition/imgur/ImageRecognitionService.java" afterPath="$PROJECT_DIR$/src/main/java/com/snapmeal/service/imageRecognition/ImageRecognitionService.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/snapmeal/configuration/SpringConfiguration.java" afterPath="$PROJECT_DIR$/src/main/java/com/snapmeal/configuration/SpringConfiguration.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/snapmeal/controllers/ImageRecognizerController.java" afterPath="$PROJECT_DIR$/src/main/java/com/snapmeal/controllers/ImageRecognizerController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/snapmeal/controllers/RecipeController.java" afterPath="$PROJECT_DIR$/src/main/java/com/snapmeal/controllers/RecipeController.java" />
     </list>
     <ignored path="snapmeal.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -167,11 +156,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ImageRecognitionService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/snapmeal/service/imageRecognition/imgur/ImageRecognitionService.java">
+      <file leaf-file-name="ImageRecognitionService.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/snapmeal/service/imageRecognition/ImageRecognitionService.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="300">
-              <caret line="30" column="13" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
+              <caret line="31" column="13" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -179,7 +168,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ImgurResponse.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ImgurResponse.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/snapmeal/service/imageRecognition/imgur/ImgurResponse.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="144">
@@ -611,10 +600,10 @@
         <option value="$PROJECT_DIR$/src/main/java/com/snapmeal/service/imageRecognition/IRResponse.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/snapmeal/service/imageRecognition/IRCaption.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/snapmeal/service/imageRecognition/IRDescription.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/snapmeal/service/imageRecognition/ImageRecognitionService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/snapmeal/controllers/ImageRecognizerController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/snapmeal/service/imageRecognition/imgur/ImgurResponse.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/snapmeal/service/imageRecognition/microsoft/IRCaption.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/snapmeal/service/imageRecognition/ImageRecognitionService.java" />
       </list>
     </option>
   </component>
@@ -803,6 +792,40 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="service" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="snapmeal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SnapMeal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="org.jetbrains.plugins.gradle.projectView.GradleTreeStructureProvider$GradleSourceSetDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="snapmeal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="service" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="imageRecognition" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1200,11 +1223,11 @@
     <configuration default="false" name="ImageRecognitionService" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
-          <option name="PATTERN" value="com.snapmeal.service.imageRecognition.imgur.*" />
+          <option name="PATTERN" value="com.snapmeal.service.imageRecognition.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="MAIN_CLASS_NAME" value="com.snapmeal.service.imageRecognition.imgur.ImageRecognitionService" />
+      <option name="MAIN_CLASS_NAME" value="com.snapmeal.service.imageRecognition.ImageRecognitionService" />
       <option name="VM_PARAMETERS" />
       <option name="PROGRAM_PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -1860,7 +1883,7 @@
       <workItem from="1484080960959" duration="2890000" />
       <workItem from="1484155534115" duration="9602000" />
       <workItem from="1484167217246" duration="3505000" />
-      <workItem from="1484417133006" duration="906000" />
+      <workItem from="1484417133006" duration="1041000" />
     </task>
     <servers />
   </component>
@@ -1897,11 +1920,11 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="189518000" />
+    <option name="totallyTimeSpent" value="189653000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-4" width="1920" height="1084" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -1923,7 +1946,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2497332" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2497332" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.11792956" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -2293,16 +2316,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/snapmeal/service/imageRecognition/imgur/ImageRecognitionService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="30" column="13" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/snapmeal/service/imageRecognition/imgur/ImgurData.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
@@ -2353,6 +2366,16 @@
         <state relative-caret-position="144">
           <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/snapmeal/service/imageRecognition/ImageRecognitionService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="31" column="13" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

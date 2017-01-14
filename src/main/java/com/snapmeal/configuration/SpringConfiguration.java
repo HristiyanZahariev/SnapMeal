@@ -1,7 +1,7 @@
 package com.snapmeal.configuration;
 
 import com.snapmeal.controllers.RecipeController;
-import com.snapmeal.service.imageRecognition.imgur.ImageRecognitionService;
+import com.snapmeal.service.imageRecognition.ImageRecognitionService;
 import com.snapmeal.service.RecipeService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;

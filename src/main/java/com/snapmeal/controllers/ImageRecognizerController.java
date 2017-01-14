@@ -1,7 +1,7 @@
 package com.snapmeal.controllers;
 
 import com.snapmeal.service.RecipeService;
-import com.snapmeal.service.imageRecognition.imgur.ImageRecognitionService;
+import com.snapmeal.service.imageRecognition.ImageRecognitionService;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.springframework.beans.factory.annotation.Autowired;
