@@ -3,6 +3,7 @@ package com.snapmeal.service.imageRecognition;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.snapmeal.service.imageRecognition.imgur.ImgurResponse;
+import com.snapmeal.service.imageRecognition.microsoft.IRUrl;
 import com.snapmeal.service.imageRecognition.microsoft.IRResponse;
 import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 import org.apache.http.HttpEntity;
@@ -53,7 +54,9 @@ public class ImageRecognitionService {
             request.setHeader("Ocp-Apim-Subscription-Key", subKeyMicrosoftApi);
 
             // Request body
-            StringEntity params = new StringEntity("{\"url\":\"" + imageUrl + "\"} ");
+            IRUrl irUrl = new IRUrl(imageUrl);
+            String url = mapper.writeValueAsString(irUrl);
+            StringEntity params = new StringEntity(url);
             request.setEntity(params);
 
             HttpResponse response = httpclient.execute(request);
