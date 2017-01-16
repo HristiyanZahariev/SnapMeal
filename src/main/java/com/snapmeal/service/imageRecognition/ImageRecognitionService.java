@@ -6,24 +6,29 @@ import com.snapmeal.service.imageRecognition.imgur.ImgurResponse;
 import com.snapmeal.service.imageRecognition.microsoft.IRUrl;
 import com.snapmeal.service.imageRecognition.microsoft.IRResponse;
 import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
+//import org.apache.http.HttpEntity;
+//import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URIBuilder;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.HttpClients;
+//import org.apache.http.entity.StringEntity;
+//import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.*;
+import org.springframework.http.converter.FormHttpMessageConverter;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.stereotype.Component;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestTemplate;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URI;
-import java.net.URL;
-import java.net.URLEncoder;
+import java.net.*;
 import java.util.List;
 
 /**
@@ -41,34 +46,33 @@ public class ImageRecognitionService {
 
     ObjectMapper mapper = new ObjectMapper();
 
-    public String recognize(String imageUrl) {
-        HttpClient httpclient = HttpClients.createDefault();
-        try {
-            URIBuilder builder = new URIBuilder("https://api.projectoxford.ai/vision/v1.0/analyze");
-            builder.setParameter("visualFeatures", "Description");
-            builder.setParameter("language", "en");
+    public String recognize(String imageUrl) throws URISyntaxException {
 
-            URI uri = builder.build();
-            HttpPost request = new HttpPost(uri);
-            request.setHeader("Content-Type", "application/json");
-            request.setHeader("Ocp-Apim-Subscription-Key", subKeyMicrosoftApi);
+        //setting params
+        URIBuilder builder = new URIBuilder(url);
+        builder.setParameter("visualFeatures", "Description");
+        builder.setParameter("language", "en");
 
-            // Request body
-            IRUrl irUrl = new IRUrl(imageUrl);
-            String url = mapper.writeValueAsString(irUrl);
-            StringEntity params = new StringEntity(url);
-            request.setEntity(params);
+        // request body
+        RestTemplate rest = new RestTemplate();
+        JSONObject request = new JSONObject();
+        request.put("url", imageUrl);
 
-            HttpResponse response = httpclient.execute(request);
-            HttpEntity entity = response.getEntity();
+        // setting headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.add("Ocp-Apim-Subscription-Key", subKeyMicrosoftApi);
+        HttpEntity<String> entity = new HttpEntity<String>(request.toString(), headers);
 
-            if (entity != null) {
-                return EntityUtils.toString(entity);
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        // sending request and parse result
+        ResponseEntity<String> resp = rest
+                .exchange(builder.build().toString(), HttpMethod.POST, entity, String.class);
+        if (resp.getStatusCode() == HttpStatus.OK) {
+            return resp.getBody();
         }
-        return null;
+        else {
+            return null;
+        }
     }
 
     public List<String> getTags(String recognizedContent) throws IOException {

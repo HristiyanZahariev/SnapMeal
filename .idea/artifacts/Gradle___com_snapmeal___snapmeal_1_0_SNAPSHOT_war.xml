@@ -57,7 +57,6 @@
           <element id="library" level="project" name="Gradle: org.springframework:spring-expression:4.3.4.RELEASE" />
           <element id="library" level="project" name="Gradle: com.google.code.gson:gson:2.3.1" />
           <element id="library" level="project" name="Gradle: org.apache.httpcomponents:httpcore:4.4.4" />
-          <element id="library" level="project" name="Gradle: commons-codec:commons-codec:1.9" />
           <element id="library" level="project" name="Gradle: commons-lang:commons-lang:2.6" />
           <element id="library" level="project" name="Gradle: joda-time:joda-time:2.9.7" />
           <element id="library" level="project" name="Gradle: org.elasticsearch:elasticsearch:2.2.0" />
@@ -118,6 +117,7 @@
           <element id="library" level="project" name="Gradle: org.springframework:spring-web:4.3.4.RELEASE" />
           <element id="library" level="project" name="Gradle: org.slf4j:slf4j-api:1.7.22" />
           <element id="library" level="project" name="Gradle: commons-logging:commons-logging:1.2" />
+          <element id="library" level="project" name="Gradle: commons-codec:commons-codec:1.9" />
           <element id="library" level="project" name="Gradle: org.springframework.data:spring-data-commons:1.12.6.RELEASE" />
           <element id="library" level="project" name="Gradle: com.fasterxml.jackson.core:jackson-databind:2.6.7" />
           <element id="library" level="project" name="Gradle: org.slf4j:jcl-over-slf4j:1.7.22" />
@@ -127,6 +127,7 @@
           <element id="library" level="project" name="Gradle: com.fasterxml.jackson.core:jackson-annotations:2.6.0" />
           <element id="library" level="project" name="Gradle: org.glassfish.hk2:hk2-utils:2.5.0-b30" />
           <element id="library" level="project" name="Gradle: org.glassfish.hk2.external:aopalliance-repackaged:2.5.0-b30" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.json/json/20160810/aca5eb39e2a12fddd6c472b240afe9ebea3a6733/json-20160810.jar" />
         </element>
       </element>
       <element id="directory" name="META-INF">
