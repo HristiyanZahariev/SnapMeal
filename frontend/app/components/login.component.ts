@@ -23,6 +23,10 @@ export class LoginComponent {
     }
     this.auth.login(user);
   }
+
+  logOut() {
+      this.auth.logout();
+  }
 }
 
 interface Credentials {

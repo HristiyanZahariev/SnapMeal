@@ -1,7 +1,9 @@
 <h3>Login</h3>
-<div class="login">
+<div class="login" *ngIf="!auth.loggedIn()">
     <p>Enter username: <input type="text" name="username" [(ngModel)]="username">
     <p>Add password: <input type="text" name="password" [(ngModel)]="password">
     <input type="text" name="email" [(ngModel)]="email">
     <button (click)="onLogin(username, password, email)">Login</button></p>
 </div>
+
+<button (click)="logOut()">Logour</button>

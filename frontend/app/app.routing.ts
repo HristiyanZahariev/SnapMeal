@@ -5,11 +5,13 @@ import {UserComponent} from './components/user.component';
 import {AboutComponent} from './components/about.component';
 import {RegisterComponent} from './components/register.component';
 import {LoginComponent} from './components/login.component';
+import { AuthGuard } from './services/auth-guard.service';
 
-const appRoutes: Routes = [
+export const AppRoutes:Routes = [
 	{
 		path: '',
-		component: UserComponent
+		component: UserComponent, 
+		canActivate: [AuthGuard] 
 	},
 	{
 		path: 'about',
@@ -24,6 +26,7 @@ const appRoutes: Routes = [
 		path: 'login',
 		component: LoginComponent
 	}
+
 ];
 
-export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
+export const routing: ModuleWithProviders = RouterModule.forRoot(AppRoutes);

@@ -1,11 +1,17 @@
 import { Component, ViewChild } from '@angular/core';
 import { UserService } from '../services/user.service';
+import { AuthService } from '../services/auth.service';
+import { AuthGuard } from '../services/auth-guard.service';
+import { AuthHttp, tokenNotExpired } from 'angular2-jwt';
 
 @Component({
   moduleId: module.id,
   selector: 'user',
   templateUrl: 'user.component.html',
-  providers: [UserService]
+  providers: [
+  	[UserService],
+  	[AuthGuard]
+  ]
 })
 export class UserComponent  { 
 	users :User[];
@@ -18,6 +24,7 @@ export class UserComponent  {
 
 		this.userService.getUsers().subscribe(users => {
 			this.users = users;
+			console.log(() => localStorage.getItem("id_token"));
 		});
 	}
 

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
+import { tokenNotExpired } from 'angular2-jwt';
 
 @Injectable()
 export class AuthService {
@@ -14,9 +15,19 @@ export class AuthService {
         // with the JWT on an id_token key
         console.log(res.headers);
         let headers = res.headers;
-        console.log(headers.get("X-AUTH-TOKEN"))
+        console.log(headers.get("X-AUTH-TOKEN"));
+        let jjwt = headers.get("X-AUTH-TOKEN");
+        localStorage.setItem('id_token', jjwt);
         // data => console.log(data),
         // error => console.log(error)
       });
+  }
+
+  loggedIn() {
+      return tokenNotExpired();
+  }
+
+  logout() {
+    localStorage.removeItem('id_token'); 
   }
 }
