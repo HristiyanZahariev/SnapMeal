@@ -1,32 +1,32 @@
 import { Component} from '@angular/core';
-import { UserService } from '../services/user.service';
+import { AuthService } from '../services/auth.service';
 
 
 @Component({
     moduleId: module.id,
     templateUrl: 'login.component.html',
     selector: 'login',
-    providers: [UserService]
+    providers: [AuthService]
 })
 
 export class LoginComponent {
-    model: any = {};
-    loading = false;
 
-    constructor(private userService: UserService) {
-        this.userService = userService;
-    }
+  credentials: Credentials;
 
-    login(username: string, password: string) {
-        this.userService.login(username, password).subscribe(
-           data => {
-             console.log("evrika bace")
-             return true;
-           },
-           error => {
-             console.error("Error saving User!");
-           }
-        );
+  constructor(private auth: AuthService) {}
+
+  onLogin(username:any, password:any, email: any) {
+    let user = {
+        username: username, 
+        password: password, 
+        email: email
     }
-           
+    this.auth.login(user);
+  }
+}
+
+interface Credentials {
+  username: string,
+  password: string,
+  email: string
 }
