@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="styles.css">
-
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <!-- Polyfill(s) for older browsers -->
     <script src="node_modules/core-js/client/shim.min.js"></script>
 
@@ -19,9 +19,30 @@
       System.import('app').catch(function(err){ console.error(err); });
     </script>
   </head>
-
+  <div id="custom-bootstrap-menu" class="navbar navbar-default " role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header"><a class="navbar-brand" href="/">Snapmeal</a>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse navbar-menubuilder">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/">Home</a>
+                </li>
+                <li><a href="/products">Products</a>
+                </li>
+                <li><a href="/about">About Us</a>
+                </li>
+                <li><a href="/contact">Contact Us</a>
+                </li>
+                <li><a href="/login">Login</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
   <body>
     <base href="/">
+
     <my-app>Loading AppComponent content here ...</my-app>
   </body>
 </html>
