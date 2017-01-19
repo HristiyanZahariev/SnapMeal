@@ -42,35 +42,34 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    @CrossOrigin(origins = "http://localhost:3000")
     protected void configure(HttpSecurity http) throws Exception {
-//        http
-//                .cors().and()
-//                .authorizeRequests()
-//
-//                //allow anonymous resource requests
-//                .antMatchers("/").permitAll()
-//                .antMatchers("/favicon.ico").permitAll()
-//                .antMatchers("/resources/**").permitAll()
-//
-//                //allow anonymous POSTs to login
-//                .antMatchers(HttpMethod.POST, "/login").permitAll()
-//
-//                //allow anonymous GETs to Site
-//                .antMatchers(HttpMethod.GET, "/**").permitAll()
-//
-//                //defined Admin only API area
-//                .antMatchers("/admin/**").hasRole("ADMIN")
-//
-//
-//                //all other request need to be authenticated
-//                .anyRequest().hasRole("USER").and()
-//
-//                // custom JSON based authentication by POST of {"username":"<name>","password":"<password>"} which sets the token header upon authentication
-//                .addFilterBefore(new StatelessLoginFilter("/login", tokenAuthenticationService, userService, authenticationManager()), UsernamePasswordAuthenticationFilter.class)
-//
-//                // custom Token based authentication based on the header previously given to the client
-//                .addFilterBefore(new StatelessAuthenticationFilter(tokenAuthenticationService), UsernamePasswordAuthenticationFilter.class);
+        http
+                .authorizeRequests()
+
+                //allow anonymous resource requests
+                .antMatchers("/").permitAll()
+                .antMatchers("/favicon.ico").permitAll()
+                .antMatchers("/resources/**").permitAll()
+                .antMatchers("/**").authenticated()
+
+                //allow anonymous POSTs to login
+                .antMatchers(HttpMethod.POST, "/login").permitAll()
+
+                //allow anonymous GETs to Site
+                .antMatchers(HttpMethod.GET, "/**").permitAll()
+
+                //defined Admin only API area
+                .antMatchers("/admin/**").hasRole("ADMIN")
+
+
+                //all other request need to be authenticated
+                .anyRequest().hasRole("USER").and()
+
+                // custom JSON based authentication by POST of {"username":"<name>","password":"<password>"} which sets the token header upon authentication
+                .addFilterBefore(new StatelessLoginFilter("/login", tokenAuthenticationService, userService, authenticationManager()), UsernamePasswordAuthenticationFilter.class)
+
+                // custom Token based authentication based on the header previously given to the client
+                .addFilterBefore(new StatelessAuthenticationFilter(tokenAuthenticationService), UsernamePasswordAuthenticationFilter.class);
     }
 
 
@@ -104,13 +103,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     //used for enabling cors
-    @Bean
-    CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("*"));
-        configuration.setAllowedMethods(Arrays.asList("GET","POST"));
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
-    }
+//    @Bean
+//    CorsConfigurationSource corsConfigurationSource() {
+//        CorsConfiguration configuration = new CorsConfiguration();
+//        configuration.setAllowedOrigins(Arrays.asList("*"));
+//        configuration.setAllowedMethods(Arrays.asList("GET","POST"));
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        source.registerCorsConfiguration("/**", configuration);
+//        return source;
+//    }
 }
