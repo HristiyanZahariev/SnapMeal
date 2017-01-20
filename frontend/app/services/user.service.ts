@@ -6,7 +6,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 
 export class UserService {
-	constructor(private authHttp: AuthHttp) {
+	constructor(private http: Http, private authHttp: AuthHttp) {
 	}
 
 	getUsers() {
@@ -29,9 +29,12 @@ export class UserService {
 	upload(fileToUpload: any) {
 	    let input = new FormData();
 	    input.append("file", fileToUpload);
+	    let headers = new Headers();
+        headers.set('X-AUTH-TOKEN', localStorage.getItem('id_token'););
+        let options = new RequestOptions({ headers: headers });
 
-	    return this.authHttp
-	        .post("http://localhost:8080/snapmeal/image/upload", input);
+	    return this.http
+	        .post("http://localhost:8080/snapmeal/image/upload", input, options);
 	}
 
 	login(username: string, password: string) {
