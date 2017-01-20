@@ -9,13 +9,14 @@ import { UserComponent }  from './components/user.component';
 import { AboutComponent }  from './components/about.component';
 import { RegisterComponent } from './components/register.component';
 import { LoginComponent } from './components/login.component';
+import { HeaderComponent } from './components/header.component';
 import {routing} from './app.routing';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './services/auth-guard.service';
 
 @NgModule({
   imports:      [ BrowserModule, FormsModule, HttpModule, routing ],
-  declarations: [ AppComponent, UserComponent, AboutComponent, RegisterComponent, LoginComponent],
+  declarations: [ AppComponent, UserComponent, AboutComponent, RegisterComponent, LoginComponent, HeaderComponent],
   bootstrap:    [ AppComponent ],
   providers: [ 
   	AuthService, 

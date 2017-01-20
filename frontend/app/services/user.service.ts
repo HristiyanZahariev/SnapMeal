@@ -30,7 +30,7 @@ export class UserService {
 	    let input = new FormData();
 	    input.append("file", fileToUpload);
 	    let headers = new Headers();
-        headers.set('X-AUTH-TOKEN', localStorage.getItem('id_token'););
+        headers.set('X-AUTH-TOKEN', localStorage.getItem('id_token'));
         let options = new RequestOptions({ headers: headers });
 
 	    return this.http
