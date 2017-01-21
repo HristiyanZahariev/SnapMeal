@@ -85,7 +85,7 @@ public class ImageRecognitionService {
             OutputStream outpuStream = new FileOutputStream(new File(serverLocation));
             int read = 0;
             byte[] bytes = new byte[1024];
-            outpuStream = new FileOutputStream(new File(serverLocation));
+              outpuStream = new FileOutputStream(new File(serverLocation));
             while ((read = uploadedInputStream.read(bytes)) != -1) {
                 outpuStream.write(bytes, 0, read);
             }
