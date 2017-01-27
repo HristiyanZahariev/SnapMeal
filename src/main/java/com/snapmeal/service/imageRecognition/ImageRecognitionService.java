@@ -2,27 +2,18 @@ package com.snapmeal.service.imageRecognition;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.snapmeal.service.imageRecognition.imgur.ImgurResponse;
-import com.snapmeal.service.imageRecognition.microsoft.IRUrl;
+import com.snapmeal.fileUpload.imgur.ImgurResponse;
 import com.snapmeal.service.imageRecognition.microsoft.IRResponse;
 import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 //import org.apache.http.HttpEntity;
 //import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URIBuilder;
 //import org.apache.http.entity.StringEntity;
 //import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
-import org.springframework.http.converter.FormHttpMessageConverter;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.stereotype.Component;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import javax.imageio.ImageIO;

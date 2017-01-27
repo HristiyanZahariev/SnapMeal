@@ -1,4 +1,4 @@
-package com.snapmeal.service.imageRecognition.imgur;
+package com.snapmeal.fileUpload.imgur;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
