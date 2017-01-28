@@ -44,7 +44,11 @@ public class ImageRecognizerController {
 
         String recognizedContent = imageRecognitionService.recognize(imageUrl);
 
-        //List<String> tags = imageRecognitionService.getTags(recognizedContent);
+        List<String> tags = imageRecognitionService.getTags(recognizedContent);
+        System.out.println(tags);
+
+        String text = imageRecognitionService.getCaptionText(recognizedContent);
+        System.out.println(text);
 
         return Response.ok(recognizedContent).build();
     }

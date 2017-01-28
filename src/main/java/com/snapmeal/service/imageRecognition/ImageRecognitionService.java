@@ -3,6 +3,7 @@ package com.snapmeal.service.imageRecognition;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.snapmeal.fileUpload.imgur.ImgurResponse;
+import com.snapmeal.service.imageRecognition.microsoft.IRCaption;
 import com.snapmeal.service.imageRecognition.microsoft.IRResponse;
 import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 //import org.apache.http.HttpEntity;
@@ -69,7 +70,17 @@ public class ImageRecognitionService {
     public List<String> getTags(String recognizedContent) throws IOException {
         IRResponse irResponse = mapper.readValue(recognizedContent, IRResponse.class);
         return irResponse.getDescription().getTags();
-    }   
+    }
+
+    public String getCaptionText(String recognizedContent) throws IOException {
+        IRResponse irResponse = mapper.readValue(recognizedContent, IRResponse.class);
+        List<IRCaption> captions = irResponse.getDescription().getCaptions();
+
+        for (IRCaption caption: captions) {
+            return caption.getText();
+        }
+        return null;
+    }
 
     public void saveFile(InputStream uploadedInputStream, String serverLocation) {
         try {

@@ -25,6 +25,7 @@
           <element id="library" level="project" name="Gradle: org.springframework.security:spring-security-config:4.2.0.RELEASE" />
           <element id="library" level="project" name="Gradle: io.jsonwebtoken:jjwt:0.4" />
           <element id="library" level="project" name="Gradle: javax.servlet:servlet-api:3.0-alpha-1" />
+          <element id="library" level="project" name="Gradle: org.json:json:20160810" />
           <element id="library" level="project" name="Gradle: org.apache.httpcomponents:httpclient:4.5.2" />
           <element id="library" level="project" name="Gradle: mysql:mysql-connector-java:6.0.5" />
           <element id="library" level="project" name="Gradle: org.springframework.data:spring-data-elasticsearch:2.0.6.RELEASE" />
@@ -124,10 +125,14 @@
           <element id="library" level="project" name="Gradle: org.glassfish.hk2:hk2-api:2.5.0-b30" />
           <element id="library" level="project" name="Gradle: org.glassfish.hk2.external:javax.inject:2.5.0-b30" />
           <element id="library" level="project" name="Gradle: org.glassfish.hk2:hk2-locator:2.5.0-b30" />
-          <element id="library" level="project" name="Gradle: com.fasterxml.jackson.core:jackson-annotations:2.6.0" />
           <element id="library" level="project" name="Gradle: org.glassfish.hk2:hk2-utils:2.5.0-b30" />
           <element id="library" level="project" name="Gradle: org.glassfish.hk2.external:aopalliance-repackaged:2.5.0-b30" />
-          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.json/json/20160810/aca5eb39e2a12fddd6c472b240afe9ebea3a6733/json-20160810.jar" />
+          <element id="library" level="project" name="Gradle: org.springframework.social:spring-social-facebook:2.0.3.RELEASE" />
+          <element id="library" level="project" name="Gradle: org.springframework.social:spring-social-core:1.1.4.RELEASE" />
+          <element id="library" level="project" name="Gradle: org.springframework.social:spring-social-config:1.1.4.RELEASE" />
+          <element id="library" level="project" name="Gradle: org.springframework.social:spring-social-web:1.1.4.RELEASE" />
+          <element id="library" level="project" name="Gradle: org.springframework:spring-webmvc:4.1.8.RELEASE" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-annotations/2.8.6/9577018f9ce3636a2e1cb0a0c7fe915e5098ded5/jackson-annotations-2.8.6.jar" />
         </element>
       </element>
       <element id="directory" name="META-INF">
