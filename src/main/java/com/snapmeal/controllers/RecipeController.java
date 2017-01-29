@@ -46,7 +46,7 @@ public class RecipeController {
     @Path("/search")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getRecipeByDescription() {
-        return Response.ok(recipeInstance.getRecipeByDescription("This", new PageRequest(0, 10))).build();
+        return Response.ok().build();
     }
 
 }

@@ -1,10 +1,12 @@
 package com.snapmeal.controllers;
 
+import com.snapmeal.repository.elasticsearch.RecipeEsRepository;
 import com.snapmeal.service.RecipeService;
 import com.snapmeal.service.imageRecognition.ImageRecognitionService;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -25,7 +27,6 @@ public class ImageRecognizerController {
 
     @Autowired
     RecipeService recipeService;
-
     
     @POST
     @Path("/upload")
@@ -50,7 +51,7 @@ public class ImageRecognizerController {
         String text = imageRecognitionService.getCaptionText(recognizedContent);
         System.out.println(text);
 
-        return Response.ok(recognizedContent).build();
+        return Response.ok(recipeService.getRecipeByDescription(text)).build();
     }
 
 }
