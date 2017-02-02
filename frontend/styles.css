@@ -4,6 +4,8 @@ h1 {
   font-size: 250%;
 }
 
+
+
 .footer-distributed{
 	background-color: #292c2f;
 	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
@@ -15,9 +17,7 @@ h1 {
 	padding: 55px 50px;
 	margin-top: 80px;
 
-	  position:absolute;                  /* added */
-   bottom:0;                           /* added */
-   left:0; 
+	  position:bottom;                 
 }
 
 .footer-distributed .footer-left,
@@ -176,3 +176,24 @@ h1 {
 	}
 
 }
+
+.image-header {
+    height: 500px;
+    background: url('http://www.startechlabs.com/images/food_water.jpg') center center no-repeat scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+/* Customize the text color and shadow color and to optimize text legibility. */
+
+.tagline {
+    text-shadow: 0 0 10px #000;
+    color: #fff;
+}
+
+.img-center {
+    margin: 0 auto;
+}
+
