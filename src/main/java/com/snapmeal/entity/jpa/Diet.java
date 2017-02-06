@@ -18,9 +18,6 @@ public class Diet {
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "diets")
     private Set<Recipe> recipes;
 
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "diets")
-    private Set<User> users;
-
     public Diet(String name, Set<Recipe> recipes) {
         this.name = name;
         this.recipes = recipes;

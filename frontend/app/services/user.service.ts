@@ -6,11 +6,12 @@ import 'rxjs/add/operator/map';
 @Injectable()
 
 export class UserService {
+
 	constructor(private http: Http, private authHttp: AuthHttp) {
 	}
 
-	getUsers() {
-		return this.authHttp.get('http://localhost:8080/snapmeal/user/all')
+	getCurrentUser() {
+		return this.authHttp.get('http://localhost:8080/snapmeal/user/current')
 			.map(res => res.json())
 
 	}
@@ -24,6 +25,13 @@ export class UserService {
 		   // let body = JSON.stringify({'username': user.username, 'password': user.password, 'email': user.email});
 		return this.authHttp.post(url, body, options).map(res =>  res.json().data);
 
+	}
+
+	selectDietPlan(diet: string, user: any) {
+		console.log(diet)
+		console.log(user)
+		let url = 'http://localhost:8080/snapmeal/user/diet?diet='
+		return this.authHttp.post(url + diet, JSON.stringify(user))
 	}
 
 	upload(fileToUpload: any) {

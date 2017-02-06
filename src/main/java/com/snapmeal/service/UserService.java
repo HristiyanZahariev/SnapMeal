@@ -41,6 +41,14 @@ public class UserService implements UserDetailsService {
         return repository.save(user);
     }
 
+    public void setUserDiet(String diet, User user) {
+        user.setDiet(diet);
+        long userId = user.getId();
+        repository.setFixedDietForUser(diet, userId);
+    }
+
+
+
     @Override
     public User loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = repository.findByUsername(username);

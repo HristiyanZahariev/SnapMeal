@@ -52,10 +52,8 @@ public class User implements UserDetails {
     @Size(min = 4, max = 128)
     private String email;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "UserDiet", joinColumns = { @JoinColumn(name = "UserId") },
-            inverseJoinColumns = { @JoinColumn(name = "DietId") })
-    private Set<Diet> diets;
+    @NotNull
+    private String diet;
 
 
     @Transient
@@ -123,6 +121,14 @@ public class User implements UserDetails {
     @JsonProperty
     public void setNewPassword(String newPassword) {
         this.newPassword = newPassword;
+    }
+
+    public String getDiet() {
+        return diet;
+    }
+
+    public void setDiet(String diet) {
+        this.diet = diet;
     }
 
     public void setAuthorities(Set<UserAuthority> authorities) {
@@ -204,5 +210,44 @@ public class User implements UserDetails {
     @Override
     public String toString() {
         return getClass().getSimpleName() + ": " + getUsername();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        if (expires != user.expires) return false;
+        if (accountExpired != user.accountExpired) return false;
+        if (accountLocked != user.accountLocked) return false;
+        if (credentialsExpired != user.credentialsExpired) return false;
+        if (accountEnabled != user.accountEnabled) return false;
+        if (id != null ? !id.equals(user.id) : user.id != null) return false;
+        if (username != null ? !username.equals(user.username) : user.username != null) return false;
+        if (password != null ? !password.equals(user.password) : user.password != null) return false;
+        if (email != null ? !email.equals(user.email) : user.email != null) return false;
+        if (diet != null ? !diet.equals(user.diet) : user.diet != null) return false;
+        if (newPassword != null ? !newPassword.equals(user.newPassword) : user.newPassword != null) return false;
+        return authorities != null ? authorities.equals(user.authorities) : user.authorities == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (username != null ? username.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (diet != null ? diet.hashCode() : 0);
+        result = 31 * result + (int) (expires ^ (expires >>> 32));
+        result = 31 * result + (accountExpired ? 1 : 0);
+        result = 31 * result + (accountLocked ? 1 : 0);
+        result = 31 * result + (credentialsExpired ? 1 : 0);
+        result = 31 * result + (accountEnabled ? 1 : 0);
+        result = 31 * result + (newPassword != null ? newPassword.hashCode() : 0);
+        result = 31 * result + (authorities != null ? authorities.hashCode() : 0);
+        return result;
     }
 }

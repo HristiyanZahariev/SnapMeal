@@ -4,6 +4,10 @@ package com.snapmeal.entity.elasticsearch;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
+
+import java.util.List;
 
 
 /**
@@ -18,9 +22,13 @@ public class RecipeEs {
     private String name;
     private String description;
 
-    public RecipeEs(String name, String description) {
+    @Field( type = FieldType.Nested)
+    private List<Diet> diet;
+
+    public RecipeEs(String name, String description, List<Diet>  diet) {
         this.name = name;
         this.description = description;
+        this.diet = diet;
     }
 
     public RecipeEs() {
@@ -50,6 +58,14 @@ public class RecipeEs {
         this.description = description;
     }
 
+    public List<Diet>  getDiet() {
+        return diet;
+    }
+
+    public void setDiet(List<Diet>  diet) {
+        this.diet = diet;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -59,7 +75,9 @@ public class RecipeEs {
 
         if (id != null ? !id.equals(recipeEs.id) : recipeEs.id != null) return false;
         if (name != null ? !name.equals(recipeEs.name) : recipeEs.name != null) return false;
-        return description != null ? description.equals(recipeEs.description) : recipeEs.description == null;
+        if (description != null ? !description.equals(recipeEs.description) : recipeEs.description != null)
+            return false;
+        return diet != null ? diet.equals(recipeEs.diet) : recipeEs.diet == null;
 
     }
 
@@ -68,15 +86,17 @@ public class RecipeEs {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (diet != null ? diet.hashCode() : 0);
         return result;
     }
 
     @Override
     public String toString() {
         return "RecipeEs{" +
-                "id=" + id +
+                "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
+                ", diet=" + diet +
                 '}';
     }
 }

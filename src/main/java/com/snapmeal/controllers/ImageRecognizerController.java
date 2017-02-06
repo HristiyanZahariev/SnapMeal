@@ -1,5 +1,6 @@
 package com.snapmeal.controllers;
 
+import com.snapmeal.entity.jpa.User;
 import com.snapmeal.repository.elasticsearch.RecipeEsRepository;
 import com.snapmeal.service.RecipeService;
 import com.snapmeal.service.imageRecognition.ImageRecognitionService;
@@ -7,6 +8,7 @@ import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -39,6 +41,8 @@ public class ImageRecognizerController {
 //
 //        imageRecognitionService.saveFile(fileInputStream, filePath);
 
+        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getDetails();
+
         String imgurContent = imageRecognitionService.getImgurContent(fileInputStream);
 
         String imageUrl = imageRecognitionService.getImageLink(imgurContent);
@@ -51,7 +55,7 @@ public class ImageRecognizerController {
         String text = imageRecognitionService.getCaptionText(recognizedContent);
         System.out.println(text);
 
-        return Response.ok(recipeService.getRecipeByDescription(text)).build();
+        return Response.ok(recipeService.getRecipeByDescription(text, currentUser)).build();
     }
 
 }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -58,6 +59,13 @@ public class UserController {
     public Response getRecipeById(@PathParam("id") String id) {
         long idx = Long.valueOf(id).longValue();
         return Response.status(200).entity(userInstance.findUserById(idx)).build();
+    }
+
+    @POST
+    @Path("/diet")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void setUserDiet(@QueryParam("diet") String diet, User user) {
+        userInstance.setUserDiet(diet, user);
     }
 
 

@@ -14,16 +14,17 @@ import { AuthHttp, tokenNotExpired } from 'angular2-jwt';
   ]
 })
 export class UserComponent  { 
-	users :User[];
+	user :any;
 	showUsers: boolean;
+	diet: any;
 	@ViewChild("fileInput") fileInput: any;
 
 	constructor(private userService: UserService) {
 		this.showUsers = false;
 		this.userService = userService;
 
-		this.userService.getUsers().subscribe(users => {
-			this.users = users;
+		this.userService.getCurrentUser().subscribe(user => {
+			this.user = user;
 			console.log(() => localStorage.getItem("id_token"));
 		});
 	}
@@ -36,6 +37,15 @@ export class UserComponent  {
 			this.showUsers = false;
 		}
 	}
+
+
+	selectDietPlan() {
+		console.log(this.diet)
+		console.log(this.user)
+		this.userService.selectDietPlan(this.diet, this.user).subscribe(res => {
+			console.log(res);
+		});	
+	} 
 
 	addFile(): void {
 	    let fi = this.fileInput.nativeElement;

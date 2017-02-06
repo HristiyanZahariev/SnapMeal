@@ -17,6 +17,11 @@
 <!-- Page Content -->
 <div class="container-fluid">
 
+<div>
+    	<input type="radio" name="diet" value="vegan" [(ngModel)]="diet" (change)="selectDietPlan()">Vegan<br />
+    	<input type="radio" name="diet" value="vegetarian" [(ngModel)]="diet" (change)="selectDietPlan()">Vegetarian<br />
+</div>
+
     <hr>
 
     <div class="row">
