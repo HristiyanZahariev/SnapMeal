@@ -2,6 +2,7 @@ package com.snapmeal.controllers;
 
 
 import com.snapmeal.entity.jpa.User;
+import com.snapmeal.security.JwtUser;
 import com.snapmeal.security.UserAuthentication;
 import com.snapmeal.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,8 +65,9 @@ public class UserController {
     @POST
     @Path("/diet")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void setUserDiet(@QueryParam("diet") String diet, User user) {
-        userInstance.setUserDiet(diet, user);
+    public void setUserDiet(@QueryParam("diet") String diet, JwtUser jwtUser) {
+        User nonJwtUser = userInstance.getNonJwtUser(jwtUser);
+        userInstance.setUserDiet(diet, nonJwtUser);
     }
 
 

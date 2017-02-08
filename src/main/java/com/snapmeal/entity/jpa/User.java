@@ -16,7 +16,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name = "User", uniqueConstraints = @UniqueConstraint(columnNames = { "username" }))
-public class User implements UserDetails {
+public class User {
 
     public User() {
     }
@@ -25,10 +25,6 @@ public class User implements UserDetails {
         this.username = username;
     }
 
-    public User(String username, Date expires) {
-        this.username = username;
-        this.expires = expires.getTime();
-    }
 
     public User(String username, String password, String email) {
         this.username = username;
@@ -52,24 +48,14 @@ public class User implements UserDetails {
     @Size(min = 4, max = 128)
     private String email;
 
-    @NotNull
+    private String firstname;
+    private String lastname;
+
     private String diet;
 
+    //Added because of jwt (when receiving user from ng2)
+    private boolean enabled;
 
-    @Transient
-    private long expires;
-
-    //@NotNull
-    private boolean accountExpired;
-
-    //@NotNull
-    private boolean accountLocked;
-
-    //@NotNull
-    private boolean credentialsExpired;
-
-    //@NotNull
-    private boolean accountEnabled;
 
     @Transient
     private String newPassword;
@@ -85,7 +71,6 @@ public class User implements UserDetails {
         this.id = id;
     }
 
-    @Override
     public String getUsername() {
         return username;
     }
@@ -102,7 +87,6 @@ public class User implements UserDetails {
         this.email = email;
     }
 
-    @Override
     @JsonIgnore
     public String getPassword() {
         return password;
@@ -135,27 +119,9 @@ public class User implements UserDetails {
         this.authorities = authorities;
     }
 
-    @Override
     @JsonIgnore
     public Set<UserAuthority> getAuthorities() {
         return authorities;
-    }
-
-    // Use Roles as external API
-    public Set<UserRole> getRoles() {
-        Set<UserRole> roles = EnumSet.noneOf(UserRole.class);
-        if (authorities != null) {
-            for (UserAuthority authority : authorities) {
-                roles.add(UserRole.valueOf(authority));
-            }
-        }
-        return roles;
-    }
-
-    public void setRoles(Set<UserRole> roles) {
-        for (UserRole role : roles) {
-            grantRole(role);
-        }
     }
 
     public void grantRole(UserRole role) {
@@ -165,46 +131,28 @@ public class User implements UserDetails {
         authorities.add(role.asAuthorityFor(this));
     }
 
-    public void revokeRole(UserRole role) {
-        if (authorities != null) {
-            authorities.remove(role.asAuthorityFor(this));
-        }
+    public String getFirstname() {
+        return firstname;
     }
 
-    public boolean hasRole(UserRole role) {
-        return authorities.contains(role.asAuthorityFor(this));
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
-    @Override
-    @JsonIgnore
-    public boolean isAccountNonExpired() {
-        return !accountExpired;
+    public String getLastname() {
+        return lastname;
     }
 
-    @Override
-    @JsonIgnore
-    public boolean isAccountNonLocked() {
-        return !accountLocked;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
-    @Override
-    @JsonIgnore
-    public boolean isCredentialsNonExpired() {
-        return !credentialsExpired;
-    }
-
-    @Override
-    @JsonIgnore
     public boolean isEnabled() {
-        return !accountEnabled;
+        return enabled;
     }
 
-    public long getExpires() {
-        return expires;
-    }
-
-    public void setExpires(long expires) {
-        this.expires = expires;
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     @Override
@@ -218,12 +166,6 @@ public class User implements UserDetails {
         if (o == null || getClass() != o.getClass()) return false;
 
         User user = (User) o;
-
-        if (expires != user.expires) return false;
-        if (accountExpired != user.accountExpired) return false;
-        if (accountLocked != user.accountLocked) return false;
-        if (credentialsExpired != user.credentialsExpired) return false;
-        if (accountEnabled != user.accountEnabled) return false;
         if (id != null ? !id.equals(user.id) : user.id != null) return false;
         if (username != null ? !username.equals(user.username) : user.username != null) return false;
         if (password != null ? !password.equals(user.password) : user.password != null) return false;
@@ -241,11 +183,6 @@ public class User implements UserDetails {
         result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (diet != null ? diet.hashCode() : 0);
-        result = 31 * result + (int) (expires ^ (expires >>> 32));
-        result = 31 * result + (accountExpired ? 1 : 0);
-        result = 31 * result + (accountLocked ? 1 : 0);
-        result = 31 * result + (credentialsExpired ? 1 : 0);
-        result = 31 * result + (accountEnabled ? 1 : 0);
         result = 31 * result + (newPassword != null ? newPassword.hashCode() : 0);
         result = 31 * result + (authorities != null ? authorities.hashCode() : 0);
         return result;

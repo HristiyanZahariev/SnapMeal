@@ -31,7 +31,8 @@ export class UserService {
 		console.log(diet)
 		console.log(user)
 		let url = 'http://localhost:8080/snapmeal/user/diet?diet='
-		return this.authHttp.post(url + diet, JSON.stringify(user))
+		console.log(url+diet);
+		return this.authHttp.post(url+diet, JSON.stringify(user))
 	}
 
 	upload(fileToUpload: any) {

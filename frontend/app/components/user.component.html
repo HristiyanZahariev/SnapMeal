@@ -13,13 +13,14 @@
 	<input #fileInput type="file"/>
 	<button (click)="addFile()" class="btn-default btn-lg">Add</button>
 </div>
-
+<img src="http://imgur.com/CQCkYtF.png" height="200" width="200">
 <!-- Page Content -->
 <div class="container-fluid">
 
 <div>
     	<input type="radio" name="diet" value="vegan" [(ngModel)]="diet" (change)="selectDietPlan()">Vegan<br />
     	<input type="radio" name="diet" value="vegetarian" [(ngModel)]="diet" (change)="selectDietPlan()">Vegetarian<br />
+    	<input type="radio" name="diet" value="null"																																																												 [(ngModel)]="diet" (change)="selectDietPlan()">Ya dont wanna a diet mate<br />
 </div>
 
     <hr>

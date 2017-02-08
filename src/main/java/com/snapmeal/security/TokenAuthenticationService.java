@@ -18,7 +18,7 @@ public class TokenAuthenticationService {
     }
 
     public String addAuthentication(HttpServletResponse response, UserAuthentication authentication) {
-        final User user = authentication.getDetails();
+        final JwtUser user = authentication.getDetails();
         String token = tokenHandler.createTokenForUser(user);
         response.addHeader(AUTH_HEADER_NAME, token);
         System.out.println("AddAuthentication token: " + token);
@@ -29,7 +29,7 @@ public class TokenAuthenticationService {
         final String token = request.getHeader(AUTH_HEADER_NAME);
         System.out.println("GetAuthentication token: " + token);
         if (token != null) {
-            final User user = tokenHandler.parseUserFromToken(token);
+            final JwtUser user = tokenHandler.parseUserFromToken(token);
             if (user != null) {
                 return new UserAuthentication(user);
             }

@@ -5,6 +5,8 @@ import com.snapmeal.entity.elasticsearch.RecipeEs;
 import com.snapmeal.entity.jpa.Recipe;
 import com.snapmeal.entity.jpa.User;
 import com.snapmeal.repository.elasticsearch.RecipeEsRepository;
+import com.snapmeal.repository.jpa.UserRepository;
+import com.snapmeal.security.JwtUser;
 import com.snapmeal.security.UserAuthentication;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
@@ -32,7 +34,10 @@ import static org.elasticsearch.index.query.QueryBuilders.termQuery;
 public class RecipeService {
 
     @Autowired
-    private RecipeEsRepository repository;
+    private RecipeEsRepository recipeEsRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     private ElasticsearchTemplate elasticsearchTemplate;
@@ -40,20 +45,21 @@ public class RecipeService {
     private float minScore = 0.11000f;
 
     public Iterable<RecipeEs> getAllRecipes() {
-        return repository.findAll();
+        return recipeEsRepository.findAll();
     }
 
     public RecipeEs findRecipeById(String id) {
-        return repository.findOne(id);
+        return recipeEsRepository.findOne(id);
     }
 
     public RecipeEs createRecipe(RecipeEs recipe) {
-        return repository.save(recipe);
+        return recipeEsRepository.save(recipe);
     }
 
 
-    public Page<RecipeEs> getRecipeByDescription(String description, User currentUser) {
+    public Page<RecipeEs> getRecipeByDescription(String description, JwtUser currentJwtUser) {
         NativeSearchQueryBuilder nativeSearchQueryBuilder = new NativeSearchQueryBuilder();
+        User currentUser = userRepository.findByUsername(currentJwtUser.getUsername());
         String diet = currentUser.getDiet();
         System.out.println(currentUser);
         QueryBuilder matchPhraseQuery = QueryBuilders.matchQuery("description", description);

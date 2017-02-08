@@ -2,6 +2,8 @@ package com.snapmeal.controllers;
 
 import com.snapmeal.entity.jpa.User;
 import com.snapmeal.repository.elasticsearch.RecipeEsRepository;
+import com.snapmeal.repository.jpa.UserRepository;
+import com.snapmeal.security.JwtUser;
 import com.snapmeal.service.RecipeService;
 import com.snapmeal.service.imageRecognition.ImageRecognitionService;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
@@ -29,7 +31,7 @@ public class ImageRecognizerController {
 
     @Autowired
     RecipeService recipeService;
-    
+
     @POST
     @Path("/upload")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
@@ -41,7 +43,7 @@ public class ImageRecognizerController {
 //
 //        imageRecognitionService.saveFile(fileInputStream, filePath);
 
-        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getDetails();
+        JwtUser currentJwtUser = (JwtUser) SecurityContextHolder.getContext().getAuthentication().getDetails();
 
         String imgurContent = imageRecognitionService.getImgurContent(fileInputStream);
 
@@ -55,7 +57,7 @@ public class ImageRecognizerController {
         String text = imageRecognitionService.getCaptionText(recognizedContent);
         System.out.println(text);
 
-        return Response.ok(recipeService.getRecipeByDescription(text, currentUser)).build();
+        return Response.ok(recipeService.getRecipeByDescription(text, currentJwtUser)).build();
     }
 
 }

@@ -2,10 +2,12 @@ package com.snapmeal.security;
 ;
 import com.snapmeal.entity.jpa.User;
 import com.snapmeal.service.UserService;
+import io.jsonwebtoken.Jwt;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import jersey.repackaged.com.google.common.base.Preconditions;
 
+import java.sql.Time;
 import java.util.Base64;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
@@ -21,7 +23,7 @@ public final class TokenHandler {
         this.userService = Preconditions.checkNotNull(userService);
     }
 
-    public User parseUserFromToken(String token) {
+    public JwtUser parseUserFromToken(String token) {
         String username = Jwts.parser()
                 .setSigningKey(secret)
                 .parseClaimsJws(token)
@@ -30,7 +32,7 @@ public final class TokenHandler {
         return userService.loadUserByUsername(username);
     }
 
-    public String createTokenForUser(User user) {
+    public String createTokenForUser(JwtUser user) {
         Date now = new Date();
         Date expiration = new Date(now.getTime() + TimeUnit.HOURS.toMillis(1l));
         return Jwts.builder()

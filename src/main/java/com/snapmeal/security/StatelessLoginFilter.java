@@ -17,6 +17,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -50,7 +51,7 @@ public class StatelessLoginFilter extends AbstractAuthenticationProcessingFilter
                                             FilterChain chain, Authentication authentication) throws IOException, ServletException {
 
         // Lookup the complete User object from the database and create an Authentication for it
-        final User authenticatedUser = userDetailsService.loadUserByUsername(authentication.getName());
+        final JwtUser authenticatedUser = userDetailsService.loadUserByUsername(authentication.getName());
         final UserAuthentication userAuthentication = new UserAuthentication(authenticatedUser);
 
         // Add the custom token as HTTP header to the response

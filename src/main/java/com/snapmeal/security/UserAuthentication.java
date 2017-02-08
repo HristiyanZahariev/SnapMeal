@@ -3,16 +3,17 @@ package com.snapmeal.security;
 import java.util.Collection;
 
 import com.snapmeal.entity.jpa.User;
+import io.jsonwebtoken.Jwt;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 
 
 public class UserAuthentication implements Authentication {
 
-    private final User user;
+    private final JwtUser user;
     private boolean authenticated = true;
 
-    public UserAuthentication(User user) {
+    public UserAuthentication(JwtUser user) {
         this.user = user;
     }
 
@@ -32,7 +33,7 @@ public class UserAuthentication implements Authentication {
     }
 
     @Override
-    public User getDetails() {
+    public JwtUser getDetails() {
         return user;
     }
 
