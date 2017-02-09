@@ -9,7 +9,6 @@ import { UserService } from '../services/user.service';
 })
 
 export class RegisterComponent  { 
-	showUsers: boolean;
 	username: string;
 	email: string;
 	password: string;
@@ -34,5 +33,5 @@ export class RegisterComponent  {
 	         console.error("Error saving User!");
 	       }
 	    );
-  	}
+	}
 }

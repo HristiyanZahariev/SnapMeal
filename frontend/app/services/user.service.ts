@@ -24,7 +24,6 @@ export class UserService {
 		let url='http://localhost:8080/snapmeal/user/register';
 		   // let body = JSON.stringify({'username': user.username, 'password': user.password, 'email': user.email});
 		return this.authHttp.post(url, body, options).map(res =>  res.json().data);
-
 	}
 
 	selectDietPlan(diet: string, user: any) {
@@ -34,7 +33,7 @@ export class UserService {
 		console.log(url+diet);
 		return this.authHttp.post(url+diet, JSON.stringify(user))
 	}
-
+	// formData doesnt support authHttp 
 	upload(fileToUpload: any) {
 	    let input = new FormData();
 	    input.append("file", fileToUpload);
@@ -45,9 +44,4 @@ export class UserService {
 	    return this.http
 	        .post("http://localhost:8080/snapmeal/image/upload", input, options);
 	}
-
-	login(username: string, password: string) {
-		//console.log(JSON.stringify({ username: username, password: password }))
-    	return this.authHttp.post('http://localhost:8080/snapmeal/login', JSON.stringify({ username: username, password: password }))
-    }
 }

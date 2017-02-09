@@ -15,6 +15,7 @@ import { FooterComponent } from './components/footer.component';
 import {routing} from './app.routing';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './services/auth-guard.service';
+import { AuthGuardLogged } from './services/auth-guard-logged.service';
 
 @NgModule({
   imports:      [ BrowserModule, FormsModule, HttpModule, routing ],
@@ -22,7 +23,8 @@ import { AuthGuard } from './services/auth-guard.service';
   bootstrap:    [ AppComponent ],
   providers: [ 
   	AuthService, 
-  	AuthGuard, 
+  	AuthGuard,
+    AuthGuardLogged,
     AuthHttp,
     provideAuth({
         headerName: 'X-AUTH-TOKEN',

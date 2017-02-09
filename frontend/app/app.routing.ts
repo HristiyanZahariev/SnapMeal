@@ -6,6 +6,7 @@ import {AboutComponent} from './components/about.component';
 import {RegisterComponent} from './components/register.component';
 import {LoginComponent} from './components/login.component';
 import { AuthGuard } from './services/auth-guard.service';
+import {AuthGuardLogged} from './services/auth-guard-logged.service'
 
 export const AppRoutes:Routes = [
 	{
@@ -20,7 +21,8 @@ export const AppRoutes:Routes = [
 
 	{
 		path: 'register',
-		component: RegisterComponent
+		component: RegisterComponent,
+		canActivate: [AuthGuardLogged]
 	},
 	{
 		path: 'login',
