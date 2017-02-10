@@ -1,6 +1,8 @@
 package com.snapmeal.entity.jpa;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -17,6 +19,7 @@ public class Recipe {
     private String name;
     private String description;
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "RecipeIngredient", joinColumns = { @JoinColumn(name = "RecipeId") },
             inverseJoinColumns = { @JoinColumn(name = "IngredientId") })
@@ -25,8 +28,9 @@ public class Recipe {
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "RecipeDiet", joinColumns = { @JoinColumn(name = "RecipeId") },
             inverseJoinColumns = { @JoinColumn(name = "DietId") })
-    private Set<Diet> diets;
+    private Set<Diet> diet;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     private Author author;
 
@@ -77,11 +81,11 @@ public class Recipe {
     }
 
     public Set<Diet> getDiets() {
-        return diets;
+        return diet;
     }
 
     public void setDiets(Set<Diet> diets) {
-        this.diets = diets;
+        this.diet = diets;
     }
 
     public Author getAuthor() {

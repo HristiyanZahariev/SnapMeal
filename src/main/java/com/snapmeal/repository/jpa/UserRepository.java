@@ -1,5 +1,6 @@
 package com.snapmeal.repository.jpa;
 
+import com.snapmeal.entity.jpa.Diet;
 import com.snapmeal.entity.jpa.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -17,6 +18,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     User findByUsername(String name);
     @Modifying
     @Transactional
-    @Query("update User u set u.diet=:diet where u.id =:userId")
-    void setFixedDietForUser(@Param("diet") String diet, @Param("userId") long userId);
+    @Query("update User u set u.diet=:diet  where u.id =:userId")
+    void setFixedDietForUser(@Param("diet") Diet diet, @Param("userId") long userId);
 }

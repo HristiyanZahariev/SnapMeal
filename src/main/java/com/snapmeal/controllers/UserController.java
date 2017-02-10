@@ -65,9 +65,9 @@ public class UserController {
     @POST
     @Path("/diet")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void setUserDiet(@QueryParam("diet") String diet, JwtUser jwtUser) {
+    public void setUserDiet(@QueryParam("diet") String dietName, JwtUser jwtUser) {
         User nonJwtUser = userInstance.getNonJwtUser(jwtUser);
-        userInstance.setUserDiet(diet, nonJwtUser);
+        userInstance.setUserDiet(dietName, nonJwtUser);
     }
 
 

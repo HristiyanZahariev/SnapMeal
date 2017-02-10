@@ -60,7 +60,7 @@ public class RecipeService {
     public Page<RecipeEs> getRecipeByDescription(String description, JwtUser currentJwtUser) {
         NativeSearchQueryBuilder nativeSearchQueryBuilder = new NativeSearchQueryBuilder();
         User currentUser = userRepository.findByUsername(currentJwtUser.getUsername());
-        String diet = currentUser.getDiet();
+        String diet = currentUser.getDiet().getName();
         System.out.println(currentUser);
         QueryBuilder matchPhraseQuery = QueryBuilders.matchQuery("description", description);
         QueryBuilder builder = nestedQuery("diet", boolQuery().must(termQuery("diet.name", diet)));

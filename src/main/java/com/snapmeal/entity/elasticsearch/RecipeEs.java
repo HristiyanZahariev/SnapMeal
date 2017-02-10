@@ -23,9 +23,9 @@ public class RecipeEs {
     private String description;
 
     @Field( type = FieldType.Nested)
-    private List<Diet> diet;
+    private List<DietEs> diet;
 
-    public RecipeEs(String name, String description, List<Diet>  diet) {
+    public RecipeEs(String name, String description, List<DietEs>  diet) {
         this.name = name;
         this.description = description;
         this.diet = diet;
@@ -58,11 +58,11 @@ public class RecipeEs {
         this.description = description;
     }
 
-    public List<Diet>  getDiet() {
+    public List<DietEs>  getDiet() {
         return diet;
     }
 
-    public void setDiet(List<Diet>  diet) {
+    public void setDiet(List<DietEs>  diet) {
         this.diet = diet;
     }
 

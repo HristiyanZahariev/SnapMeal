@@ -1,8 +1,10 @@
 package com.snapmeal.service;
 
 
+import com.snapmeal.entity.jpa.Diet;
 import com.snapmeal.entity.jpa.User;
 import com.snapmeal.entity.enums.UserRole;
+import com.snapmeal.repository.jpa.DietRepository;
 import com.snapmeal.repository.jpa.UserRepository;
 import com.snapmeal.security.JwtUser;
 import com.snapmeal.security.JwtUserFactory;
@@ -24,16 +26,19 @@ import java.util.List;
 public class UserService implements UserDetailsService {
 
     @Autowired
-    private UserRepository repository;
+    private UserRepository userRepository;
+
+    @Autowired
+    private DietRepository dietRepository;
 
     private final AccountStatusUserDetailsChecker detailsChecker = new AccountStatusUserDetailsChecker();
 
     public List<User> getAllUsers() {
-        return repository.findAll();
+        return userRepository.findAll();
     }
 
     public User findUserById(long id) {
-        return repository.findOne(id);
+        return userRepository.findOne(id);
     }
 
     public User createUser(User user) {
@@ -42,23 +47,26 @@ public class UserService implements UserDetailsService {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String hashedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(hashedPassword);
-        return repository.save(user);
+        return userRepository.save(user);
     }
 
-    public void setUserDiet(String diet, User user) {
-        user.setDiet(diet);
+    public void setUserDiet(String dietName, User user) {
+        Diet userDiet = dietRepository.findByName(dietName);
+        user.setDiet(userDiet);
         long userId = user.getId();
-        repository.setFixedDietForUser(diet, userId);
+        System.out.println(userDiet.getId());
+        System.out.println(user.getDiet().getDescription());
+        userRepository.setFixedDietForUser(user.getDiet(), userId);
     }
 
     public User getNonJwtUser(JwtUser jwtUser) {
-        return repository.findByUsername(jwtUser.getUsername());
+        return userRepository.findByUsername(jwtUser.getUsername());
     }
 
 
     @Override
     public JwtUser loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = repository.findByUsername(username);
+        User user = userRepository.findByUsername(username);
         if (user == null) {
             throw new UsernameNotFoundException("User not found");
         }

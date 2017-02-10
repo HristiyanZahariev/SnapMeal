@@ -51,7 +51,9 @@ public class User {
     private String firstname;
     private String lastname;
 
-    private String diet;
+    @ManyToOne
+    @JoinColumn(name = "dietId")
+    private Diet diet;
 
     //Added because of jwt (when receiving user from ng2)
     private boolean enabled;
@@ -107,11 +109,11 @@ public class User {
         this.newPassword = newPassword;
     }
 
-    public String getDiet() {
+    public Diet getDiet() {
         return diet;
     }
 
-    public void setDiet(String diet) {
+    public void setDiet(Diet diet) {
         this.diet = diet;
     }
 

@@ -1,6 +1,9 @@
 package com.snapmeal.entity.jpa;
 
+import org.springframework.data.annotation.*;
+
 import javax.persistence.*;
+import javax.persistence.Id;
 import java.util.Set;
 
 /**
@@ -11,25 +14,28 @@ public class Diet {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
+    private Long id;
     private String name;
+    private String description;
 
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "diets")
-    private Set<Recipe> recipes;
+    @OneToMany(mappedBy = "diet", cascade = CascadeType.ALL)
+    private Set<User> users;
 
-    public Diet(String name, Set<Recipe> recipes) {
-        this.name = name;
-        this.recipes = recipes;
+    @ManyToMany(mappedBy = "diet", cascade = CascadeType.ALL)
+    private Set<Diet> recipes;
+
+    public Diet() {
     }
 
-    public Diet() {}
+    public Diet(String name) {
+        this.name = name;
+    }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -41,11 +47,27 @@ public class Diet {
         this.name = name;
     }
 
-    public Set<Recipe> getRecipes() {
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
+
+    public Set<Diet> getRecipes() {
         return recipes;
     }
 
-    public void setRecipes(Set<Recipe> recipes) {
+    public void setRecipes(Set<Diet> recipes) {
         this.recipes = recipes;
     }
 
@@ -56,16 +78,20 @@ public class Diet {
 
         Diet diet = (Diet) o;
 
-        if (id != diet.id) return false;
+        if (id != null ? !id.equals(diet.id) : diet.id != null) return false;
         if (name != null ? !name.equals(diet.name) : diet.name != null) return false;
+        if (description != null ? !description.equals(diet.description) : diet.description != null) return false;
+        if (users != null ? !users.equals(diet.users) : diet.users != null) return false;
         return recipes != null ? recipes.equals(diet.recipes) : diet.recipes == null;
 
     }
 
     @Override
     public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
+        int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (users != null ? users.hashCode() : 0);
         result = 31 * result + (recipes != null ? recipes.hashCode() : 0);
         return result;
     }
