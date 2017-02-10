@@ -1,7 +1,5 @@
 package com.snapmeal.entity.jpa;
 
-import com.snapmeal.entity.enums.IngredientType;
-
 import javax.persistence.*;
 import java.util.Set;
 

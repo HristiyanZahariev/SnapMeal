@@ -5,6 +5,7 @@ import com.snapmeal.entity.elasticsearch.RecipeEs;
 import com.snapmeal.entity.jpa.Recipe;
 import com.snapmeal.entity.jpa.User;
 import com.snapmeal.repository.elasticsearch.RecipeEsRepository;
+import com.snapmeal.repository.jpa.RecipeRepository;
 import com.snapmeal.repository.jpa.UserRepository;
 import com.snapmeal.security.JwtUser;
 import com.snapmeal.security.UserAuthentication;
@@ -37,6 +38,9 @@ public class RecipeService {
     private RecipeEsRepository recipeEsRepository;
 
     @Autowired
+    private RecipeRepository recipeRepository;
+
+    @Autowired
     private UserRepository userRepository;
 
     @Autowired
@@ -53,7 +57,9 @@ public class RecipeService {
     }
 
     public RecipeEs createRecipe(RecipeEs recipe) {
+        //recipeRepository.save(recipe);
         return recipeEsRepository.save(recipe);
+
     }
 
 

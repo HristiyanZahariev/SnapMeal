@@ -22,7 +22,7 @@ public class Diet {
     private Set<User> users;
 
     @ManyToMany(mappedBy = "diet", cascade = CascadeType.ALL)
-    private Set<Diet> recipes;
+    private Set<Recipe> recipes;
 
     public Diet() {
     }
@@ -63,11 +63,11 @@ public class Diet {
         this.users = users;
     }
 
-    public Set<Diet> getRecipes() {
+    public Set<Recipe> getRecipes() {
         return recipes;
     }
 
-    public void setRecipes(Set<Diet> recipes) {
+    public void setRecipes(Set<Recipe> recipes) {
         this.recipes = recipes;
     }
 
