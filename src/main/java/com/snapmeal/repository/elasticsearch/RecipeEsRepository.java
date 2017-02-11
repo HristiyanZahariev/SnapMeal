@@ -17,5 +17,6 @@ public interface RecipeEsRepository extends ElasticsearchRepository<RecipeEs, St
 
     Page<RecipeEs> findByName(String name, Pageable pageable);
     List<RecipeEs> findByDescriptionContaining(String description);
+    RecipeEs findById(String id);
 
 }

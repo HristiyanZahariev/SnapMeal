@@ -53,7 +53,7 @@ public class RecipeService {
     }
 
     public RecipeEs findRecipeById(String id) {
-        return recipeEsRepository.findOne(id);
+        return recipeEsRepository.findById(id);
     }
 
     public RecipeEs createRecipe(RecipeEs recipe) {
