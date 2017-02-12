@@ -14,20 +14,20 @@ public class Recipe {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
     private String name;
     private String description;
 
     @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "RecipeIngredient", joinColumns = { @JoinColumn(name = "RecipeId") },
-            inverseJoinColumns = { @JoinColumn(name = "IngredientId") })
-    private Set<Ingredient> ingredients;
+    @JoinTable(name = "RecipeIngredient", joinColumns = { @JoinColumn(name = "recipeId") },
+            inverseJoinColumns = { @JoinColumn(name = "ingredientId") })
+    private Set<Ingredient> ingredient;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "RecipeDiet", joinColumns = { @JoinColumn(name = "RecipeId") },
-            inverseJoinColumns = { @JoinColumn(name = "DietId") })
+    @JoinTable(name = "RecipeDiet", joinColumns = { @JoinColumn(name = "recipeId") },
+            inverseJoinColumns = { @JoinColumn(name = "dietId") })
     private Set<Diet> diet;
 
     @JsonIgnore
@@ -42,17 +42,17 @@ public class Recipe {
         this.description = description;
     }
 
-    public Recipe(String name, String description, Set<Ingredient> ingredients) {
+    public Recipe(String name, String description, Set<Ingredient> ingredient) {
         this.name = name;
         this.description = description;
-        this.ingredients = ingredients;
+        this.ingredient = ingredient;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -73,11 +73,11 @@ public class Recipe {
     }
 
     public Set<Ingredient> getIngredients() {
-        return ingredients;
+        return ingredient;
     }
 
-    public void setIngredients(Set<Ingredient> ingredients) {
-        this.ingredients = ingredients;
+    public void setIngredients(Set<Ingredient> ingredient) {
+        this.ingredient = ingredient;
     }
 
     public Set<Diet> getDiets() {

@@ -15,6 +15,9 @@ public class Ingredient {
 
     private String name;
 
+    @ManyToMany(mappedBy = "ingredient", cascade = CascadeType.ALL)
+    private Set<Recipe> recipes;
+
     public Ingredient() {
     }
 
@@ -34,6 +37,15 @@ public class Ingredient {
         this.name = name;
     }
 
+    public Set<Recipe> getRecipes() {
+        return recipes;
+    }
+
+    public void setRecipes(Set<Recipe> recipes) {
+        this.recipes = recipes;
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -42,7 +54,8 @@ public class Ingredient {
         Ingredient that = (Ingredient) o;
 
         if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        return name != null ? name.equals(that.name) : that.name == null;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        return recipes != null ? recipes.equals(that.recipes) : that.recipes == null;
 
     }
 
@@ -50,6 +63,7 @@ public class Ingredient {
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (recipes != null ? recipes.hashCode() : 0);
         return result;
     }
 }
