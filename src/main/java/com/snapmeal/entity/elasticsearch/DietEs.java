@@ -1,12 +1,15 @@
 package com.snapmeal.entity.elasticsearch;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 /**
  * Created by hristiyan on 05.02.17.
  */
-@Document(indexName = "snapmeal", type = "diet")
+@Document(indexName = "snapmeal", type = "diets")
 public class DietEs {
+    @Id
+    private String id;
     private String name;
     private String description;
 
@@ -32,6 +35,14 @@ public class DietEs {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     @Override

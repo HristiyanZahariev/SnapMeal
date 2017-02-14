@@ -2,6 +2,7 @@ package com.snapmeal.entity.jpa;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -25,7 +26,8 @@ public class Recipe {
             inverseJoinColumns = { @JoinColumn(name = "ingredientId") })
     private Set<Ingredient> ingredient;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JsonProperty("diet")
     @JoinTable(name = "RecipeDiet", joinColumns = { @JoinColumn(name = "recipeId") },
             inverseJoinColumns = { @JoinColumn(name = "dietId") })
     private Set<Diet> diet;

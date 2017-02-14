@@ -21,7 +21,7 @@ public class Diet {
     @OneToMany(mappedBy = "diet", cascade = CascadeType.ALL)
     private Set<User> users;
 
-    @ManyToMany(mappedBy = "diet", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "diet")
     private Set<Recipe> recipes;
 
     public Diet() {

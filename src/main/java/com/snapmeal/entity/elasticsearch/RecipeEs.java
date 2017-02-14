@@ -2,6 +2,7 @@ package com.snapmeal.entity.elasticsearch;
 
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
@@ -23,6 +24,7 @@ public class RecipeEs {
     private String description;
 
     @Field( type = FieldType.Nested)
+    @JsonProperty("diet")
     private List<DietEs> diet;
 
     public RecipeEs(String name, String description, List<DietEs>  diet) {

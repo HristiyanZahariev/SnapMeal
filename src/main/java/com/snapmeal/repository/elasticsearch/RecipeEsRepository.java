@@ -1,6 +1,7 @@
 package com.snapmeal.repository.elasticsearch;
 
 import com.snapmeal.entity.elasticsearch.RecipeEs;
+import com.snapmeal.entity.jpa.Recipe;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.annotations.Query;
