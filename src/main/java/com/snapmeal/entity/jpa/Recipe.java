@@ -15,7 +15,7 @@ public class Recipe {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
 
     private String name;
     private String description;
@@ -30,7 +30,7 @@ public class Recipe {
     @JsonProperty("diet")
     @JoinTable(name = "RecipeDiet", joinColumns = { @JoinColumn(name = "recipeId") },
             inverseJoinColumns = { @JoinColumn(name = "dietId") })
-    private Set<Diet> diet;
+    private Set<Diet> diets;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
@@ -50,11 +50,11 @@ public class Recipe {
         this.ingredient = ingredient;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -83,11 +83,11 @@ public class Recipe {
     }
 
     public Set<Diet> getDiets() {
-        return diet;
+        return diets;
     }
 
     public void setDiets(Set<Diet> diets) {
-        this.diet = diets;
+        this.diets = diets;
     }
 
     public Author getAuthor() {
