@@ -1,5 +1,6 @@
 package com.snapmeal.controllers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.snapmeal.entity.jpa.User;
 import com.snapmeal.repository.elasticsearch.RecipeEsRepository;
 import com.snapmeal.repository.jpa.UserRepository;
@@ -32,12 +33,15 @@ public class ImageRecognizerController {
     @Autowired
     RecipeService recipeService;
 
+    ObjectMapper mapper = new ObjectMapper();
+
     @POST
     @Path("/upload")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     public Response uploadFile(
             @FormDataParam("file") InputStream fileInputStream,
-            @FormDataParam("file") FormDataContentDisposition contentDispositionHeader) throws Exception {
+            @FormDataParam("file") FormDataContentDisposition contentDispositionHeader,
+            @QueryParam("page") int page) throws Exception {
 
 //        String filePath = path + contentDispositionHeader.getFileName();
 //
@@ -57,7 +61,10 @@ public class ImageRecognizerController {
         String text = imageRecognitionService.getCaptionText(recognizedContent);
         System.out.println(text);
 
-        return Response.ok(recipeService.getRecipeByDescription(text, currentJwtUser)).build();
+        return Response.ok(recipeService.getRecipeByDescription(text, currentJwtUser, page)).build();
     }
+
+//    @GET
+//    @Produces(MediaType.)
 
 }

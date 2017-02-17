@@ -1,6 +1,7 @@
 package com.snapmeal.entity.jpa;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Set;
 
 /**
@@ -15,8 +16,11 @@ public class Ingredient {
 
     private String name;
 
-    @ManyToMany(mappedBy = "ingredient", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "ingredient", fetch = FetchType.EAGER)
     private Set<Recipe> recipes;
+
+    @ManyToMany(mappedBy = "ingredients")
+    private Set<Diet> diets;
 
     public Ingredient() {
     }
@@ -45,6 +49,13 @@ public class Ingredient {
         this.recipes = recipes;
     }
 
+    public Set<Diet> getDiets() {
+        return diets;
+    }
+
+    public void setDiets(Set<Diet> diets) {
+        this.diets = diets;
+    }
 
     @Override
     public boolean equals(Object o) {

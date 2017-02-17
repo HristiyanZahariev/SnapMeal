@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Set;
 
 /**
@@ -20,12 +21,13 @@ public class Recipe {
     private String name;
     private String description;
 
-    @JsonIgnore
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JsonProperty("ingredient")
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "RecipeIngredient", joinColumns = { @JoinColumn(name = "recipeId") },
             inverseJoinColumns = { @JoinColumn(name = "ingredientId") })
     private Set<Ingredient> ingredient;
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER)
     @JsonProperty("diet")
     @JoinTable(name = "RecipeDiet", joinColumns = { @JoinColumn(name = "recipeId") },

@@ -2,8 +2,12 @@ package com.snapmeal.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.snapmeal.entity.elasticsearch.RecipeEs;
 
+import com.snapmeal.entity.jpa.Ingredient;
 import com.snapmeal.entity.jpa.Recipe;
 import com.snapmeal.entity.jpa.User;
 import com.snapmeal.repository.elasticsearch.RecipeEsRepository;
@@ -12,19 +16,24 @@ import com.snapmeal.repository.jpa.UserRepository;
 import com.snapmeal.security.JwtUser;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 import java.util.concurrent.CompletableFuture;
+import java.util.stream.Collectors;
 
-import static org.elasticsearch.index.query.QueryBuilders.boolQuery;
-import static org.elasticsearch.index.query.QueryBuilders.nestedQuery;
-import static org.elasticsearch.index.query.QueryBuilders.termQuery;
+import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * Created by hristiyan on 12.12.16.
@@ -46,15 +55,20 @@ public class RecipeService {
 
     private float minScore = 0.11000f;
 
+    private String scoreMode = "max";
+
+    private int limit = 2;
     ObjectMapper mapper = new ObjectMapper();
+
+    Gson gson = new Gson();
 
     public Iterable<RecipeEs> getAllRecipes() {
         return recipeEsRepository.findAll();
     }
 
-//    public RecipeEs findRecipeById(String id) {
-//        return recipeEsRepository.findById(id);
-//    }
+    public RecipeEs findRecipeById(String id) {
+        return recipeEsRepository.findById(id);
+    }
 
     public CompletableFuture<Recipe> createRecipe(RecipeEs recipeEs) throws IOException {
         recipeEsRepository.save(recipeEs);
@@ -64,20 +78,28 @@ public class RecipeService {
 
     }
 
-
-    public Page<RecipeEs> getRecipeByDescription(String description, JwtUser currentJwtUser) {
+    public Page<RecipeEs> getRecipeByDescription(String description, JwtUser currentJwtUser, int page) throws JsonProcessingException {
         NativeSearchQueryBuilder nativeSearchQueryBuilder = new NativeSearchQueryBuilder();
         User currentUser = userRepository.findByUsername(currentJwtUser.getUsername());
         String diet = currentUser.getDiet().getName();
         System.out.println(currentUser);
-        QueryBuilder matchPhraseQuery = QueryBuilders.matchQuery("description", description);
-        QueryBuilder builder = nestedQuery("diet", boolQuery().must(termQuery("diet.name", diet)));
+        Collection<Ingredient> dietIngredients = currentUser.getDiet().getIngredients();
 
-        nativeSearchQueryBuilder.withQuery(matchPhraseQuery);
-        nativeSearchQueryBuilder.withQuery(builder);
+        List<String> ingredientNames = dietIngredients.
+                stream()
+                .map((ingredient -> ingredient.getName()))
+                .distinct().collect(Collectors.toList());
+        QueryBuilder queryBuilder = QueryBuilders.boolQuery()
+                .must(matchQuery("description", description))
+                .must(nestedQuery("ingredient", termsQuery("ingredient.name", ingredientNames)).scoreMode(scoreMode));
+
+        nativeSearchQueryBuilder.withQuery(queryBuilder);
+        nativeSearchQueryBuilder.withPageable(new PageRequest(limit*(page-1), limit));
         nativeSearchQueryBuilder.withMinScore(minScore);
 
         NativeSearchQuery nativeSearchQuery = nativeSearchQueryBuilder.build();
+
+        System.out.println("nativeQuery" + nativeSearchQuery.getQuery());
 
         Page<RecipeEs> results = elasticsearchTemplate.queryForPage(nativeSearchQuery, RecipeEs.class);
 

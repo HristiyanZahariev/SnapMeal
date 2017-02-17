@@ -38,10 +38,11 @@ export class UserService {
 	    let input = new FormData();
 	    input.append("file", fileToUpload);
 	    let headers = new Headers();
+	    let page = 1;
         headers.set('X-AUTH-TOKEN', localStorage.getItem('id_token'));
         let options = new RequestOptions({ headers: headers });
 
 	    return this.http
-	        .post("http://localhost:8080/snapmeal/image/upload", input, options);
+	        .post("http://localhost:8080/snapmeal/image/upload?page=" + page, input, options);
 	}
 }

@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Created by hristiyan on 11.12.16.
  */
-@Document(indexName = "snapmeal", type = "recipe")
+@Document(indexName = "snapmeal", type = "recipeTest")
 public class RecipeEs {
 
     @Id
@@ -24,16 +24,25 @@ public class RecipeEs {
     private String description;
 
     @Field( type = FieldType.Nested)
-    @JsonProperty("diet")
-    private List<DietEs> diet;
+    @JsonProperty("ingredient")
+//    private List<DietEs> diet;
+    private List<IngredientEs> ingredient;
 
     public RecipeEs(String name, String description, List<DietEs>  diet) {
         this.name = name;
         this.description = description;
-        this.diet = diet;
+//        this.diet = diet;
     }
 
     public RecipeEs() {
+    }
+
+    public List<IngredientEs> getIngredient() {
+        return ingredient;
+    }
+
+    public void setIngredient(List<IngredientEs> ingredient) {
+        this.ingredient = ingredient;
     }
 
     public String getId() {
@@ -60,45 +69,4 @@ public class RecipeEs {
         this.description = description;
     }
 
-    public List<DietEs>  getDiet() {
-        return diet;
-    }
-
-    public void setDiet(List<DietEs>  diet) {
-        this.diet = diet;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        RecipeEs recipeEs = (RecipeEs) o;
-
-        if (id != null ? !id.equals(recipeEs.id) : recipeEs.id != null) return false;
-        if (name != null ? !name.equals(recipeEs.name) : recipeEs.name != null) return false;
-        if (description != null ? !description.equals(recipeEs.description) : recipeEs.description != null)
-            return false;
-        return diet != null ? diet.equals(recipeEs.diet) : recipeEs.diet == null;
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + (diet != null ? diet.hashCode() : 0);
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return "RecipeEs{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", diet=" + diet +
-                '}';
-    }
 }

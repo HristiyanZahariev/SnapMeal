@@ -1,9 +1,12 @@
 package com.snapmeal.entity.jpa;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.annotation.*;
 
 import javax.persistence.*;
 import javax.persistence.Id;
+import java.util.Collection;
 import java.util.Set;
 
 /**
@@ -18,11 +21,19 @@ public class Diet {
     private String name;
     private String description;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "diet", cascade = CascadeType.ALL)
     private Set<User> users;
 
-    @ManyToMany(mappedBy = "diets", cascade = CascadeType.ALL)
+    @JsonIgnore
+    @ManyToMany(mappedBy = "diets")
     private Set<Recipe> recipes;
+
+    @JsonProperty("ingredient")
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "DietIngredient", joinColumns = { @JoinColumn(name = "dietId") },
+            inverseJoinColumns = { @JoinColumn(name = "ingredientId") })
+    private Collection<Ingredient> ingredients;
 
     public Diet() {
     }
@@ -69,6 +80,14 @@ public class Diet {
 
     public void setRecipes(Set<Recipe> recipes) {
         this.recipes = recipes;
+    }
+
+    public Collection<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(Collection <Ingredient> ingredients) {
+        this.ingredients = ingredients;
     }
 
     @Override

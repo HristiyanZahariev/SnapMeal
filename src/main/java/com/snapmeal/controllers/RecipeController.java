@@ -28,12 +28,12 @@ public class RecipeController {
        return Response.ok(recipeInstance.getAllRecipes()).build();
     }
 
-//    @GET
-//    @Path("{id}")
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public Response getRecipeById(@PathParam("id") String id) {
-//        return Response.status(200).entity(recipeInstance.findRecipeById(id)).build();
-//    }
+    @GET
+    @Path("{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getRecipeById(@PathParam("id") String id) {
+        return Response.status(200).entity(recipeInstance.findRecipeById(id)).build();
+    }
 
 
     @POST
