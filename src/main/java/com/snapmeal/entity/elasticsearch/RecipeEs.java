@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Created by hristiyan on 11.12.16.
  */
-@Document(indexName = "snapmeal", type = "recipeTest")
+@Document(indexName = "snapmeal", type = "recipeTests")
 public class RecipeEs {
 
     @Id

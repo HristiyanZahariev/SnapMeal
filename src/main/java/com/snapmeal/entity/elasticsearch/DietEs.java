@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by hristiyan on 05.02.17.
  */
-@Document(indexName = "snapmeal", type = "diet")
+@Document(indexName = "snapmeal", type = "diets")
 public class DietEs {
     @Id
     private String id;

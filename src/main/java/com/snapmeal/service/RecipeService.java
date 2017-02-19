@@ -11,6 +11,7 @@ import com.snapmeal.entity.jpa.Ingredient;
 import com.snapmeal.entity.jpa.Recipe;
 import com.snapmeal.entity.jpa.User;
 import com.snapmeal.repository.elasticsearch.RecipeEsRepository;
+import com.snapmeal.repository.jpa.IngredientRepository;
 import com.snapmeal.repository.jpa.RecipeRepository;
 import com.snapmeal.repository.jpa.UserRepository;
 import com.snapmeal.security.JwtUser;
@@ -51,9 +52,12 @@ public class RecipeService {
     private UserRepository userRepository;
 
     @Autowired
+    private IngredientRepository ingredientRepository;
+
+    @Autowired
     private ElasticsearchTemplate elasticsearchTemplate;
 
-    private float minScore = 0.11000f;
+    private float minScore = 0.12000f;
 
     private String scoreMode = "max";
 
@@ -81,21 +85,33 @@ public class RecipeService {
     public Page<RecipeEs> getRecipeByDescription(String description, JwtUser currentJwtUser, int page) throws JsonProcessingException {
         NativeSearchQueryBuilder nativeSearchQueryBuilder = new NativeSearchQueryBuilder();
         User currentUser = userRepository.findByUsername(currentJwtUser.getUsername());
-        String diet = currentUser.getDiet().getName();
         System.out.println(currentUser);
-        Collection<Ingredient> dietIngredients = currentUser.getDiet().getIngredients();
+        if (currentUser.getDiet() != null) {
+            //Ingredients allowed to be used for the diet
+            Collection<Ingredient> dietIngredients = currentUser.getDiet().getIngredients();
+            Collection<Ingredient> allIngredients = ingredientRepository.findAll();
+            //Getting the !allowed ingredients
+            allIngredients.removeAll(dietIngredients);
+            List<String> ingredientNames = allIngredients.
+                    stream()
+                    .map((ingredient -> ingredient.getName()))
+                    .distinct().collect(Collectors.toList());
+            QueryBuilder queryBuilder = QueryBuilders.boolQuery()
+                    .must(matchQuery("description", description).boost(2.000f))
+                    .mustNot((nestedQuery("ingredient", termsQuery("ingredient.name", ingredientNames))));
 
-        List<String> ingredientNames = dietIngredients.
-                stream()
-                .map((ingredient -> ingredient.getName()))
-                .distinct().collect(Collectors.toList());
-        QueryBuilder queryBuilder = QueryBuilders.boolQuery()
-                .must(matchQuery("description", description))
-                .must(nestedQuery("ingredient", termsQuery("ingredient.name", ingredientNames)).scoreMode(scoreMode));
+            nativeSearchQueryBuilder.withQuery(queryBuilder);
+            nativeSearchQueryBuilder.withPageable(new PageRequest(limit * (page - 1), limit));
+            nativeSearchQueryBuilder.withMinScore(minScore);
+        }
+        else {
+            QueryBuilder queryBuilder = QueryBuilders.boolQuery()
+                    .must(matchQuery("description", description));
 
-        nativeSearchQueryBuilder.withQuery(queryBuilder);
-        nativeSearchQueryBuilder.withPageable(new PageRequest(limit*(page-1), limit));
-        nativeSearchQueryBuilder.withMinScore(minScore);
+            nativeSearchQueryBuilder.withQuery(queryBuilder);
+            nativeSearchQueryBuilder.withPageable(new PageRequest(limit * (page - 1), limit));
+            nativeSearchQueryBuilder.withMinScore(minScore);
+        }
 
         NativeSearchQuery nativeSearchQuery = nativeSearchQueryBuilder.build();
 

@@ -7,7 +7,7 @@ import javax.persistence.Id;
 /**
  * Created by hristiyan on 15.02.17.
  */
-@Document(indexName = "snapmeal", type = "ingredient")
+@Document(indexName = "snapmeal", type = "ingredients")
 public class IngredientEs {
     @Id
     private String id;
