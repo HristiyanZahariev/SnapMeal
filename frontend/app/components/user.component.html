@@ -8,10 +8,22 @@
 	        {{user.email}}
 	    </div>
 	</div>
-
-	<h1>Upload a file </h1>
-	<input #fileInput type="file"/>
-	<button (click)="addFile()" class="btn-default btn-lg">Add</button>
+</div>
+<h1>Upload a file </h1>
+<input #fileInput type="file"/>
+<button (click)="addFile()" class="btn-default btn-lg">Add</button>
+<div *ngIf="recipes">
+		<div *ngFor="let recipe of recipes.content">
+			<ul>
+				<li><strong>{{recipe.id}}</strong></li>
+				<li><strong>{{recipe.name}}</strong></li>
+				<li><strong>{{recipe.description}}</strong></li>
+				<p> With ingredients </p>
+				<li *ngFor="let ingredient of recipe.ingredient">
+					<strong>{{ingredient.name}}</strong>
+				</li>
+			</ul>
+		</div>
 </div>
 <img src="http://imgur.com/CQCkYtF.png" height="200" width="200">
 <!-- Page Content -->

@@ -4,6 +4,7 @@ import { AuthService } from '../services/auth.service';
 import { AuthGuard } from '../services/auth-guard.service';
 import { AuthHttp, tokenNotExpired } from 'angular2-jwt';
 
+
 @Component({
   moduleId: module.id,
   selector: 'user',
@@ -17,7 +18,9 @@ export class UserComponent  {
 	user :any;
 	showUsers: boolean;
 	diet: any;
+
 	@ViewChild("fileInput") fileInput: any;
+	recipes: RootObject;
 
 	constructor(private userService: UserService) {
 		this.showUsers = false;
@@ -53,16 +56,37 @@ export class UserComponent  {
 	        let fileToUpload = fi.files[0];
 	        this.userService
 	            .upload(fileToUpload)
-	            .subscribe(res => {
-	                console.log(res);
-	            });
-	    }
+				.subscribe(value => {
+    				this.recipes = <RootObject>value.json();
+    				console.log(this.recipes)
+
+    				console.log(this.recipes.content);
+	    		});
+		}
 	}
 }
 
-interface User {
-	id: number;
-	username: string;
-	email: string;
+export interface Ingredient {
+    id: string;
+    name: string;
+}
+
+export interface Content {
+    id: string;
+    name: string;
+    description: string;
+    ingredient: Ingredient[];
+}
+
+export interface RootObject {
+    content: Content[];
+    last: boolean;
+    totalPages: number;
+    totalElements: number;
+    first: boolean;
+    sort?: any;
+    numberOfElements: number;
+    size: number;
+    number: number;
 }
 
