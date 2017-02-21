@@ -3,6 +3,7 @@ import { UserService } from '../services/user.service';
 import { AuthService } from '../services/auth.service';
 import { AuthGuard } from '../services/auth-guard.service';
 import { AuthHttp, tokenNotExpired } from 'angular2-jwt';
+import {RatingModule} from "ngx-rating";
 
 
 @Component({
@@ -18,6 +19,7 @@ export class UserComponent  {
 	user :any;
 	showUsers: boolean;
 	diet: any;
+	starsCount: any[];
 
 	@ViewChild("fileInput") fileInput: any;
 	recipes: RootObject;

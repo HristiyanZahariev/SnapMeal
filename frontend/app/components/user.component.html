@@ -14,15 +14,21 @@
 <button (click)="addFile()" class="btn-default btn-lg">Add</button>
 <div *ngIf="recipes">
 		<div *ngFor="let recipe of recipes.content">
-			<ul>
-				<li><strong>{{recipe.id}}</strong></li>
-				<li><strong>{{recipe.name}}</strong></li>
-				<li><strong>{{recipe.description}}</strong></li>
-				<p> With ingredients </p>
-				<li *ngFor="let ingredient of recipe.ingredient">
+			<div class="recipe">
+				<strong>{{recipe.id}}</strong>
+				<strong>{{recipe.name}}</strong>
+				<strong>{{recipe.description}}</strong>
+				<div class="ingredients" *ngFor="let ingredient of recipe.ingredient">
 					<strong>{{ingredient.name}}</strong>
-				</li>
-			</ul>
+				</div>
+
+				<div class="raiting">
+					<rating [(ngModel)]="starsCount"
+					        [max]="5"
+					        [titles]="['one', 'two', 'three', 'four', 'five']">
+					</rating>
+				</div>
+			</div>
 		</div>
 </div>
 <img src="http://imgur.com/CQCkYtF.png" height="200" width="200">
