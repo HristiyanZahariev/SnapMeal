@@ -1,7 +1,9 @@
 package com.snapmeal.entity.jpa;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
@@ -15,7 +17,6 @@ import java.util.Set;
 public class Recipe {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
@@ -28,15 +29,11 @@ public class Recipe {
     private Set<Ingredient> ingredient;
 
     @JsonIgnore
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JsonProperty("diet")
-    @JoinTable(name = "RecipeDiet", joinColumns = { @JoinColumn(name = "recipeId") },
-            inverseJoinColumns = { @JoinColumn(name = "dietId") })
-    private Set<Diet> diets;
-
-    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     private Author author;
+
+    @OneToMany(mappedBy = "recipe",cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private Set<Rating> ratings;
 
     public Recipe() {}
 
@@ -84,20 +81,20 @@ public class Recipe {
         this.ingredient = ingredient;
     }
 
-    public Set<Diet> getDiets() {
-        return diets;
-    }
-
-    public void setDiets(Set<Diet> diets) {
-        this.diets = diets;
-    }
-
     public Author getAuthor() {
         return author;
     }
 
     public void setAuthor(Author author) {
         this.author = author;
+    }
+
+    public Set<Rating> getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(Set<Rating> ratings) {
+        this.ratings = ratings;
     }
 
     @Override
@@ -120,6 +117,7 @@ public class Recipe {
         result = 31 * result + (description != null ? description.hashCode() : 0);
         return result;
     }
+
 
     @Override
     public String toString() {

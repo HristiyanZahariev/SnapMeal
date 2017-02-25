@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.apache.mahout:mahout-hdfs:0.12.2">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.mahout/mahout-hdfs/0.12.2/40d3b38d1b4abd777b484d9f42cb19e14fb7ca96/mahout-hdfs-0.12.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.mahout/mahout-hdfs/0.12.2/e1f64c55ac4b4fd5a079f1c012146988d068cfc5/mahout-hdfs-0.12.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

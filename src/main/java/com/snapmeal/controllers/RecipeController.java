@@ -2,9 +2,15 @@ package com.snapmeal.controllers;
 
 import com.snapmeal.entity.elasticsearch.RecipeEs;
 import com.snapmeal.entity.jpa.Recipe;
+import com.snapmeal.entity.jpa.User;
+import com.snapmeal.security.JwtUser;
+import com.snapmeal.security.UserAuthentication;
 import com.snapmeal.service.RecipeService;
+import com.snapmeal.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -20,6 +26,11 @@ public class RecipeController {
 
     @Autowired
     RecipeService recipeInstance;
+
+
+    //SHOULD REWORK !!!!
+    @Autowired
+    UserService userService;
     
     @GET
     @Path("/all")
@@ -35,6 +46,18 @@ public class RecipeController {
         return Response.status(200).entity(recipeInstance.findRecipeById(id)).build();
     }
 
+    @POST
+    @Path("/rating")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response rateRecipe(@QueryParam("recipe_id") Long recipeId,
+                               @QueryParam("rating") int rating) {
+
+        final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        JwtUser jwtUser = ((UserAuthentication) authentication).getDetails();
+        recipeInstance.rateRecipe(recipeId, rating, jwtUser);
+        return Response.ok().build();
+
+    }
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)

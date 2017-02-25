@@ -20,6 +20,8 @@ export class AuthService {
         localStorage.setItem('id_token', jjwt);
         // data => console.log(data),
         // error => console.log(error)
+
+        //not sure if this gotta be here
         this.router.navigateByUrl('');
       });
   }

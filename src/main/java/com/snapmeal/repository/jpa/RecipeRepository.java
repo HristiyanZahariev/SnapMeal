@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 /**
@@ -13,7 +14,8 @@ import java.util.concurrent.CompletableFuture;
  */
 @Repository
 public interface RecipeRepository extends org.springframework.data.repository.Repository<Recipe, String> {
-    Recipe findById(String id);
+    Recipe findById(Long id);
+    List<Recipe> findAll();
     @Async
     <S extends Recipe> CompletableFuture<S> save(S recipe);
 }

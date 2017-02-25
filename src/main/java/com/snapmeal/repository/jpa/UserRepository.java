@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 public interface UserRepository extends JpaRepository<User, Long> {
     //List<User> findByFirstName(String name);
     User findByUsername(String name);
+    User findById(Long id);
     @Modifying
     @Transactional
     @Query("update User u set u.diet=:diet  where u.id =:userId")

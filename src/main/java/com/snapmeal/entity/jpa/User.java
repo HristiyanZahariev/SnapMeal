@@ -8,6 +8,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.snapmeal.entity.enums.UserRole;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -55,8 +57,11 @@ public class User {
     @JoinColumn(name = "dietId")
     private Diet diet;
 
-    //Added because of jwt (when receiving user from ng2)
+    //Added because of jwt
     private boolean enabled;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private Set<Rating> ratings;
 
 
     @Transient
@@ -157,9 +162,24 @@ public class User {
         this.enabled = enabled;
     }
 
+    public Set<Rating> getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(Set<Rating> ratings) {
+        this.ratings = ratings;
+    }
+
     @Override
     public String toString() {
-        return getClass().getSimpleName() + ": " + getUsername();
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                '}';
     }
 
     @Override
@@ -168,25 +188,18 @@ public class User {
         if (o == null || getClass() != o.getClass()) return false;
 
         User user = (User) o;
+
+        if (enabled != user.enabled) return false;
         if (id != null ? !id.equals(user.id) : user.id != null) return false;
         if (username != null ? !username.equals(user.username) : user.username != null) return false;
         if (password != null ? !password.equals(user.password) : user.password != null) return false;
         if (email != null ? !email.equals(user.email) : user.email != null) return false;
+        if (firstname != null ? !firstname.equals(user.firstname) : user.firstname != null) return false;
+        if (lastname != null ? !lastname.equals(user.lastname) : user.lastname != null) return false;
         if (diet != null ? !diet.equals(user.diet) : user.diet != null) return false;
+        if (ratings != null ? !ratings.equals(user.ratings) : user.ratings != null) return false;
         if (newPassword != null ? !newPassword.equals(user.newPassword) : user.newPassword != null) return false;
         return authorities != null ? authorities.equals(user.authorities) : user.authorities == null;
 
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (username != null ? username.hashCode() : 0);
-        result = 31 * result + (password != null ? password.hashCode() : 0);
-        result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + (diet != null ? diet.hashCode() : 0);
-        result = 31 * result + (newPassword != null ? newPassword.hashCode() : 0);
-        result = 31 * result + (authorities != null ? authorities.hashCode() : 0);
-        return result;
     }
 }

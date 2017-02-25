@@ -1,6 +1,7 @@
 package com.snapmeal.service;
 
 
+import com.mysql.cj.jdbc.MysqlDataSource;
 import com.snapmeal.entity.jpa.Diet;
 import com.snapmeal.entity.jpa.User;
 import com.snapmeal.entity.enums.UserRole;
@@ -8,8 +9,21 @@ import com.snapmeal.repository.jpa.DietRepository;
 import com.snapmeal.repository.jpa.UserRepository;
 import com.snapmeal.security.JwtUser;
 import com.snapmeal.security.JwtUserFactory;
+import com.snapmeal.security.UserAuthentication;
+import org.apache.mahout.cf.taste.common.TasteException;
+import org.apache.mahout.cf.taste.impl.model.jdbc.MySQLJDBCDataModel;
+import org.apache.mahout.cf.taste.impl.neighborhood.ThresholdUserNeighborhood;
+import org.apache.mahout.cf.taste.impl.recommender.GenericUserBasedRecommender;
+import org.apache.mahout.cf.taste.impl.similarity.PearsonCorrelationSimilarity;
+import org.apache.mahout.cf.taste.model.JDBCDataModel;
+import org.apache.mahout.cf.taste.neighborhood.UserNeighborhood;
+import org.apache.mahout.cf.taste.recommender.RecommendedItem;
+import org.apache.mahout.cf.taste.recommender.UserBasedRecommender;
+import org.apache.mahout.cf.taste.similarity.UserSimilarity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AccountStatusUserDetailsChecker;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -31,8 +45,6 @@ public class UserService implements UserDetailsService {
     @Autowired
     private DietRepository dietRepository;
 
-    private final AccountStatusUserDetailsChecker detailsChecker = new AccountStatusUserDetailsChecker();
-
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
@@ -50,7 +62,8 @@ public class UserService implements UserDetailsService {
         return userRepository.save(user);
     }
 
-    public void setUserDiet(String dietName, User user) {
+    public void setUserDiet(String dietName, JwtUser jwtUser) {
+        User user = getNonJwtUser(jwtUser);
         Diet userDiet = dietRepository.findByName(dietName);
         user.setDiet(userDiet);
         long userId = user.getId();

@@ -7,6 +7,8 @@ import 'rxjs/add/operator/map';
 
 export class UserService {
 
+	body: any;
+
 	constructor(private http: Http, private authHttp: AuthHttp) {
 	}
 
@@ -26,23 +28,30 @@ export class UserService {
 		return this.authHttp.post(url, body, options).map(res =>  res.json().data);
 	}
 
-	selectDietPlan(diet: string, user: any) {
+	selectDietPlan(diet: string) {
 		console.log(diet)
-		console.log(user)
 		let url = 'http://localhost:8080/snapmeal/user/diet?diet='
 		console.log(url+diet);
-		return this.authHttp.post(url+diet, JSON.stringify(user))
+		this.body = null;
+		return this.authHttp.post(url+diet, this.body);
 	}
 	// formData doesnt support authHttp 
 	upload(fileToUpload: any) {
 	    let input = new FormData();
 	    input.append("file", fileToUpload);
 	    let headers = new Headers();
-	    let page = 1;
+	    let page = 3;
         headers.set('X-AUTH-TOKEN', localStorage.getItem('id_token'));
         let options = new RequestOptions({ headers: headers });
 
 	    return this.http
 	        .post("http://localhost:8080/snapmeal/image/upload?page=" + page, input, options);
+	}
+
+	setRecipeRating(recipeRating: number, recipeId: number) {
+		let url = "http://localhost:8080/snapmeal/recipe/rating?recipe_id=" + recipeId + "&rating=" + recipeRating;
+		console.log(url);
+		this.body = null;
+		return this.authHttp.post(url, this.body);
 	}
 }

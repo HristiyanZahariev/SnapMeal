@@ -18,15 +18,17 @@
 				<strong>{{recipe.id}}</strong>
 				<strong>{{recipe.name}}</strong>
 				<strong>{{recipe.description}}</strong>
-				<div class="ingredients" *ngFor="let ingredient of recipe.ingredient">
-					<strong>{{ingredient.name}}</strong>
-				</div>
-
 				<div class="raiting">
-					<rating [(ngModel)]="starsCount"
+					<rating [(ngModel)]="recipe.rating"
 					        [max]="5"
+					        (click)="setRecipeRating(recipe.rating, recipe.id)"
 					        [titles]="['one', 'two', 'three', 'four', 'five']">
 					</rating>
+					{{recipe.rating}}
+				</div>
+				<strong>With ingredients:</strong>
+				<div class="ingredients" *ngFor="let ingredient of recipe.ingredient">
+					<strong>{{ingredient.name}}</strong>
 				</div>
 			</div>
 		</div>

@@ -2,6 +2,7 @@ package com.snapmeal.entity.elasticsearch;
 
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
@@ -22,6 +23,9 @@ public class RecipeEs {
 
     private String name;
     private String description;
+
+    @Field(type = FieldType.Nested)
+    private List<RatingEs> ratings;
 
     @Field( type = FieldType.Nested)
     @JsonProperty("ingredient")
@@ -69,4 +73,37 @@ public class RecipeEs {
         this.description = description;
     }
 
+    public List<RatingEs> getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(List<RatingEs> ratings) {
+        this.ratings = ratings;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        RecipeEs recipeEs = (RecipeEs) o;
+
+        if (id != null ? !id.equals(recipeEs.id) : recipeEs.id != null) return false;
+        if (name != null ? !name.equals(recipeEs.name) : recipeEs.name != null) return false;
+        if (description != null ? !description.equals(recipeEs.description) : recipeEs.description != null)
+            return false;
+        if (ratings != null ? !ratings.equals(recipeEs.ratings) : recipeEs.ratings != null) return false;
+        return ingredient != null ? ingredient.equals(recipeEs.ingredient) : recipeEs.ingredient == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (ratings != null ? ratings.hashCode() : 0);
+        result = 31 * result + (ingredient != null ? ingredient.hashCode() : 0);
+        return result;
+    }
 }

@@ -1,6 +1,7 @@
 package com.snapmeal.entity.jpa;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.annotation.*;
 
@@ -22,12 +23,8 @@ public class Diet {
     private String description;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "diet", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "diet", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<User> users;
-
-    @JsonIgnore
-    @ManyToMany(mappedBy = "diets")
-    private Set<Recipe> recipes;
 
     @JsonProperty("ingredient")
     @ManyToMany(fetch = FetchType.EAGER)
@@ -74,13 +71,6 @@ public class Diet {
         this.users = users;
     }
 
-    public Set<Recipe> getRecipes() {
-        return recipes;
-    }
-
-    public void setRecipes(Set<Recipe> recipes) {
-        this.recipes = recipes;
-    }
 
     public Collection<Ingredient> getIngredients() {
         return ingredients;
@@ -101,7 +91,7 @@ public class Diet {
         if (name != null ? !name.equals(diet.name) : diet.name != null) return false;
         if (description != null ? !description.equals(diet.description) : diet.description != null) return false;
         if (users != null ? !users.equals(diet.users) : diet.users != null) return false;
-        return recipes != null ? recipes.equals(diet.recipes) : diet.recipes == null;
+        return ingredients != null ? ingredients.equals(diet.ingredients) : diet.ingredients == null;
 
     }
 
@@ -111,7 +101,7 @@ public class Diet {
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (users != null ? users.hashCode() : 0);
-        result = 31 * result + (recipes != null ? recipes.hashCode() : 0);
         return result;
     }
+
 }

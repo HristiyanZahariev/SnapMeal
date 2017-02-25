@@ -5,6 +5,7 @@ import com.snapmeal.entity.jpa.User;
 import com.snapmeal.security.JwtUser;
 import com.snapmeal.security.UserAuthentication;
 import com.snapmeal.service.UserService;
+import org.apache.mahout.cf.taste.common.TasteException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -28,7 +29,7 @@ public class UserController {
     @GET
     @Path("/current")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getCurrent() {
+    public Response getCurrent() throws TasteException {
         final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication instanceof UserAuthentication) {
             return Response.ok(((UserAuthentication) authentication).getDetails()).build();
@@ -65,9 +66,10 @@ public class UserController {
     @POST
     @Path("/diet")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void setUserDiet(@QueryParam("diet") String dietName, JwtUser jwtUser) {
-        User nonJwtUser = userInstance.getNonJwtUser(jwtUser);
-        userInstance.setUserDiet(dietName, nonJwtUser);
+    public void setUserDiet(@QueryParam("diet") String dietName) {
+        final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        JwtUser jwtUser = ((UserAuthentication) authentication).getDetails();
+        userInstance.setUserDiet(dietName, jwtUser);
     }
 
 

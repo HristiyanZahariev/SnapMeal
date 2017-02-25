@@ -46,8 +46,7 @@ export class UserComponent  {
 
 	selectDietPlan() {
 		console.log(this.diet)
-		console.log(this.user)
-		this.userService.selectDietPlan(this.diet, this.user).subscribe(res => {
+		this.userService.selectDietPlan(this.diet).subscribe(res => {
 			console.log(res);
 		});	
 	} 
@@ -60,11 +59,16 @@ export class UserComponent  {
 	            .upload(fileToUpload)
 				.subscribe(value => {
     				this.recipes = <RootObject>value.json();
-    				console.log(this.recipes)
-
-    				console.log(this.recipes.content);
+    				console.log(this.recipes.content)
 	    		});
 		}
+	}	
+
+	setRecipeRating(recipeRating: number, recipeId: number) :void {
+		this.userService.setRecipeRating(recipeRating, recipeId)
+						.subscribe(res => {
+							console.log(res);
+						});
 	}
 }
 
@@ -77,6 +81,7 @@ export interface Content {
     id: string;
     name: string;
     description: string;
+	rating: number;
     ingredient: Ingredient[];
 }
 

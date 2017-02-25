@@ -13,20 +13,18 @@
           <element id="library" level="project" name="Gradle: com.microsoft.projectoxford:vision:aar:0.5.0" />
         </element>
         <element id="directory" name="lib">
-          <element id="library" level="project" name="Gradle: org.springframework.javaconfig:spring-javaconfig:1.0.0.m3" />
-          <element id="library" level="project" name="Gradle: org.glassfish.jersey.media:jersey-media-json-jackson:2.19" />
           <element id="library" level="project" name="Gradle: org.glassfish.jersey.ext:jersey-spring3:2.24.1" />
-          <element id="library" level="project" name="Gradle: com.fasterxml.jackson.core:jackson-annotations:2.8.6" />
           <element id="library" level="project" name="Gradle: org.glassfish.jersey.media:jersey-media-multipart:2.25" />
           <element id="library" level="project" name="Gradle: org.springframework:spring-test:4.0.5.RELEASE" />
           <element id="library" level="project" name="Gradle: org.springframework:spring-orm:4.3.4.RELEASE" />
+          <element id="library" level="project" name="Gradle: org.apache.solr:solr-commons-csv:3.5.0" />
           <element id="library" level="project" name="Gradle: org.springframework.data:spring-data-jpa:1.10.5.RELEASE" />
           <element id="library" level="project" name="Gradle: org.springframework.security:spring-security-web:4.2.0.RELEASE" />
           <element id="library" level="project" name="Gradle: org.springframework.security:spring-security-config:4.2.0.RELEASE" />
           <element id="library" level="project" name="Gradle: org.springframework.social:spring-social-facebook:2.0.3.RELEASE" />
           <element id="library" level="project" name="Gradle: org.springframework.social:spring-social-core:1.1.4.RELEASE" />
           <element id="library" level="project" name="Gradle: io.jsonwebtoken:jjwt:0.4" />
-          <element id="library" level="project" name="Gradle: javax.servlet:servlet-api:3.0-alpha-1" />
+          <element id="library" level="project" name="Gradle: org.jvnet.mimepull:mimepull:1.9.6" />
           <element id="library" level="project" name="Gradle: org.json:json:20160810" />
           <element id="library" level="project" name="Gradle: org.apache.httpcomponents:httpclient:4.5.2" />
           <element id="library" level="project" name="Gradle: mysql:mysql-connector-java:6.0.5" />
@@ -41,7 +39,7 @@
           <element id="library" level="project" name="Gradle: org.glassfish.hk2:hk2:2.5.0-b05" />
           <element id="library" level="project" name="Gradle: org.glassfish.hk2:spring-bridge:2.5.0-b05" />
           <element id="library" level="project" name="Gradle: javax.ws.rs:javax.ws.rs-api:2.0.1" />
-          <element id="library" level="project" name="Gradle: org.jvnet.mimepull:mimepull:1.9.6" />
+          <element id="library" level="project" name="Gradle: javax.servlet:servlet-api:3.0-alpha-1" />
           <element id="library" level="project" name="Gradle: org.springframework:spring-jdbc:4.3.4.RELEASE" />
           <element id="library" level="project" name="Gradle: org.springframework:spring-tx:4.3.4.RELEASE" />
           <element id="library" level="project" name="Gradle: org.jboss.logging:jboss-logging:3.3.0.Final" />
@@ -49,6 +47,7 @@
           <element id="library" level="project" name="Gradle: org.javassist:javassist:3.20.0-GA" />
           <element id="library" level="project" name="Gradle: antlr:antlr:2.7.7" />
           <element id="library" level="project" name="Gradle: org.apache.geronimo.specs:geronimo-jta_1.1_spec:1.1.1" />
+          <element id="library" level="project" name="Gradle: org.jboss:jandex:2.0.3.Final" />
           <element id="library" level="project" name="Gradle: com.fasterxml:classmate:1.3.0" />
           <element id="library" level="project" name="Gradle: dom4j:dom4j:1.6.1" />
           <element id="library" level="project" name="Gradle: org.hibernate.common:hibernate-commons-annotations:5.0.1.Final" />
@@ -63,6 +62,12 @@
           <element id="library" level="project" name="Gradle: commons-lang:commons-lang:2.6" />
           <element id="library" level="project" name="Gradle: joda-time:joda-time:2.9.7" />
           <element id="library" level="project" name="Gradle: org.elasticsearch:elasticsearch:2.2.0" />
+          <element id="library" level="project" name="Gradle: org.apache.hadoop:hadoop-client:2.4.1" />
+          <element id="library" level="project" name="Gradle: org.apache.commons:commons-lang3:3.1" />
+          <element id="library" level="project" name="Gradle: com.thoughtworks.xstream:xstream:1.4.4" />
+          <element id="library" level="project" name="Gradle: org.apache.mahout.commons:commons-cli:2.0-mahout" />
+          <element id="library" level="project" name="Gradle: org.apache.commons:commons-math3:3.2" />
+          <element id="library" level="project" name="Gradle: org.hibernate:hibernate-core:5.2.6.Final" />
           <element id="library" level="project" name="Gradle: com.fasterxml.jackson.module:jackson-module-jaxb-annotations:2.5.1" />
           <element id="library" level="project" name="Gradle: org.glassfish.jersey.core:jersey-client:2.24.1" />
           <element id="library" level="project" name="Gradle: org.glassfish.jersey.media:jersey-media-jaxb:2.24.1" />
@@ -78,9 +83,7 @@
           <element id="library" level="project" name="Gradle: javax.annotation:jsr250-api:1.0" />
           <element id="library" level="project" name="Gradle: javax.inject:javax.inject:1" />
           <element id="library" level="project" name="Gradle: org.springframework.social:spring-social-web:1.1.4.RELEASE" />
-          <element id="library" level="project" name="Gradle: org.apache.lucene:lucene-core:5.4.1" />
           <element id="library" level="project" name="Gradle: org.apache.lucene:lucene-backward-codecs:5.4.1" />
-          <element id="library" level="project" name="Gradle: org.apache.lucene:lucene-analyzers-common:5.4.1" />
           <element id="library" level="project" name="Gradle: org.apache.lucene:lucene-queries:5.4.1" />
           <element id="library" level="project" name="Gradle: org.apache.lucene:lucene-memory:5.4.1" />
           <element id="library" level="project" name="Gradle: org.apache.lucene:lucene-highlighter:5.4.1" />
@@ -88,7 +91,6 @@
           <element id="library" level="project" name="Gradle: org.apache.lucene:lucene-suggest:5.4.1" />
           <element id="library" level="project" name="Gradle: org.apache.lucene:lucene-join:5.4.1" />
           <element id="library" level="project" name="Gradle: org.apache.lucene:lucene-spatial:5.4.1" />
-          <element id="library" level="project" name="Gradle: com.google.guava:guava:18.0" />
           <element id="library" level="project" name="Gradle: org.elasticsearch:securesm:1.0" />
           <element id="library" level="project" name="Gradle: com.carrotsearch:hppc:0.7.1" />
           <element id="library" level="project" name="Gradle: org.joda:joda-convert:1.2" />
@@ -97,10 +99,13 @@
           <element id="library" level="project" name="Gradle: com.fasterxml.jackson.dataformat:jackson-dataformat-cbor:2.6.2" />
           <element id="library" level="project" name="Gradle: io.netty:netty:3.10.5.Final" />
           <element id="library" level="project" name="Gradle: com.ning:compress-lzf:1.0.2" />
-          <element id="library" level="project" name="Gradle: com.tdunning:t-digest:3.0" />
           <element id="library" level="project" name="Gradle: org.hdrhistogram:HdrHistogram:2.1.6" />
-          <element id="library" level="project" name="Gradle: commons-cli:commons-cli:1.3.1" />
           <element id="library" level="project" name="Gradle: com.twitter:jsr166e:1.1.0" />
+          <element id="library" level="project" name="Gradle: org.apache.hadoop:hadoop-hdfs:2.4.1" />
+          <element id="library" level="project" name="Gradle: org.apache.hadoop:hadoop-mapreduce-client-app:2.4.1" />
+          <element id="library" level="project" name="Gradle: org.apache.hadoop:hadoop-mapreduce-client-jobclient:2.4.1" />
+          <element id="library" level="project" name="Gradle: xmlpull:xmlpull:1.1.3.1" />
+          <element id="library" level="project" name="Gradle: xpp3:xpp3_min:1.1.4c" />
           <element id="library" level="project" name="Gradle: org.glassfish.hk2:osgi-resource-locator:1.0.1" />
           <element id="library" level="project" name="Gradle: org.jvnet:tiger-types:1.4" />
           <element id="library" level="project" name="Gradle: org.glassfish.hk2.external:bean-validator:2.5.0-b05" />
@@ -112,6 +117,43 @@
           <element id="library" level="project" name="Gradle: org.apache.lucene:lucene-spatial3d:5.4.1" />
           <element id="library" level="project" name="Gradle: com.spatial4j:spatial4j:0.5" />
           <element id="library" level="project" name="Gradle: org.yaml:snakeyaml:1.15" />
+          <element id="library" level="project" name="Gradle: commons-httpclient:commons-httpclient:3.1" />
+          <element id="library" level="project" name="Gradle: commons-io:commons-io:2.4" />
+          <element id="library" level="project" name="Gradle: commons-net:commons-net:3.1" />
+          <element id="library" level="project" name="Gradle: commons-collections:commons-collections:3.2.1" />
+          <element id="library" level="project" name="Gradle: log4j:log4j:1.2.17" />
+          <element id="library" level="project" name="Gradle: commons-configuration:commons-configuration:1.6" />
+          <element id="library" level="project" name="Gradle: org.apache.avro:avro:1.7.4" />
+          <element id="library" level="project" name="Gradle: com.google.protobuf:protobuf-java:2.5.0" />
+          <element id="library" level="project" name="Gradle: com.google.code.findbugs:jsr305:1.3.9" />
+          <element id="library" level="project" name="Gradle: com.fasterxml.jackson.core:jackson-annotations:2.8.6" />
+          <element id="library" level="project" name="Gradle: org.apache.commons:commons-compress:1.4.1" />
+          <element id="library" level="project" name="Gradle: org.apache.hadoop:hadoop-mapreduce-client-common:2.4.1" />
+          <element id="library" level="project" name="Gradle: org.apache.hadoop:hadoop-mapreduce-client-shuffle:2.4.1" />
+          <element id="library" level="project" name="Gradle: org.slf4j:slf4j-log4j12:1.7.5" />
+          <element id="library" level="project" name="Gradle: commons-digester:commons-digester:1.8" />
+          <element id="library" level="project" name="Gradle: commons-beanutils:commons-beanutils-core:1.8.0" />
+          <element id="library" level="project" name="Gradle: com.thoughtworks.paranamer:paranamer:2.3" />
+          <element id="library" level="project" name="Gradle: org.xerial.snappy:snappy-java:1.0.4.1" />
+          <element id="library" level="project" name="Gradle: org.tukaani:xz:1.0" />
+          <element id="library" level="project" name="Gradle: org.apache.hadoop:hadoop-yarn-client:2.4.1" />
+          <element id="library" level="project" name="Gradle: org.apache.hadoop:hadoop-yarn-server-common:2.4.1" />
+          <element id="library" level="project" name="Gradle: org.apache.hadoop:hadoop-yarn-server-nodemanager:2.4.1" />
+          <element id="library" level="project" name="Gradle: javax.xml.bind:jaxb-api:2.2.2" />
+          <element id="library" level="project" name="Gradle: com.sun.jersey:jersey-core:1.9" />
+          <element id="library" level="project" name="Gradle: com.google.inject:guice:3.0" />
+          <element id="library" level="project" name="Gradle: com.sun.jersey:jersey-server:1.9" />
+          <element id="library" level="project" name="Gradle: com.sun.jersey:jersey-json:1.9" />
+          <element id="library" level="project" name="Gradle: com.sun.jersey.contribs:jersey-guice:1.9" />
+          <element id="library" level="project" name="Gradle: commons-beanutils:commons-beanutils:1.7.0" />
+          <element id="library" level="project" name="Gradle: com.sun.jersey:jersey-client:1.9" />
+          <element id="library" level="project" name="Gradle: org.codehaus.jettison:jettison:1.1" />
+          <element id="library" level="project" name="Gradle: javax.xml.stream:stax-api:1.0-2" />
+          <element id="library" level="project" name="Gradle: javax.activation:activation:1.1" />
+          <element id="library" level="project" name="Gradle: org.sonatype.sisu.inject:cglib:2.2.1-v20090111" />
+          <element id="library" level="project" name="Gradle: asm:asm:3.1" />
+          <element id="library" level="project" name="Gradle: com.sun.xml.bind:jaxb-impl:2.2.3-1" />
+          <element id="library" level="project" name="Gradle: jline:jline:0.9.94" />
           <element id="library" level="project" name="Gradle: org.springframework:spring-beans:4.3.4.RELEASE" />
           <element id="library" level="project" name="Gradle: org.springframework:spring-core:4.3.4.RELEASE" />
           <element id="library" level="project" name="Gradle: org.springframework:spring-web:4.3.4.RELEASE" />
@@ -124,15 +166,61 @@
           <element id="library" level="project" name="Gradle: commons-logging:commons-logging:1.2" />
           <element id="library" level="project" name="Gradle: commons-codec:commons-codec:1.9" />
           <element id="library" level="project" name="Gradle: org.springframework.data:spring-data-commons:1.12.6.RELEASE" />
-          <element id="library" level="project" name="Gradle: com.fasterxml.jackson.core:jackson-core:2.6.7" />
           <element id="library" level="project" name="Gradle: org.slf4j:jcl-over-slf4j:1.7.22" />
+          <element id="library" level="project" name="Gradle: org.apache.lucene:lucene-core:5.4.1" />
+          <element id="library" level="project" name="Gradle: org.apache.lucene:lucene-analyzers-common:5.4.1" />
+          <element id="library" level="project" name="Gradle: com.google.guava:guava:18.0" />
+          <element id="library" level="project" name="Gradle: commons-cli:commons-cli:1.3.1" />
+          <element id="library" level="project" name="Gradle: com.tdunning:t-digest:3.1" />
           <element id="library" level="project" name="Gradle: org.glassfish.hk2:hk2-api:2.5.0-b30" />
           <element id="library" level="project" name="Gradle: org.glassfish.hk2.external:javax.inject:2.5.0-b30" />
           <element id="library" level="project" name="Gradle: org.glassfish.hk2:hk2-locator:2.5.0-b30" />
           <element id="library" level="project" name="Gradle: org.glassfish.hk2:hk2-utils:2.5.0-b30" />
           <element id="library" level="project" name="Gradle: org.glassfish.hk2.external:aopalliance-repackaged:2.5.0-b30" />
-          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.hibernate/hibernate-core/5.2.6.Final/b19341bc2b668423dbeca229be8ce921bcf88364/hibernate-core-5.2.6.Final.jar" />
-          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jboss/jandex/2.0.3.Final/bfc4d6257dbff7a33a357f0de116be6ff951d849/jandex-2.0.3.Final.jar" />
+          <element id="library" level="project" name="Gradle: org.glassfish.jersey.media:jersey-media-json-jackson:2.19" />
+          <element id="library" level="project" name="Gradle: org.springframework.javaconfig:spring-javaconfig:1.0.0.m3" />
+          <element id="library" level="project" name="Gradle: junit:junit:4.11" />
+          <element id="library" level="project" name="Gradle: org.hamcrest:hamcrest-core:1.3" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.mahout/mahout-integration/0.12.2/5a744fde25cd98336a824a55a04a9eeacd6dd56d/mahout-integration-0.12.2.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.hbase/hbase-client/1.0.0/a81f4057db1ebd20cc9c30a57a80b496a536c2e7/hbase-client-1.0.0.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.hbase/hbase-annotations/1.0.0/36ec15edf6513057ad5d8cdf9f95705f8c619e54/hbase-annotations-1.0.0.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.hbase/hbase-common/1.0.0/1b795be68384bd3a796cbb7523c0f9887abfb329/hbase-common-1.0.0.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.hbase/hbase-protocol/1.0.0/3497a170e1b73c7b7e5a2d24ee2f0f1f221a2414/hbase-protocol-1.0.0.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.netty/netty-all/4.0.23.Final/294104aaf1781d6a56a07d561e792c5d0c95f45/netty-all-4.0.23.Final.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.zookeeper/zookeeper/3.4.6/1b2502e29da1ebaade2357cd1de35a855fa3755/zookeeper-3.4.6.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.htrace/htrace-core/3.1.0-incubating/f73606e7c9ede5802335c290bf47490ad6d51df3/htrace-core-3.1.0-incubating.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jruby.jcodings/jcodings/1.0.8/33fa45fd853c277b888e3d5a2e6a4604b7c11e2c/jcodings-1.0.8.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jruby.joni/joni/2.1.2/1f08024ec70e86a716188b7d069b0c2d2f183e14/joni-2.1.2.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.stephenc.findbugs/findbugs-annotations/1.3.9-1/a6b11447635d80757d64b355bed3c00786d86801/findbugs-annotations-1.3.9-1.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.hadoop/hadoop-auth/2.5.1/d5b7d23bd7fe0d7b47166a2ac6fd318304e941a2/hadoop-auth-2.5.1.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.hadoop/hadoop-common/2.5.1/c6d9c2d93b4a099d119aada3ad27d5559db108c2/hadoop-common-2.5.1.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.hadoop/hadoop-mapreduce-client-core/2.5.1/a7fdce41a358c87f3fabe5fefbb49be5a0e2e5a1/hadoop-mapreduce-client-core-2.5.1.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mortbay.jetty/jetty-util/6.1.26/e5642fe0399814e1687d55a3862aa5a3417226a9/jetty-util-6.1.26.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.directory.server/apacheds-kerberos-codec/2.0.0-M15/1c16e4e477183641c5f0dd5cdecd27ec331bacb5/apacheds-kerberos-codec-2.0.0-M15.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.hadoop/hadoop-annotations/2.5.1/2fd0ea8a8402047d0c80f446349f5ea787934390/hadoop-annotations-2.5.1.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/xmlenc/xmlenc/0.52/d82554efbe65906d83b3d97bd7509289e9db561a/xmlenc-0.52.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mortbay.jetty/jetty/6.1.26/2f546e289fddd5b1fab1d4199fbb6e9ef43ee4b0/jetty-6.1.26.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.java.dev.jets3t/jets3t/0.9.0/792bc96ee7e57b89f472aa0cb5a31015b9f59c96/jets3t-0.9.0.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jcraft/jsch/0.1.42/a86104b0f2e0c0bab5b0df836065823a99b5e334/jsch-0.1.42.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.hadoop/hadoop-yarn-common/2.5.1/31c7646ba7fc326f215422837d36cab0bad1790b/hadoop-yarn-common-2.5.1.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.inject.extensions/guice-servlet/3.0/610cde0e8da5a8b7d8efb8f0b8987466ffebaaf9/guice-servlet-3.0.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/tomcat/jasper-compiler/5.5.23/6d35bd7fb8c4fbc1f5401fb3678aa976d2e4c241/jasper-compiler-5.5.23.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/tomcat/jasper-runtime/5.5.23/96ca5528a93ab47b001476b74320c644beb89dde/jasper-runtime-5.5.23.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-el/commons-el/1.0/1df2c042b3f2de0124750241ac6c886dbfa2cc2c/commons-el-1.0.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.directory.server/apacheds-i18n/2.0.0-M15/71c61c84683152ec2a6a65f3f96fe534e304fa22/apacheds-i18n-2.0.0-M15.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.directory.api/api-asn1-api/1.0.0-M20/5e6486ffa3125ba44dc410ead166e1d6ba8ac76d/api-asn1-api-1.0.0-M20.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.directory.api/api-util/1.0.0-M20/a871abf060b3cf83fc6dc4d7e3d151fce50ac3cb/api-util-1.0.0-M20.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jamesmurty.utils/java-xmlbuilder/0.4/ac5962e48cdee3a0a6e1f8e00fcb594747ac5aaf/java-xmlbuilder-0.4.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.hadoop/hadoop-yarn-api/2.5.1/7eaf7353bbb2d684ceeca371509a80b020ae1aab/hadoop-yarn-api-2.5.1.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.mahout/mahout-hdfs/0.12.2/40d3b38d1b4abd777b484d9f42cb19e14fb7ca96/mahout-hdfs-0.12.2.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.mahout/mahout-mr/0.12.2/ddb4a745a57e569dda62de198f9dbfcb23dbbacb/mahout-mr-0.12.2.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.mahout/mahout-math/0.12.2/aa6346f1b0ec1cd5d9474cb89c3e19aaeaeaf582/mahout-math-0.12.2.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/it.unimi.dsi/fastutil/7.0.12/9d9b3cfcf42706f3300e96c47c8df99194bf8d73/fastutil-7.0.12.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.jackson/jackson-mapper-asl/1.9.13/1ee2f2bed0e5dd29d1cb155a166e6f8d50bbddb7/jackson-mapper-asl-1.9.13.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.jackson/jackson-core-asl/1.9.13/3c304d70f42f832e0a86d45bd437f692129299a4/jackson-core-asl-1.9.13.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.jackson/jackson-jaxrs/1.9.13/534d72d2b9d6199dd531dfb27083dd4844082bba/jackson-jaxrs-1.9.13.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.jackson/jackson-xc/1.9.13/e3480072bc95c202476ffa1de99ff7ee9149f29c/jackson-xc-1.9.13.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-core/2.7.4/b8f38a249116b66d804a5ca2b14a3459b7913a94/jackson-core-2.7.4.jar" />
         </element>
       </element>
       <element id="directory" name="META-INF">

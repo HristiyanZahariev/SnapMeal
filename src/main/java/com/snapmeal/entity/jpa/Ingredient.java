@@ -1,5 +1,7 @@
 package com.snapmeal.entity.jpa;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Set;

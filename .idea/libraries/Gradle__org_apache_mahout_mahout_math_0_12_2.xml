@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.apache.mahout:mahout-math:0.12.2">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.mahout/mahout-math/0.12.2/aa6346f1b0ec1cd5d9474cb89c3e19aaeaeaf582/mahout-math-0.12.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.mahout/mahout-math/0.12.2/e845150987aa66b2f855ba05743480e1a216445f/mahout-math-0.12.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
