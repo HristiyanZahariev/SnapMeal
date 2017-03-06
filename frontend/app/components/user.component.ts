@@ -4,6 +4,7 @@ import { AuthService } from '../services/auth.service';
 import { AuthGuard } from '../services/auth-guard.service';
 import { AuthHttp, tokenNotExpired } from 'angular2-jwt';
 import {RatingModule} from "ngx-rating";
+import { TagInputModule } from 'ng2-tag-input';
 
 
 @Component({
@@ -20,13 +21,16 @@ export class UserComponent  {
 	showUsers: boolean;
 	diet: any;
 	starsCount: any[];
+	searchTags: any;
+	picture: any
 
 	@ViewChild("fileInput") fileInput: any;
-	recipes: RootObject;
+	recipes: Recipe;
 
 	constructor(private userService: UserService) {
 		this.showUsers = false;
 		this.userService = userService;
+		this.picture = false;
 
 		this.userService.getCurrentUser().subscribe(user => {
 			this.user = user;
@@ -43,6 +47,15 @@ export class UserComponent  {
 		}
 	}
 
+	withPicture() {
+		if (this.picture == false) {
+			this.picture = true
+		}
+		else {
+			this.picture = false
+		}
+	}
+
 
 	selectDietPlan() {
 		console.log(this.diet)
@@ -51,14 +64,21 @@ export class UserComponent  {
 		});	
 	} 
 
-	addFile(): void {
+	recipesWithKeyWords(searchTag: any) {
+		this.userService.searchRecipesWithTags(searchTag).subscribe(res => {
+			console.log(res);
+		});
+		console.log(searchTag)
+	}
+
+	recipesWithPicture(): void {
 	    let fi = this.fileInput.nativeElement;
 	    if (fi.files && fi.files[0]) {
 	        let fileToUpload = fi.files[0];
 	        this.userService
-	            .upload(fileToUpload)
+	            .searchRecipesWithPicture(fileToUpload)
 				.subscribe(value => {
-    				this.recipes = <RootObject>value.json();
+    				this.recipes = <Recipe>value.json();
     				console.log(this.recipes.content)
 	    		});
 		}
@@ -85,7 +105,7 @@ export interface Content {
     ingredient: Ingredient[];
 }
 
-export interface RootObject {
+export interface Recipe {
     content: Content[];
     last: boolean;
     totalPages: number;

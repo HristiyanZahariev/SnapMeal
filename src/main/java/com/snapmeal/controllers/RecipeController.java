@@ -6,6 +6,7 @@ import com.snapmeal.entity.jpa.User;
 import com.snapmeal.security.JwtUser;
 import com.snapmeal.security.UserAuthentication;
 import com.snapmeal.service.RecipeService;
+import com.snapmeal.service.Tags;
 import com.snapmeal.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -16,6 +17,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by hristiyan on 07.12.16.
@@ -50,7 +52,7 @@ public class RecipeController {
     @Path("/rating")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response rateRecipe(@QueryParam("recipe_id") Long recipeId,
-                               @QueryParam("rating") int rating) {
+                               @QueryParam("rating") float rating) {
 
         final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         JwtUser jwtUser = ((UserAuthentication) authentication).getDetails();
@@ -67,11 +69,28 @@ public class RecipeController {
 
     }
 
-    @GET
+    @POST
     @Path("/search")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getRecipeByDescription() {
-        return Response.ok().build();
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response getRecipeByDescription(List<Tags> tags) {
+        final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        JwtUser jwtUser = ((UserAuthentication) authentication).getDetails();
+        return Response.ok(recipeInstance.getRecipeByTags(tags, jwtUser)).build();
+    }
+
+    @POST
+    @Path("/recommend")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getRecommendations(@QueryParam("user1Id") long user1Id,
+                                       @QueryParam("user2Id") long user2Id) {
+
+        //recipeInstance.getPearsonScore(user1Id, user2Id);
+//        recipeInstance.getRecommendations(user1Id);
+        User user1 = userService.findUserById(user1Id);
+        User user2 = userService.findUserById(user2Id);
+        return Response.ok(recipeInstance.getPearsonScore(user1, user2)).build();
     }
 
 }

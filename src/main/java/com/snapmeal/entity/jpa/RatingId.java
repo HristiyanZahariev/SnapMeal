@@ -40,6 +40,7 @@ public class RatingId implements Serializable {
 
     }
 
+
     @Override
     public int hashCode() {
         int result = recipe != null ? recipe.hashCode() : 0;

@@ -1,8 +1,17 @@
-<h3>Registration</h3>
-<div class="registration">
-	<p>Add username: <input type="text" name="username" [(ngModel)]="username">
-	<p>Add password: <input type="text" name="password" [(ngModel)]="password">
-	<p>Add email: <input type="text" name="email" [(ngModel)]="email">
+<div class="vid-container">
+  <video class="bgvid" autoplay="autoplay" muted="muted" preload="auto" loop>
+      <source src="http://coverr.co/s3/mp4/Egg-Shop.mp4" type="video/webm">
+  </video>
+  <div class="inner-container">
+    <div class="box">
+	<h1>Registration</h1>
+	<div class="registration">
+		<p>Choose username: <input type="text" name="username" [(ngModel)]="username">
+		<p>Add password: <input type="text" name="password" [(ngModel)]="password">
+		<p>Add email: <input type="text" name="email" [(ngModel)]="email">
 
-	<button (click)="createUser(username, password, email)">Register</button></p>
+		<button (click)="createUser(username, password, email)">Register</button></p>
+	</div>
+    </div>
+  </div>
 </div>

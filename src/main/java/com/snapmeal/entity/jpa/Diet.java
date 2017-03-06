@@ -3,6 +3,7 @@ package com.snapmeal.entity.jpa;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.springframework.data.annotation.*;
 
 import javax.persistence.*;
@@ -103,5 +104,4 @@ public class Diet {
         result = 31 * result + (users != null ? users.hashCode() : 0);
         return result;
     }
-
 }

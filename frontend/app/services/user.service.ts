@@ -36,16 +36,15 @@ export class UserService {
 		return this.authHttp.post(url+diet, this.body);
 	}
 	// formData doesnt support authHttp 
-	upload(fileToUpload: any) {
-	    let input = new FormData();
-	    input.append("file", fileToUpload);
-	    let headers = new Headers();
-	    let page = 3;
-        headers.set('X-AUTH-TOKEN', localStorage.getItem('id_token'));
-        let options = new RequestOptions({ headers: headers });
+	searchRecipesWithPicture(imageToUpload: any) {
+		let input = new FormData();
+		input.append("image", imageToUpload);
+		let headers = new Headers();
+		headers.set('X-AUTH-TOKEN', localStorage.getItem('id_token'));
+		let options = new RequestOptions({ headers: headers });
 
-	    return this.http
-	        .post("http://localhost:8080/snapmeal/image/upload?page=" + page, input, options);
+		return this.http
+					.post("http://localhost:8080/snapmeal/image/upload", input, options);
 	}
 
 	setRecipeRating(recipeRating: number, recipeId: number) {
@@ -53,5 +52,13 @@ export class UserService {
 		console.log(url);
 		this.body = null;
 		return this.authHttp.post(url, this.body);
+	}
+
+	searchRecipesWithTags(userInput: any[]) {
+		let body = JSON.stringify(userInput);
+		let headers = new Headers({ 'Content-Type': 'application/json' });
+		let options = new RequestOptions({ headers: headers });
+		let url = "http://localhost:8080/snapmeal/recipe/search"
+		return this.authHttp.post(url, body, options);
 	}
 }

@@ -8,7 +8,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 public class RatingEs {
 
     private Long userId;
-    private int value;
+    private float value;
 
     public RatingEs() {
     }
@@ -21,13 +21,14 @@ public class RatingEs {
         this.userId = userId;
     }
 
-    public int getValue() {
+    public float getValue() {
         return value;
     }
 
-    public void setValue(int value) {
+    public void setValue(float value) {
         this.value = value;
     }
+
 
     @Override
     public boolean equals(Object o) {
@@ -36,7 +37,7 @@ public class RatingEs {
 
         RatingEs ratingEs = (RatingEs) o;
 
-        if (value != ratingEs.value) return false;
+        if (Float.compare(ratingEs.value, value) != 0) return false;
         return userId != null ? userId.equals(ratingEs.userId) : ratingEs.userId == null;
 
     }
@@ -44,7 +45,7 @@ public class RatingEs {
     @Override
     public int hashCode() {
         int result = userId != null ? userId.hashCode() : 0;
-        result = 31 * result + value;
+        result = 31 * result + (value != +0.0f ? Float.floatToIntBits(value) : 0);
         return result;
     }
 }

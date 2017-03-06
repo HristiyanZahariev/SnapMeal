@@ -6,12 +6,11 @@
         <div class="collapse navbar-collapse navbar-menubuilder">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="/">Home</a>
+                </li> 
+                <li><a [routerLink]="['/about']">About</a>
                 </li>
-                <li><a href="/products">Products</a>
-                </li>
-                <li><a [routerLink]="['/about']">About Us</a>
-                </li>
-                <li><a href="/contact">Contact Us</a>
+                <li><a href="/contact">Contact</a>
+                <li><a href="/register">Register</a>
                 </li>
                 <li *ngIf="auth.loggedIn()" (click)="logOut()"><a href="/">Logout</a></li>
                 <li *ngIf="!auth.loggedIn()"><a href="/login">Login</a></li>

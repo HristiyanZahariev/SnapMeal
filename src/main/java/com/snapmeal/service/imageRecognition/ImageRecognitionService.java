@@ -141,7 +141,6 @@ public class ImageRecognitionService {
 
     public String getImageLink(String imgurContent) throws IOException {
         ImgurResponse imgurResponse = mapper.readValue(imgurContent, ImgurResponse.class);
-
         return imgurResponse.getData().getLink().toString();
     }
 

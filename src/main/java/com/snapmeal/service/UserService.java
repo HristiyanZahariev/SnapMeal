@@ -69,7 +69,7 @@ public class UserService implements UserDetailsService {
         long userId = user.getId();
         System.out.println(userDiet.getId());
         System.out.println(user.getDiet().getDescription());
-        userRepository.setFixedDietForUser(user.getDiet(), userId);
+        userRepository.save(user);
     }
 
     public User getNonJwtUser(JwtUser jwtUser) {
