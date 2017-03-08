@@ -86,11 +86,10 @@ public class RecipeController {
     public Response getRecommendations(@QueryParam("user1Id") long user1Id,
                                        @QueryParam("user2Id") long user2Id) {
 
-        //recipeInstance.getPearsonScore(user1Id, user2Id);
-//        recipeInstance.getRecommendations(user1Id);
         User user1 = userService.findUserById(user1Id);
         User user2 = userService.findUserById(user2Id);
-        return Response.ok(recipeInstance.getPearsonScore(user1, user2)).build();
+        //recipeInstance.getRecommendations(user1Id);
+        return Response.ok(recipeInstance.getRecommendations(user1Id)).build();
     }
 
 }

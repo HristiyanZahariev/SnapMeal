@@ -18,6 +18,7 @@ import com.snapmeal.repository.jpa.UserRepository;
 import com.snapmeal.security.JwtUser;
 import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectArraySet;
+import org.apache.hadoop.yarn.webapp.hamlet.HamletSpec;
 import org.apache.mahout.cf.taste.common.TasteException;
 import org.apache.mahout.cf.taste.impl.model.jdbc.MySQLJDBCDataModel;
 import org.apache.mahout.cf.taste.impl.neighborhood.NearestNUserNeighborhood;
@@ -83,7 +84,7 @@ public class RecipeService {
 
     private String scoreMode = "max";
 
-    private int limit = 2;
+    private int limit = 0;
     ObjectMapper mapper = new ObjectMapper();
 
     Gson gson = new Gson();
@@ -131,7 +132,6 @@ public class RecipeService {
                     .must(matchQuery("description", description));
 
             nativeSearchQueryBuilder.withQuery(queryBuilder);
-            //nativeSearchQueryBuilder.withPageable(new PageRequest(limit * (page - 1), limit));
             //nativeSearchQueryBuilder.withMinScore(minScore);
         }
 
@@ -172,11 +172,12 @@ public class RecipeService {
                     .must((nestedQuery("ingredient", termsQuery("ingredient.name", userTags))));
 
             nativeSearchQueryBuilder.withQuery(queryBuilder);
+            nativeSearchQueryBuilder.withPageable(new PageRequest(0, 1000));
         }
 
         NativeSearchQuery nativeSearchQuery = nativeSearchQueryBuilder.build();
-
         System.out.println("nativeQuery" + nativeSearchQuery.getQuery());
+
 
         Page<RecipeEs> results = elasticsearchTemplate.queryForPage(nativeSearchQuery, RecipeEs.class);
 
@@ -226,38 +227,21 @@ public class RecipeService {
                 .map(rating -> rating.getRecipe())
                 .collect(Collectors.toList());
 
-//        if (user1Recipes.size() <= user2Recipes.size()) {
-//        }
-//        else {
-//            for (Recipe recipe : user1Recipes) {
-//                if (user2Recipes.contains(recipe)) {
-//                    recipesRatedFromBothUsers.add(recipe);
-//                }
-//            }
-//        }
-
-//        recipesRatedFromBothUsers.addAll(user2Recipes.stream().filter(user1Recipes::contains).collect(Collectors.toList()));
-//        recipesRatedFromBothUsers.addAll(user1Recipes.stream().filter(user2Recipes::contains).collect(Collectors.toList()));
 
         List<Recipe> recipesRatedFromBothUsers = new ArrayList<Recipe>(user1Recipes);
         recipesRatedFromBothUsers.addAll(user2Recipes);
 
-        Set<Recipe> listaunionlistb =new HashSet<Recipe>(user1Recipes);
-        listaunionlistb.addAll(user2Recipes);
+        Set<Recipe> combined = new HashSet<Recipe>(user1Recipes);
+        combined.addAll(user2Recipes);
 
-        for(Recipe s:listaunionlistb)
+        for(Recipe s:combined)
         {
             recipesRatedFromBothUsers.remove(s);
         }
-        System.out.println(recipesRatedFromBothUsers);
-
-        recipesRatedFromBothUsers.forEach(recipe -> System.out.println("NAMESSS :" + recipe.getName()));
 
         int n = recipesRatedFromBothUsers.size();
 
-        if (n == 0) {
-            return 0;
-        }
+        if (n == 0) return 0;
 
         List<Rating> user1Ratings = new ArrayList<>();
         List<Rating> user2Ratings = new ArrayList<>();
@@ -265,74 +249,77 @@ public class RecipeService {
         for (Recipe r : recipesRatedFromBothUsers) {
             if (r.getRatings() != null) {
                 for (Rating rating : r.getRatings()) {
-                    if (rating.getUser().getId() == user1.getId()) {
+                    if (rating.getUser().getId() == user1.getId())
                         user1Ratings.add(rating);
-                    }
-                    else if (rating.getUser().getId() == user2.getId()) {
+                    else if (rating.getUser().getId() == user2.getId())
                         user2Ratings.add(rating);
-                    }
                 }
             }
         }
 
-        user1Ratings.stream().forEach(rating -> System.out.println("USER 1 RATINGS: " + rating.getValue()));
-
         double[] ratingUser1 = user1Ratings.stream().mapToDouble(rating -> rating.getValue()).toArray();
         double sum1 = DoubleStream.of(ratingUser1).sum();
-        System.out.println("SUM USER 1: " + sum1);
+
         double sum1pow = 0;
         for (int i=0; i<ratingUser1.length; i++) {
             sum1pow += Math.pow(ratingUser1[i], 2);
         }
-        System.out.println("SUMPOW USER 1: " + sum1pow);
-
-        user2Ratings.stream().forEach(rating -> System.out.println("USER 2 RATINGS: " + rating.getValue()));
 
         double[] ratingUser2 = user2Ratings.stream().mapToDouble(rating -> rating.getValue()).toArray();
         double sum2 = DoubleStream.of(ratingUser2).sum();
-        System.out.println("SUM USER 2: " + sum2);
+
         double sum2pow = 0;
         for (int i=0; i < ratingUser2.length; i++) {
             sum2pow += Math.pow(ratingUser2[i], 2);
         }
-        System.out.println("SUMPOW USER 2: " + sum2pow);
 
         double sumProducts = 0;
         for (int i = 0; i < ratingUser1.length; i++) {
             sumProducts += ratingUser1[i] * ratingUser2[i];
         }
-        System.out.println("SUM PRODUCTS: " + sumProducts);
 
         // Calculate Pearson score
-        double num = sumProducts-(sum1*sum2/n);
+        double num = sumProducts-((sum1*sum2)/n);
         double den = Math.sqrt((sum1pow-Math.pow(sum1, 2)/n)*(sum2pow-Math.pow(sum2, 2)/n));
+
         if (den == 0) return 0;
 
         double result = num/den;
         return result;
     }
 
-//    public double getRecommendations(long userId) {
-//        List<User> allUsers = userRepository.findAll();
-//        User user = userRepository.findById(userId);
-//        double similarity = 0;
-//        Arrays toatals = new A();
-//        System.out.println(allUsers.size());
-//        for (int i=0; i < allUsers.size(); i++) {
-//            if (userId != allUsers.get(i).getId()) {
-//                similarity =(getPearsonScore(user, allUsers.get(i)));
-//                if (similarity < 0) {
-//                    return 0;
-//                }
-//
-//                Set<Rating> userRatings = user.getRatings();
-//                for (Rating rating : userRatings) {
-//                    toatals.add(rating.getValue()*similarity);
-//                }
-//
-//            }
-//        }
-//    }
+    public List<Long> getRecommendations(Long currentUserId) {
+        List<User> allUsers = userRepository.findAll();
+        User currentUser = userRepository.findById(currentUserId);
+        double[] similarity = new double[allUsers.size()];
+        for (int i=0; i < allUsers.size(); i++) {
+            if (currentUserId != allUsers.get(i).getId()) {
+                similarity[i] = getPearsonScore(currentUser, allUsers.get(i));
+            }
+        }
+        int maxSimilarity = 0;
+        for (int i=1; i < similarity.length; i++ ) {
+            double holder = similarity[i];
+            if (holder > similarity[i-1]) {
+                maxSimilarity = i;
+            }
+        }
+        List<Long> similarRecipes = new ArrayList<>();
+        List<Long> currentUserRecipes = new ArrayList<>();
+
+        similarRecipes.addAll(allUsers.get(maxSimilarity - 1).getRatings()
+                                            .stream()
+                                            .map(rating -> rating.getRecipe().getId())
+                                            .collect(Collectors.toList()));
+
+        currentUserRecipes.addAll(currentUser.getRatings().stream()
+                                            .map(rating -> rating.getRecipe().getId())
+                                            .collect(Collectors.toList()));
+
+        similarRecipes.removeAll(currentUserRecipes);
+
+        return similarRecipes;
+    }
 
 
 }

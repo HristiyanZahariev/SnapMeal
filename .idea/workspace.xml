@@ -7,28 +7,8 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.13/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.13/taskArtifacts/fileSnapshots.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.13/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.13/taskArtifacts/taskArtifacts.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontend/app/app.module.ts" afterPath="$PROJECT_DIR$/frontend/app/app.module.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontend/app/components/header.component.html" afterPath="$PROJECT_DIR$/frontend/app/components/header.component.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontend/app/components/register.component.html" afterPath="$PROJECT_DIR$/frontend/app/components/register.component.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontend/app/components/user.component.html" afterPath="$PROJECT_DIR$/frontend/app/components/user.component.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontend/app/components/user.component.ts" afterPath="$PROJECT_DIR$/frontend/app/components/user.component.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontend/app/services/user.service.ts" afterPath="$PROJECT_DIR$/frontend/app/services/user.service.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontend/package.json" afterPath="$PROJECT_DIR$/frontend/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontend/styles.css" afterPath="$PROJECT_DIR$/frontend/styles.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frontend/systemjs.config.js" afterPath="$PROJECT_DIR$/frontend/systemjs.config.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/snapmeal/controllers/ImageRecognizerController.java" afterPath="$PROJECT_DIR$/src/main/java/com/snapmeal/controllers/ImageRecognizerController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/snapmeal/controllers/RecipeController.java" afterPath="$PROJECT_DIR$/src/main/java/com/snapmeal/controllers/RecipeController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/snapmeal/entity/elasticsearch/IngredientEs.java" afterPath="$PROJECT_DIR$/src/main/java/com/snapmeal/entity/elasticsearch/IngredientEs.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/snapmeal/entity/elasticsearch/RatingEs.java" afterPath="$PROJECT_DIR$/src/main/java/com/snapmeal/entity/elasticsearch/RatingEs.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/snapmeal/entity/elasticsearch/RecipeEs.java" afterPath="$PROJECT_DIR$/src/main/java/com/snapmeal/entity/elasticsearch/RecipeEs.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/snapmeal/entity/jpa/Diet.java" afterPath="$PROJECT_DIR$/src/main/java/com/snapmeal/entity/jpa/Diet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/snapmeal/entity/jpa/Rating.java" afterPath="$PROJECT_DIR$/src/main/java/com/snapmeal/entity/jpa/Rating.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/snapmeal/entity/jpa/RatingId.java" afterPath="$PROJECT_DIR$/src/main/java/com/snapmeal/entity/jpa/RatingId.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/snapmeal/entity/jpa/Recipe.java" afterPath="$PROJECT_DIR$/src/main/java/com/snapmeal/entity/jpa/Recipe.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/snapmeal/entity/jpa/User.java" afterPath="$PROJECT_DIR$/src/main/java/com/snapmeal/entity/jpa/User.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/snapmeal/service/RecipeService.java" afterPath="$PROJECT_DIR$/src/main/java/com/snapmeal/service/RecipeService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/snapmeal/service/UserService.java" afterPath="$PROJECT_DIR$/src/main/java/com/snapmeal/service/UserService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/snapmeal/service/imageRecognition/ImageRecognitionService.java" afterPath="$PROJECT_DIR$/src/main/java/com/snapmeal/service/imageRecognition/ImageRecognitionService.java" />
     </list>
     <ignored path="snapmeal.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -119,10 +99,72 @@
       <file leaf-file-name="RecipeService.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/snapmeal/service/RecipeService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="725">
-              <caret line="306" column="33" selection-start-line="306" selection-start-column="33" selection-end-line="306" selection-end-column="33" />
+            <state relative-caret-position="239">
+              <caret line="290" column="0" selection-start-line="290" selection-start-column="0" selection-end-line="321" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#9654#9662#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RecipeController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/snapmeal/controllers/RecipeController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="739">
+              <caret line="91" column="69" selection-start-line="91" selection-start-column="69" selection-end-line="91" selection-end-column="69" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/snapmeal/controllers/UserController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="324">
+              <caret line="31" column="56" selection-start-line="31" selection-start-column="56" selection-end-line="31" selection-end-column="56" />
+              <folding>
+                <element signature="imports" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="IngredientEs.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/snapmeal/entity/elasticsearch/IngredientEs.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="738">
+              <caret line="51" column="5" selection-start-line="51" selection-start-column="5" selection-end-line="51" selection-end-column="5" />
+              <folding>
+                <element signature="imports" expanded="false" />
+                <element signature="e#390#391#0" expanded="false" />
+                <element signature="e#415#416#0" expanded="false" />
+                <element signature="e#451#452#0" expanded="false" />
+                <element signature="e#479#480#0" expanded="false" />
+                <element signature="e#510#511#0" expanded="false" />
+                <element signature="e#537#538#0" expanded="false" />
+                <element signature="e#577#578#0" expanded="false" />
+                <element signature="e#609#610#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RatingEs.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/snapmeal/entity/elasticsearch/RatingEs.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="450">
+              <caret line="33" column="37" selection-start-line="33" selection-start-column="37" selection-end-line="33" selection-end-column="37" />
+              <folding>
+                <element signature="e#293#294#0" expanded="false" />
+                <element signature="e#322#323#0" expanded="false" />
+                <element signature="e#364#365#0" expanded="false" />
+                <element signature="e#400#401#0" expanded="false" />
+                <element signature="e#431#432#0" expanded="false" />
+                <element signature="e#459#460#0" expanded="false" />
+                <element signature="e#500#501#0" expanded="false" />
+                <element signature="e#534#535#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -131,34 +173,9 @@
       <file leaf-file-name="Recipe.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/snapmeal/entity/jpa/Recipe.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="865">
-              <caret line="122" column="0" selection-start-line="122" selection-start-column="0" selection-end-line="122" selection-end-column="0" />
-              <folding>
-                <element signature="e#1467#1468#0" expanded="true" />
-                <element signature="e#1492#1493#0" expanded="true" />
-                <element signature="e#1526#1527#0" expanded="true" />
-                <element signature="e#1554#1555#0" expanded="true" />
-                <element signature="e#1585#1586#0" expanded="true" />
-                <element signature="e#1612#1613#0" expanded="true" />
-                <element signature="e#1652#1653#0" expanded="true" />
-                <element signature="e#1684#1685#0" expanded="true" />
-                <element signature="e#1722#1723#0" expanded="true" />
-                <element signature="e#1756#1757#0" expanded="true" />
-                <element signature="e#1810#1811#0" expanded="true" />
-                <element signature="e#1856#1857#0" expanded="true" />
-                <element signature="e#1903#1904#0" expanded="true" />
-                <element signature="e#1936#1937#0" expanded="true" />
-                <element signature="e#1998#1999#0" expanded="true" />
-                <element signature="e#2042#2043#0" expanded="true" />
-                <element signature="e#2075#2076#0" expanded="true" />
-                <element signature="e#2104#2105#0" expanded="true" />
-                <element signature="e#2148#2149#0" expanded="true" />
-                <element signature="e#2184#2185#0" expanded="true" />
-                <element signature="e#2223#2224#0" expanded="true" />
-                <element signature="e#2253#2254#0" expanded="true" />
-                <element signature="e#2304#2305#0" expanded="true" />
-                <element signature="e#2342#2343#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="649">
+              <caret line="114" column="1" selection-start-line="114" selection-start-column="1" selection-end-line="120" selection-end-column="5" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -166,7 +183,7 @@
       <file leaf-file-name="User.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/snapmeal/entity/jpa/User.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2501">
+            <state relative-caret-position="90">
               <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -222,13 +239,18 @@
       <file leaf-file-name="UserAuthority.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/snapmeal/entity/jpa/UserAuthority.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="846">
+            <state relative-caret-position="774">
               <caret line="60" column="1" selection-start-line="60" selection-start-column="1" selection-end-line="60" selection-end-column="1" />
               <folding>
-                <element signature="e#1111#1112#0" expanded="true" />
-                <element signature="e#1188#1189#0" expanded="true" />
-                <element signature="e#1234#1235#0" expanded="true" />
-                <element signature="e#1307#1308#0" expanded="true" />
+                <element signature="imports" expanded="false" />
+                <element signature="e#510#511#0" expanded="false" />
+                <element signature="e#537#538#0" expanded="false" />
+                <element signature="e#575#576#0" expanded="false" />
+                <element signature="e#607#608#0" expanded="false" />
+                <element signature="e#657#658#0" expanded="false" />
+                <element signature="e#689#690#0" expanded="false" />
+                <element signature="e#739#740#0" expanded="false" />
+                <element signature="e#781#782#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -237,9 +259,18 @@
       <file leaf-file-name="RatingId.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/snapmeal/entity/jpa/RatingId.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="756">
-              <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="126">
+              <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+              <folding>
+                <element signature="e#265#266#0" expanded="false" />
+                <element signature="e#294#295#0" expanded="false" />
+                <element signature="e#336#337#0" expanded="false" />
+                <element signature="e#372#373#0" expanded="false" />
+                <element signature="e#401#402#0" expanded="false" />
+                <element signature="e#428#429#0" expanded="false" />
+                <element signature="e#466#467#0" expanded="false" />
+                <element signature="e#498#499#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -247,99 +278,11 @@
       <file leaf-file-name="Rating.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/snapmeal/entity/jpa/Rating.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="865">
-              <caret line="77" column="0" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
+            <state relative-caret-position="649">
+              <caret line="69" column="0" selection-start-line="69" selection-start-column="0" selection-end-line="75" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#795#796#0" expanded="true" />
-                <element signature="e#824#825#0" expanded="true" />
-                <element signature="e#868#869#0" expanded="true" />
-                <element signature="e#904#905#0" expanded="true" />
-                <element signature="e#933#934#0" expanded="true" />
-                <element signature="e#960#961#0" expanded="true" />
-                <element signature="e#998#999#0" expanded="true" />
-                <element signature="e#1030#1031#0" expanded="true" />
-                <element signature="e#1061#1062#0" expanded="true" />
-                <element signature="e#1089#1090#0" expanded="true" />
-                <element signature="e#1130#1131#0" expanded="true" />
-                <element signature="e#1164#1165#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Ingredient.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/snapmeal/entity/jpa/Ingredient.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="865">
-              <caret line="82" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
-              <folding>
-                <element signature="e#595#596#0" expanded="true" />
-                <element signature="e#620#621#0" expanded="true" />
-                <element signature="e#654#655#0" expanded="true" />
-                <element signature="e#682#683#0" expanded="true" />
-                <element signature="e#713#714#0" expanded="true" />
-                <element signature="e#740#741#0" expanded="true" />
-                <element signature="e#780#781#0" expanded="true" />
-                <element signature="e#812#813#0" expanded="true" />
-                <element signature="e#851#852#0" expanded="true" />
-                <element signature="e#881#882#0" expanded="true" />
-                <element signature="e#932#933#0" expanded="true" />
-                <element signature="e#970#971#0" expanded="true" />
-                <element signature="e#1005#1006#0" expanded="true" />
-                <element signature="e#1033#1034#0" expanded="true" />
-                <element signature="e#1078#1079#0" expanded="true" />
-                <element signature="e#1112#1113#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Diet.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/snapmeal/entity/jpa/Diet.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="865">
-              <caret line="106" column="1" selection-start-line="106" selection-start-column="1" selection-end-line="106" selection-end-column="1" />
-              <folding>
-                <element signature="e#1102#1103#0" expanded="true" />
-                <element signature="e#1134#1135#0" expanded="true" />
-                <element signature="e#1161#1162#0" expanded="true" />
-                <element signature="e#1186#1187#0" expanded="true" />
-                <element signature="e#1220#1221#0" expanded="true" />
-                <element signature="e#1248#1249#0" expanded="true" />
-                <element signature="e#1279#1280#0" expanded="true" />
-                <element signature="e#1306#1307#0" expanded="true" />
-                <element signature="e#1346#1347#0" expanded="true" />
-                <element signature="e#1378#1379#0" expanded="true" />
-                <element signature="e#1416#1417#0" expanded="true" />
-                <element signature="e#1450#1451#0" expanded="true" />
-                <element signature="e#1504#1505#0" expanded="true" />
-                <element signature="e#1550#1551#0" expanded="true" />
-                <element signature="e#1585#1586#0" expanded="true" />
-                <element signature="e#1613#1614#0" expanded="true" />
-                <element signature="e#1658#1659#0" expanded="true" />
-                <element signature="e#1692#1693#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Author.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/snapmeal/entity/jpa/Author.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="684">
-              <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="69" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RecipeEs.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/snapmeal/entity/elasticsearch/RecipeEs.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="51" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -689,7 +632,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/snapmeal/service/UserSearchTags.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/snapmeal/service/Tags.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/snapmeal/service/UserService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/snapmeal/controllers/RecipeController.java" />
         <option value="$PROJECT_DIR$/src/main/resources/config.properties" />
         <option value="$PROJECT_DIR$/src/main/resources/persistence-h2.properties" />
         <option value="$PROJECT_DIR$/src/main/resources/persistence-mysql.properties" />
@@ -698,11 +640,12 @@
         <option value="$PROJECT_DIR$/src/main/java/com/snapmeal/entity/jpa/Author.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/snapmeal/entity/jpa/Diet.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/snapmeal/entity/jpa/Ingredient.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/snapmeal/entity/jpa/Rating.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/snapmeal/entity/jpa/RatingId.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/snapmeal/entity/jpa/Recipe.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/snapmeal/entity/jpa/User.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/snapmeal/entity/jpa/UserAuthority.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/snapmeal/controllers/RecipeController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/snapmeal/entity/jpa/Recipe.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/snapmeal/entity/jpa/Rating.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/snapmeal/service/RecipeService.java" />
       </list>
     </option>
@@ -831,28 +774,6 @@
               <option name="myItemType" value="org.jetbrains.plugins.gradle.projectView.GradleTreeStructureProvider$GradleSourceSetDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="snapmeal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SnapMeal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="org.jetbrains.plugins.gradle.projectView.GradleTreeStructureProvider$GradleSourceSetDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="java" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -952,44 +873,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="entity" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="enums" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="snapmeal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SnapMeal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="org.jetbrains.plugins.gradle.projectView.GradleTreeStructureProvider$GradleSourceSetDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="snapmeal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="entity" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="elasticsearch" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1799,7 +1682,9 @@
       <workItem from="1488356937631" duration="1424000" />
       <workItem from="1488727364790" duration="16612000" />
       <workItem from="1488829467423" duration="1631000" />
-      <workItem from="1488834729461" duration="5346000" />
+      <workItem from="1488834729461" duration="9354000" />
+      <workItem from="1488881617477" duration="21000" />
+      <workItem from="1488911401354" duration="14436000" />
     </task>
     <servers />
   </component>
@@ -1836,7 +1721,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="483166000" />
+    <option name="totallyTimeSpent" value="501631000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="24" width="1920" height="1056" extended-state="6" />
@@ -1903,11 +1788,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
           <caret line="42" column="37" selection-start-line="42" selection-start-column="37" selection-end-line="42" selection-end-column="37" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#5171#5172#0" expanded="false" />
-            <element signature="e#5229#5230#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2003,9 +1883,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="540">
           <caret line="41" column="5" selection-start-line="41" selection-start-column="5" selection-end-line="41" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2044,14 +1921,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/snapmeal/controllers/UserController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="31" column="56" selection-start-line="31" selection-start-column="56" selection-end-line="31" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/snapmeal/repository/jpa/UserRepository.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="198">
@@ -2063,7 +1932,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="684">
           <caret line="57" column="46" selection-start-line="57" selection-start-column="46" selection-end-line="57" selection-end-column="46" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2071,7 +1939,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
           <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2079,7 +1946,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="432">
           <caret line="34" column="38" selection-start-line="34" selection-start-column="38" selection-end-line="34" selection-end-column="38" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2087,9 +1953,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
           <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="15" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2097,15 +1960,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="684">
           <caret line="71" column="33" selection-start-line="71" selection-start-column="33" selection-end-line="71" selection-end-column="33" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#2014#2015#0" expanded="false" />
-            <element signature="e#2061#2062#0" expanded="false" />
-            <element signature="e#2102#2103#0" expanded="false" />
-            <element signature="e#2151#2152#0" expanded="false" />
-            <element signature="e#2944#2945#0" expanded="false" />
-            <element signature="e#3019#3020#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2144,14 +1998,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/snapmeal/controllers/RecipeController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="487">
-          <caret line="78" column="48" selection-start-line="78" selection-start-column="48" selection-end-line="78" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/snapmeal/entity/enums/AuthorityName.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -2170,23 +2016,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="19">
           <caret line="21" column="32" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/snapmeal/entity/elasticsearch/IngredientEs.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="738">
-          <caret line="51" column="5" selection-start-line="51" selection-start-column="5" selection-end-line="51" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/snapmeal/entity/elasticsearch/RatingEs.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="33" column="37" selection-start-line="33" selection-start-column="37" selection-end-line="33" selection-end-column="37" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2194,7 +2023,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="684">
           <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="69" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2202,7 +2030,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="51" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2210,26 +2037,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="865">
           <caret line="106" column="1" selection-start-line="106" selection-start-column="1" selection-end-line="106" selection-end-column="1" />
-          <folding>
-            <element signature="e#1102#1103#0" expanded="true" />
-            <element signature="e#1134#1135#0" expanded="true" />
-            <element signature="e#1161#1162#0" expanded="true" />
-            <element signature="e#1186#1187#0" expanded="true" />
-            <element signature="e#1220#1221#0" expanded="true" />
-            <element signature="e#1248#1249#0" expanded="true" />
-            <element signature="e#1279#1280#0" expanded="true" />
-            <element signature="e#1306#1307#0" expanded="true" />
-            <element signature="e#1346#1347#0" expanded="true" />
-            <element signature="e#1378#1379#0" expanded="true" />
-            <element signature="e#1416#1417#0" expanded="true" />
-            <element signature="e#1450#1451#0" expanded="true" />
-            <element signature="e#1504#1505#0" expanded="true" />
-            <element signature="e#1550#1551#0" expanded="true" />
-            <element signature="e#1585#1586#0" expanded="true" />
-            <element signature="e#1613#1614#0" expanded="true" />
-            <element signature="e#1658#1659#0" expanded="true" />
-            <element signature="e#1692#1693#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2237,106 +2044,30 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="865">
           <caret line="82" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
-          <folding>
-            <element signature="e#595#596#0" expanded="true" />
-            <element signature="e#620#621#0" expanded="true" />
-            <element signature="e#654#655#0" expanded="true" />
-            <element signature="e#682#683#0" expanded="true" />
-            <element signature="e#713#714#0" expanded="true" />
-            <element signature="e#740#741#0" expanded="true" />
-            <element signature="e#780#781#0" expanded="true" />
-            <element signature="e#812#813#0" expanded="true" />
-            <element signature="e#851#852#0" expanded="true" />
-            <element signature="e#881#882#0" expanded="true" />
-            <element signature="e#932#933#0" expanded="true" />
-            <element signature="e#970#971#0" expanded="true" />
-            <element signature="e#1005#1006#0" expanded="true" />
-            <element signature="e#1033#1034#0" expanded="true" />
-            <element signature="e#1078#1079#0" expanded="true" />
-            <element signature="e#1112#1113#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/snapmeal/entity/jpa/Rating.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="865">
-          <caret line="77" column="0" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#795#796#0" expanded="true" />
-            <element signature="e#824#825#0" expanded="true" />
-            <element signature="e#868#869#0" expanded="true" />
-            <element signature="e#904#905#0" expanded="true" />
-            <element signature="e#933#934#0" expanded="true" />
-            <element signature="e#960#961#0" expanded="true" />
-            <element signature="e#998#999#0" expanded="true" />
-            <element signature="e#1030#1031#0" expanded="true" />
-            <element signature="e#1061#1062#0" expanded="true" />
-            <element signature="e#1089#1090#0" expanded="true" />
-            <element signature="e#1130#1131#0" expanded="true" />
-            <element signature="e#1164#1165#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/snapmeal/entity/jpa/RatingId.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="756">
-          <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/snapmeal/entity/jpa/Recipe.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="865">
-          <caret line="122" column="0" selection-start-line="122" selection-start-column="0" selection-end-line="122" selection-end-column="0" />
-          <folding>
-            <element signature="e#1467#1468#0" expanded="true" />
-            <element signature="e#1492#1493#0" expanded="true" />
-            <element signature="e#1526#1527#0" expanded="true" />
-            <element signature="e#1554#1555#0" expanded="true" />
-            <element signature="e#1585#1586#0" expanded="true" />
-            <element signature="e#1612#1613#0" expanded="true" />
-            <element signature="e#1652#1653#0" expanded="true" />
-            <element signature="e#1684#1685#0" expanded="true" />
-            <element signature="e#1722#1723#0" expanded="true" />
-            <element signature="e#1756#1757#0" expanded="true" />
-            <element signature="e#1810#1811#0" expanded="true" />
-            <element signature="e#1856#1857#0" expanded="true" />
-            <element signature="e#1903#1904#0" expanded="true" />
-            <element signature="e#1936#1937#0" expanded="true" />
-            <element signature="e#1998#1999#0" expanded="true" />
-            <element signature="e#2042#2043#0" expanded="true" />
-            <element signature="e#2075#2076#0" expanded="true" />
-            <element signature="e#2104#2105#0" expanded="true" />
-            <element signature="e#2148#2149#0" expanded="true" />
-            <element signature="e#2184#2185#0" expanded="true" />
-            <element signature="e#2223#2224#0" expanded="true" />
-            <element signature="e#2253#2254#0" expanded="true" />
-            <element signature="e#2304#2305#0" expanded="true" />
-            <element signature="e#2342#2343#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/snapmeal/entity/jpa/UserAuthority.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="846">
+        <state relative-caret-position="774">
           <caret line="60" column="1" selection-start-line="60" selection-start-column="1" selection-end-line="60" selection-end-column="1" />
           <folding>
-            <element signature="e#1111#1112#0" expanded="true" />
-            <element signature="e#1188#1189#0" expanded="true" />
-            <element signature="e#1234#1235#0" expanded="true" />
-            <element signature="e#1307#1308#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#510#511#0" expanded="false" />
+            <element signature="e#537#538#0" expanded="false" />
+            <element signature="e#575#576#0" expanded="false" />
+            <element signature="e#607#608#0" expanded="false" />
+            <element signature="e#657#658#0" expanded="false" />
+            <element signature="e#689#690#0" expanded="false" />
+            <element signature="e#739#740#0" expanded="false" />
+            <element signature="e#781#782#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/snapmeal/entity/jpa/User.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2501">
+        <state relative-caret-position="90">
           <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -2388,12 +2119,101 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/snapmeal/service/RecipeService.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/snapmeal/controllers/UserController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="725">
-          <caret line="306" column="33" selection-start-line="306" selection-start-column="33" selection-end-line="306" selection-end-column="33" />
+        <state relative-caret-position="324">
+          <caret line="31" column="56" selection-start-line="31" selection-start-column="56" selection-end-line="31" selection-end-column="56" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/snapmeal/entity/elasticsearch/IngredientEs.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="738">
+          <caret line="51" column="5" selection-start-line="51" selection-start-column="5" selection-end-line="51" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#390#391#0" expanded="false" />
+            <element signature="e#415#416#0" expanded="false" />
+            <element signature="e#451#452#0" expanded="false" />
+            <element signature="e#479#480#0" expanded="false" />
+            <element signature="e#510#511#0" expanded="false" />
+            <element signature="e#537#538#0" expanded="false" />
+            <element signature="e#577#578#0" expanded="false" />
+            <element signature="e#609#610#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/snapmeal/entity/elasticsearch/RatingEs.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="33" column="37" selection-start-line="33" selection-start-column="37" selection-end-line="33" selection-end-column="37" />
+          <folding>
+            <element signature="e#293#294#0" expanded="false" />
+            <element signature="e#322#323#0" expanded="false" />
+            <element signature="e#364#365#0" expanded="false" />
+            <element signature="e#400#401#0" expanded="false" />
+            <element signature="e#431#432#0" expanded="false" />
+            <element signature="e#459#460#0" expanded="false" />
+            <element signature="e#500#501#0" expanded="false" />
+            <element signature="e#534#535#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/snapmeal/entity/jpa/RatingId.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+          <folding>
+            <element signature="e#265#266#0" expanded="false" />
+            <element signature="e#294#295#0" expanded="false" />
+            <element signature="e#336#337#0" expanded="false" />
+            <element signature="e#372#373#0" expanded="false" />
+            <element signature="e#401#402#0" expanded="false" />
+            <element signature="e#428#429#0" expanded="false" />
+            <element signature="e#466#467#0" expanded="false" />
+            <element signature="e#498#499#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/snapmeal/controllers/RecipeController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="739">
+          <caret line="91" column="69" selection-start-line="91" selection-start-column="69" selection-end-line="91" selection-end-column="69" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/snapmeal/entity/jpa/Recipe.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="649">
+          <caret line="114" column="1" selection-start-line="114" selection-start-column="1" selection-end-line="120" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/snapmeal/entity/jpa/Rating.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="649">
+          <caret line="69" column="0" selection-start-line="69" selection-start-column="0" selection-end-line="75" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/snapmeal/service/RecipeService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="239">
+          <caret line="290" column="0" selection-start-line="290" selection-start-column="0" selection-end-line="321" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#9654#9662#0" expanded="true" />
           </folding>
         </state>
       </provider>
