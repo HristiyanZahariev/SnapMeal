@@ -1,9 +1,5 @@
 package com.snapmeal.controllers;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.snapmeal.entity.jpa.User;
-import com.snapmeal.repository.elasticsearch.RecipeEsRepository;
-import com.snapmeal.repository.jpa.UserRepository;
 import com.snapmeal.security.JwtUser;
 import com.snapmeal.security.UserAuthentication;
 import com.snapmeal.service.RecipeService;
@@ -11,14 +7,15 @@ import com.snapmeal.service.imageRecognition.ImageRecognitionService;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import javax.ws.rs.*;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.io.*;
+import java.io.InputStream;
 import java.util.List;
 
 /**

@@ -1,4 +1,4 @@
-<input type="file" #fileInput type="file" id="fileInput"><button (click)="recipesWithPicture()" class="btn-default btn-lg">Search</button>
+<input type="file" #fileInput type="file" id="fileInput"><button md-raised-button (click)="recipesWithPicture()" class="btn-default btn-lg">Search</button>
 	<div *ngIf="recipes">
 			<div *ngFor="let recipe of recipes.content">
 				<div class="recipe">
@@ -20,10 +20,13 @@
 				</div>
 			</div>
 	</div>
+    <div *ngIf="requestSent">
+        <md-spinner></md-spinner>
+    </div>
 	<br />
 	<span>Search recipe by tags / keywords </span>
 		<tag-input [(ngModel)]='searchTags' [identifyBy]="'id'" [displayBy]="'name'" placeholder="Enter ingredients. By clicking Enter you can add multiple ingredients">Enter new ingredient</tag-input>
-		<button (click)="recipesWithKeyWords(searchTags)">Search</button>
+	   <button md-raised-button (click)="recipesWithKeyWords(searchTags)">Search</button>
 <div class="container-fluid">
 <br/>
 <div class="dietSelection">

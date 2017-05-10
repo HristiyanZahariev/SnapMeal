@@ -5,12 +5,14 @@ import { AuthGuard } from '../services/auth-guard.service';
 import { AuthHttp, tokenNotExpired } from 'angular2-jwt';
 import {RatingModule} from "ngx-rating";
 import { TagInputModule } from 'ng2-tag-input';
+import {MdButtonModule} from '@angular/material';
+import {MdProgressSpinnerModule} from '@angular/material';
 
 
 @Component({
   moduleId: module.id,
   selector: 'user',
-  templateUrl: 'user.component.html',
+  templateUrl: 'user.component.html',	
   providers: [
   	[UserService],
   	[AuthGuard]
@@ -18,6 +20,7 @@ import { TagInputModule } from 'ng2-tag-input';
 })
 export class UserComponent  { 
 	user :any;
+	requestSent: boolean;
 	showUsers: boolean;
 	diet: any;
 	starsCount: any[];
@@ -31,6 +34,7 @@ export class UserComponent  {
 		this.showUsers = false;
 		this.userService = userService;
 		this.picture = false;
+		this.requestSent = false;
 
 		this.userService.getCurrentUser().subscribe(user => {
 			this.user = user;
@@ -72,6 +76,7 @@ export class UserComponent  {
 	}
 
 	recipesWithPicture(): void {
+		this.requestSent =  true;
 	    let fi = this.fileInput.nativeElement;
 	    if (fi.files && fi.files[0]) {
 	        let fileToUpload = fi.files[0];
@@ -79,6 +84,7 @@ export class UserComponent  {
 	            .searchRecipesWithPicture(fileToUpload)
 				.subscribe(value => {
     				this.recipes = <Recipe>value.json();
+    				this.requestSent = false
     				console.log(this.recipes.content)
 	    		});
 		}

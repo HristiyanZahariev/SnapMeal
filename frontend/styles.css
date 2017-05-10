@@ -205,10 +205,16 @@ h1 {
 
 /*Loggin page*/
 
-body{
+body * {
   padding:0;
   margin:0;
 }
+
+video {
+  display: block;
+  margin-top: -20px;
+}
+
 .vid-container{
   position:relative;
   height:100vh;
@@ -231,6 +237,7 @@ body{
 .bgvid.inner{
   top:calc(-50vh + 200px);
   left:calc(-50vw + 200px);
+
   filter: url("data:image/svg+xml;utf9,<svg%20version='1.1'%20xmlns='http://www.w3.org/2000/svg'><filter%20id='blur'><feGaussianBlur%20stdDeviation='10'%20/></filter></svg>#blur");
   -webkit-filter:blur(10px);
   -ms-filter: blur(10px);
@@ -249,6 +256,7 @@ body{
 .box h1{
   text-align:center;
   margin:30px 0;
+  opacity: 1;
   font-size:30px;
 }
 .box input{
@@ -263,7 +271,7 @@ body{
 .box input:focus,.box input:active,.box button:focus,.box button:active{
   outline:none;
 }
-.box button{
+.box button {
   background:#2ecc71;
   border:0;
   color:#fff;

@@ -34,6 +34,7 @@ public final class TokenHandler {
 
     public String createTokenForUser(JwtUser user) {
         Date now = new Date();
+        System.out.println(new Date(now.getTime()).toString());
         Date expiration = new Date(now.getTime() + TimeUnit.HOURS.toMillis(1l));
         return Jwts.builder()
                 .setId(UUID.randomUUID().toString())

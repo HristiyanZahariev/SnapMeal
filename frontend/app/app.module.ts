@@ -18,10 +18,15 @@ import { AuthGuard } from './services/auth-guard.service';
 import { AuthGuardLogged } from './services/auth-guard-logged.service';
 import {RatingModule} from "ngx-rating";
 import { TagInputModule } from 'ng2-tag-input';
+import {MdButtonModule, MdCheckboxModule} from '@angular/material';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MdProgressSpinnerModule} from '@angular/material';
+
+
 
 
 @NgModule({
-  imports:      [ BrowserModule, FormsModule, HttpModule, routing, RatingModule, TagInputModule ],
+  imports:      [ BrowserModule, FormsModule, HttpModule, routing, RatingModule, TagInputModule, MdButtonModule, MdCheckboxModule, BrowserAnimationsModule, MdProgressSpinnerModule ],
   declarations: [ AppComponent, UserComponent, AboutComponent, RegisterComponent, LoginComponent, HeaderComponent, FooterComponent],
   bootstrap:    [ AppComponent ],
   providers: [ 

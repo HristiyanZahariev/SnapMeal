@@ -25,7 +25,7 @@ export class UserService {
 		// let options = new RequestOptions({ headers: headers });
 		let url='http://localhost:8080/snapmeal/user/register';
 		   // let body = JSON.stringify({'username': user.username, 'password': user.password, 'email': user.email});
-		return this.authHttp.post(url, body, options).map(res =>  res.json().data);
+		return this.http.post(url, body, options).map(res =>  res.json().data);
 	}
 
 	selectDietPlan(diet: string) {

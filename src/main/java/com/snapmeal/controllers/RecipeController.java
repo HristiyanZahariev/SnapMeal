@@ -1,7 +1,6 @@
 package com.snapmeal.controllers;
 
 import com.snapmeal.entity.elasticsearch.RecipeEs;
-import com.snapmeal.entity.jpa.Recipe;
 import com.snapmeal.entity.jpa.User;
 import com.snapmeal.security.JwtUser;
 import com.snapmeal.security.UserAuthentication;
@@ -9,7 +8,6 @@ import com.snapmeal.service.RecipeService;
 import com.snapmeal.service.Tags;
 import com.snapmeal.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
