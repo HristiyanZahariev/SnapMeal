@@ -1,42 +1,24 @@
 <div *ngIf="recipes">
-<!-- 			<div *ngFor="let recipe of recipes.content">
-				<div class="recipe">
-					<strong>{{recipe.id}}</strong>
-					<strong>{{recipe.name}}</strong>
-					<strong>{{recipe.description}}</strong>
-					<div class="raiting">
-						<rating [(ngModel)]="recipe.rating"
-						        [max]="5"
-						        (click)="setRecipeRating(recipe.rating, recipe.id)"
-						        [titles]="['one', 'two', 'three', 'four', 'five']">
-						</rating>
-						{{recipe.rating}}
-					</div>
-					<strong>With ingredients:</strong>
-					<div class="ingredients" *ngFor="let ingredient of recipe.ingredient">
-						<strong>{{ingredient.name}}</strong>
-					</div>
-				</div>
-			</div> -->
-            <md-grid-list cols="4" rowHeight="100px">
-                <md-grid-tile
-                    *ngFor="let recipe of recipes.content"
-                    [colspan]="2"
-                    [rowspan]="1"
-                    [style.background]="lightblue">
-                    {{recipe.name}} <br />
-                    {{recipe.description}} <br />
-                    <div *ngFor="let ingredient of recipe.ingredient">
-                        <strong>{{ingredient.name}}</strong>
-                    </div>
-                    <!-- <div class="raiting"> -->
-                        <rating [(ngModel)]="recipe.rating"
-                                [max]="5"
-                                (click)="setRecipeRating(recipe.rating, recipe.id)"
-                                [titles]="['one', 'two', 'three', 'four', 'five']">
-                        </rating>
-                        {{recipe.rating}}
-                    <!-- </div> -->
-                </md-grid-tile>
-            </md-grid-list>
-	</div>
+    <md-grid-list cols="4" rowHeight="500px">
+        <md-grid-tile
+            *ngFor="let recipe of recipes.content"
+            [colspan]="2"
+            [rowspan]="1"
+            [style.background]="lightblue">
+            {{recipe.name}} <br />
+            <img src="http://i.imgur.com/U0keZyj.png" alt="Smiley face" width="150" height="150">
+            {{recipe.description}} <br />
+            <div *ngFor="let ingredient of recipe.ingredient">
+                <strong>{{ingredient.name}}</strong>
+            </div>
+            <!-- <div class="raiting"> -->
+                <rating [(ngModel)]="recipe.rating"
+                        [max]="5"
+                        (click)="setRecipeRating(recipe.rating, recipe.id)"
+                        [titles]="['one', 'two', 'three', 'four', 'five']">
+                </rating>
+                {{recipe.rating}}
+            <!-- </div> -->
+        </md-grid-tile>
+    </md-grid-list>
+</div>

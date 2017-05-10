@@ -17,15 +17,17 @@ export class FileUploaderComponent {
     baseColor: string = '#ccc';
     overlayColor: string = 'rgba(255,255,255,0.5)';
     recipes: Recipe
+    typing: boolean = true;
+    dropping: boolean = false;
     dragging: boolean = false;
     requestSent: boolean = false;
     loaded: boolean = false;
     imageLoaded: boolean = false;
     imageSrc: string = '';
+    searchTags: any;
     
     handleDragEnter() {
         this.dragging = true;
-        console.log("bumyes")
     }
     
     handleDragLeave() {
@@ -34,7 +36,9 @@ export class FileUploaderComponent {
     
     handleDrop(e: any) {
         e.preventDefault();
+        this.dropping = true;
         this.dragging = false;
+        this.typing = false;
         this.handleInputChange(e);
     }
     
@@ -55,7 +59,6 @@ export class FileUploaderComponent {
         }
 
         this.loaded = false;
-
         reader.onload = this._handleReaderLoaded.bind(this);
         reader.readAsDataURL(file);
         this.userService
@@ -67,11 +70,24 @@ export class FileUploaderComponent {
             });
     }
 
+    handleTyping(e: any) {
+        e.preventDefault();
+        this.typing = true;
+        this.dropping = false;
+        console.log("working?")
+
+    }
     
     _handleReaderLoaded(e: any) {
         var reader = e.target;
         this.imageSrc = reader.result;
         this.loaded = true;
+    }
+
+    recipesWithKeyWords(searchTag: any) {
+        this.userService.searchRecipesWithTags(searchTag).subscribe(res => {
+            console.log(res);
+        });
     }
     
     // _setActive() {

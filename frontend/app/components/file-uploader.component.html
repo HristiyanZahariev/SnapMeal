@@ -1,25 +1,37 @@
-<label class="uploader" ondragover="return false;"
+<div *ngIf="dropping">
+    <label class="uploader" ondragover="return false;"
+        [class.loaded]="loaded" 
+        [style.outlineColor]="dragging ? activeColor : baseColor"
+        (dragenter)="handleDragEnter()"
+        (dragleave)="handleDragLeave()"
+        (drop)="handleDrop($event)"
+        (click)="handleTyping($event)">
+        
+        <i class="icon icon-upload" 
+            [style.color]="dragging 
+                ? ((imageSrc.length > 0) ? overlayColor : activeColor)
+                : ((imageSrc.length > 0) ? overlayColor : baseColor)"></i>
+            <img 
+                [src]="imageSrc" 
+                (load)="handleImageLoad()" 
+                [class.loaded]="imageLoaded"/>
+            
+            <input type="file" name="file" accept="image/*" class="inputfile">
+            <div *ngIf="requestSent">
+                <md-spinner></md-spinner>
+            </div>
+
+    </label>
+</div>
+<div *ngIf="typing">
+    <tag-input [(ngModel)]='searchTags' [identifyBy]="'id'" [displayBy]="'name'" placeholder="Enter ingredients. By clicking Enter you can add multiple ingredients"     
     [class.loaded]="loaded" 
     [style.outlineColor]="dragging ? activeColor : baseColor"
     (dragenter)="handleDragEnter()"
     (dragleave)="handleDragLeave()"
-    (drop)="handleDrop($event)">
-    
-    <i class="icon icon-upload" 
-        [style.color]="dragging 
-            ? ((imageSrc.length > 0) ? overlayColor : activeColor)
-            : ((imageSrc.length > 0) ? overlayColor : baseColor)"></i>
-    
-    <img 
-        [src]="imageSrc" 
-        (load)="handleImageLoad()" 
-        [class.loaded]="imageLoaded"/>
-    
-    <input type="file" name="file" accept="image/*" class="inputfile">
-    <label for="file">Choose a file</label>
-</label>
-<button md-raised-button (click)="recipesWithPicture()">Search</button>
-<recipe [recipes]=recipes></recipe>
-<div *ngIf="requestSent">
-    <md-spinner></md-spinner>
+    (drop)="handleDrop($event)"
+    (click)="handleTyping($event)">
+    </tag-input>
+    <button md-raised-button (click)="recipesWithKeyWords(searchTags)">Search</button>
 </div>
+<recipe [recipes]=recipes></recipe>

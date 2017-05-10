@@ -68,35 +68,6 @@ export class UserComponent  {
 			console.log(res);
 		});	
 	} 
-
-	recipesWithKeyWords(searchTag: any) {
-		this.userService.searchRecipesWithTags(searchTag).subscribe(res => {
-			console.log(res);
-		});
-		console.log(searchTag)
-	}
-
-	recipesWithPicture(): void {
-		this.requestSent =  true;
-	    let fi = this.fileInput.nativeElement;
-	    if (fi.files && fi.files[0]) {
-	        let fileToUpload = fi.files[0];
-	        this.userService
-	            .searchRecipesWithPicture(fileToUpload)
-				.subscribe(value => {
-    				this.recipes = <Recipe>value.json();
-    				this.requestSent = false
-    				console.log(this.recipes.content)
-	    		});
-		}
-	}	
-
-	setRecipeRating(recipeRating: number, recipeId: number) :void {
-		this.userService.setRecipeRating(recipeRating, recipeId)
-						.subscribe(res => {
-							console.log(res);
-						});
-	}
 }
 
 export interface Ingredient {

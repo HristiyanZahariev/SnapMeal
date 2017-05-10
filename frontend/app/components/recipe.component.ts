@@ -30,10 +30,9 @@ export class RecipeComponent  {
 
 
 	setRecipeRating(recipeRating: number, recipeId: number) :void {
-		this.userService.setRecipeRating(recipeRating, recipeId)
-						.subscribe(res => {
-							console.log(res);
-						});
+		this.userService.setRecipeRating(recipeRating, recipeId).subscribe(res => {
+			console.log(res);
+		});
 	}
 }
 
