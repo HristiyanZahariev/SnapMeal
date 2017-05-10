@@ -1,29 +1,11 @@
-<input type="file" #fileInput type="file" id="fileInput"><button md-raised-button (click)="recipesWithPicture()" class="btn-default btn-lg">Search</button>
-	<div *ngIf="recipes">
-			<div *ngFor="let recipe of recipes.content">
-				<div class="recipe">
-					<strong>{{recipe.id}}</strong>
-					<strong>{{recipe.name}}</strong>
-					<strong>{{recipe.description}}</strong>
-					<div class="raiting">
-						<rating [(ngModel)]="recipe.rating"
-						        [max]="5"
-						        (click)="setRecipeRating(recipe.rating, recipe.id)"
-						        [titles]="['one', 'two', 'three', 'four', 'five']">
-						</rating>
-						{{recipe.rating}}
-					</div>
-					<strong>With ingredients:</strong>
-					<div class="ingredients" *ngFor="let ingredient of recipe.ingredient">
-						<strong>{{ingredient.name}}</strong>
-					</div>
-				</div>
-			</div>
-	</div>
-    <div *ngIf="requestSent">
-        <md-spinner></md-spinner>
-    </div>
-	<br />
+<hr>
+<!-- <span class="searchField">
+    <input type="file" #fileInput id="file" class="inputfile">
+    <label for="file">Choose a file</label>
+    <button md-raised-button (click)="recipesWithPicture()">Search</button>
+</span> -->
+<file-uploader [activeColor]="'orangered'" [baseColor]="'lightgray'"></file-uploader>
+<hr>
 	<span>Search recipe by tags / keywords </span>
 		<tag-input [(ngModel)]='searchTags' [identifyBy]="'id'" [displayBy]="'name'" placeholder="Enter ingredients. By clicking Enter you can add multiple ingredients">Enter new ingredient</tag-input>
 	   <button md-raised-button (click)="recipesWithKeyWords(searchTags)">Search</button>
@@ -34,19 +16,6 @@
     	<input type="radio" name="diet" value="vegetarian" [(ngModel)]="diet" (change)="selectDietPlan()">Vegetarian<br />
     	<input type="radio" name="diet" value="null"																																																												 [(ngModel)]="diet" (change)="selectDietPlan()">Ya dont wanna a diet mate<br />
 </div>
-
-    <hr>
-
-    <div class="row">
-        <div class="col-md-8">
-            <h2>What We Do</h2>
-            <p>Introduce the visitor to the business using clear, informative text. Use well-targeted keywords within your sentences to make sure search engines can find the business.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et molestiae similique eligendi reiciendis sunt distinctio odit? Quia, neque, ipsa, adipisci quisquam ullam deserunt accusantium illo iste exercitationem nemo voluptates asperiores.</p>
-            <p>
-                <a class="btn btn-default btn-lg" href="#">Call to Action &raquo;</a>
-            </p>
-        </div>
-    </div>
     <!-- /.row -->
 
     <hr>

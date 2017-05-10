@@ -7,7 +7,8 @@ import {RatingModule} from "ngx-rating";
 import { TagInputModule } from 'ng2-tag-input';
 import {MdButtonModule} from '@angular/material';
 import {MdProgressSpinnerModule} from '@angular/material';
-
+import {MdGridListModule} from '@angular/material';
+import {FileUploaderComponent} from './file-uploader.component';
 
 @Component({
   moduleId: module.id,

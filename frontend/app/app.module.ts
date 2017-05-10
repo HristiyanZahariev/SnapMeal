@@ -21,13 +21,16 @@ import { TagInputModule } from 'ng2-tag-input';
 import {MdButtonModule, MdCheckboxModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MdProgressSpinnerModule} from '@angular/material';
+import {MdGridListModule} from '@angular/material';
+import {FileUploaderComponent} from './components/file-uploader.component';
+import {RecipeComponent} from './components/recipe.component';
 
 
 
 
 @NgModule({
-  imports:      [ BrowserModule, FormsModule, HttpModule, routing, RatingModule, TagInputModule, MdButtonModule, MdCheckboxModule, BrowserAnimationsModule, MdProgressSpinnerModule ],
-  declarations: [ AppComponent, UserComponent, AboutComponent, RegisterComponent, LoginComponent, HeaderComponent, FooterComponent],
+  imports:      [ BrowserModule, FormsModule, HttpModule, routing, RatingModule, TagInputModule, MdButtonModule, MdCheckboxModule, BrowserAnimationsModule, MdProgressSpinnerModule, MdGridListModule ],
+  declarations: [ AppComponent, UserComponent, AboutComponent, RegisterComponent, LoginComponent, HeaderComponent, FooterComponent, FileUploaderComponent, RecipeComponent],
   bootstrap:    [ AppComponent ],
   providers: [ 
   	AuthService, 
