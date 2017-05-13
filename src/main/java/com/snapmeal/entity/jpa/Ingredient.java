@@ -1,6 +1,9 @@
 package com.snapmeal.entity.jpa;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -10,6 +13,7 @@ import java.util.Set;
  * Created by hristiyan on 16.12.16.
  */
 @Entity
+//@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class Ingredient {
 
     @Id
@@ -21,7 +25,7 @@ public class Ingredient {
     @ManyToMany(mappedBy = "ingredient", fetch = FetchType.EAGER)
     private Set<Recipe> recipes;
 
-    @ManyToMany(mappedBy = "ingredients")
+    @ManyToMany(mappedBy = "ingredients", fetch = FetchType.EAGER)
     private Set<Diet> diets;
 
     public Ingredient() {

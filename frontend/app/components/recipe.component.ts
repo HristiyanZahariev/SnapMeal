@@ -9,11 +9,14 @@ import {MdButtonModule} from '@angular/material';
 import {MdProgressSpinnerModule} from '@angular/material';
 import {MdGridListModule} from '@angular/material';
 import {FileUploaderComponent} from './file-uploader.component';
+import { RecipeService } from '../services/recipe.service';
+
 
 @Component({
   moduleId: module.id,
   selector: 'recipe',
-  templateUrl: 'recipe.component.html',	
+  templateUrl: 'recipe.component.html',
+  providers: [RecipeService]
 })
 export class RecipeComponent  { 
 	requestSent: boolean;
@@ -24,13 +27,13 @@ export class RecipeComponent  {
 	@Input("recipes") 
 	recipes: Recipe;
 
-	constructor(private userService: UserService) {
-        this.userService = userService;
+	constructor(private recipeService: RecipeService) {
+        this.recipeService = recipeService;
     }
 
 
 	setRecipeRating(recipeRating: number, recipeId: number) :void {
-		this.userService.setRecipeRating(recipeRating, recipeId).subscribe(res => {
+		this.recipeService.setRecipeRating(recipeRating, recipeId).subscribe(res => {
 			console.log(res);
 		});
 	}

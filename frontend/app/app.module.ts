@@ -6,7 +6,7 @@ import { AuthHttp, AuthConfig, AUTH_PROVIDERS, provideAuth } from 'angular2-jwt'
 import { CollapseDirective } from 'ng2-bootstrap'
 
 import { AppComponent }  from './app.component';
-import { UserComponent }  from './components/user.component';
+import { HomeComponent }  from './components/home.component';
 import { AboutComponent }  from './components/about.component';
 import { RegisterComponent } from './components/register.component';
 import { LoginComponent } from './components/login.component';
@@ -24,13 +24,14 @@ import {MdProgressSpinnerModule} from '@angular/material';
 import {MdGridListModule} from '@angular/material';
 import {FileUploaderComponent} from './components/file-uploader.component';
 import {RecipeComponent} from './components/recipe.component';
+import {UserComponent} from './components/user.component';
 
 
 
 
 @NgModule({
   imports:      [ BrowserModule, FormsModule, HttpModule, routing, RatingModule, TagInputModule, MdButtonModule, MdCheckboxModule, BrowserAnimationsModule, MdProgressSpinnerModule, MdGridListModule ],
-  declarations: [ AppComponent, UserComponent, AboutComponent, RegisterComponent, LoginComponent, HeaderComponent, FooterComponent, FileUploaderComponent, RecipeComponent],
+  declarations: [ AppComponent, HomeComponent, AboutComponent, RegisterComponent, LoginComponent, HeaderComponent, FooterComponent, FileUploaderComponent, RecipeComponent, UserComponent],
   bootstrap:    [ AppComponent ],
   providers: [ 
   	AuthService, 

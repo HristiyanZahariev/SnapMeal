@@ -156,6 +156,7 @@ public class RecipeService {
             Collection<Ingredient> allIngredients = ingredientRepository.findAll();
             //Getting the !allowed ingredients
             allIngredients.removeAll(dietIngredients);
+            System.out.println("ASDSADSADSADASASD" + allIngredients.toString());
             List<String> ingredientNames = allIngredients.
                     stream()
                     .map((ingredient -> ingredient.getName()))

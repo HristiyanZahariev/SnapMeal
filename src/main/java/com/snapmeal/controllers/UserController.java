@@ -72,5 +72,14 @@ public class UserController {
         userInstance.setUserDiet(dietName, jwtUser);
     }
 
+    @GET
+    @Path("/profile")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getProfile() {
+        final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        JwtUser jwtUser = ((UserAuthentication) authentication).getDetails();
+        return Response.status(200).entity(userInstance.getProfile(jwtUser)).build();
+    }
+
 
 }

@@ -1,16 +1,17 @@
 import { Component } from '@angular/core';
-import { UserService } from '../services/user.service';
+import { RecipeService } from '../services/recipe.service';
 
 @Component({
     moduleId: module.id,
     selector: 'file-uploader',
     templateUrl: 'file-uploader.component.html',
-    inputs:['activeColor','baseColor','overlayColor']
+    inputs:['activeColor','baseColor','overlayColor'],
+    providers: [RecipeService]
 })
 export class FileUploaderComponent {
     
-    constructor(private userService: UserService) {
-        this.userService = userService;
+    constructor(private recipeService: RecipeService) {
+        this.recipeService = recipeService;
     }
 
     activeColor: string = 'green';
@@ -35,8 +36,8 @@ export class FileUploaderComponent {
     }
     
     handleDrop(e: any) {
-        e.preventDefault();
         this.dropping = true;
+        e.preventDefault();
         this.dragging = false;
         this.typing = false;
         this.handleInputChange(e);
@@ -61,7 +62,7 @@ export class FileUploaderComponent {
         this.loaded = false;
         reader.onload = this._handleReaderLoaded.bind(this);
         reader.readAsDataURL(file);
-        this.userService
+        this.recipeService
             .searchRecipesWithPicture(file)
             .subscribe(value => {
                 this.recipes = <Recipe>value.json();
@@ -85,7 +86,7 @@ export class FileUploaderComponent {
     }
 
     recipesWithKeyWords(searchTag: any) {
-        this.userService.searchRecipesWithTags(searchTag).subscribe(res => {
+        this.recipeService.searchRecipesWithTags(searchTag).subscribe(res => {
             console.log(res);
         });
     }

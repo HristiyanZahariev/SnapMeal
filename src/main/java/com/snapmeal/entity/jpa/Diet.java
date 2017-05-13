@@ -1,8 +1,6 @@
 package com.snapmeal.entity.jpa;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.springframework.data.annotation.*;
 
@@ -15,6 +13,7 @@ import java.util.Set;
  * Created by hristiyan on 25.12.16.
  */
 @Entity
+//@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class Diet {
 
     @Id
@@ -25,6 +24,7 @@ public class Diet {
 
     @JsonIgnore
     @OneToMany(mappedBy = "diet", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonManagedReference(value = "diet-users")
     private Set<User> users;
 
     @JsonProperty("ingredient")

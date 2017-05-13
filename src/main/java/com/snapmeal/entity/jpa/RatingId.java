@@ -1,10 +1,16 @@
 package com.snapmeal.entity.jpa;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import java.io.Serializable;
 
 /**
  * Created by hristiyan on 23.02.17.
  */
+
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class RatingId implements Serializable {
     private Long recipe;
     private Long user;

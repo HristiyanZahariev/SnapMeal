@@ -1,9 +1,6 @@
 package com.snapmeal.entity.jpa;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
 import javax.persistence.*;
@@ -13,15 +10,19 @@ import java.io.Serializable;
  * Created by hristiyan on 22.02.17.
  */
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 @IdClass(RatingId.class)
 public class Rating {
     @Id
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    //@JsonBackReference("recipe-rating")
     @JoinColumn(name = "recipe_id", referencedColumnName = "id")
     private Recipe recipe;
 
     @Id
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    //@JsonBackReference("user-rating")
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 

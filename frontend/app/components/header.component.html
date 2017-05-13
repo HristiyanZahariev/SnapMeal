@@ -10,10 +10,19 @@
                 <li><a [routerLink]="['/about']">About</a>
                 </li>
                 <li><a href="/contact">Contact</a>
-                <li><a href="/register">Register</a>
                 </li>
-                <li *ngIf="auth.loggedIn()" (click)="logOut()"><a href="/">Logout</a></li>
-                <li *ngIf="!auth.loggedIn()"><a href="/login">Login</a></li>
+                <li *ngIf="auth.loggedIn()" (click)="logOut()">
+                    <a href="/">Logout</a>
+                </li>
+                <li *ngIf="auth.loggedIn()">
+                    <a [routerLink]="['/profile']">Profile</a>
+                </li>
+                <li *ngIf="!auth.loggedIn()">
+                    <a href="/register">Register</a>
+                </li>
+                <li *ngIf="!auth.loggedIn()">
+                    <a href="/login">Login</a>
+                </li>
             </ul>
         </div>
 </div>

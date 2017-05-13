@@ -1,10 +1,7 @@
 package com.snapmeal.entity.jpa;
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
 import javax.persistence.*;
@@ -15,6 +12,7 @@ import java.util.Set;
  * Created by hristiyan on 11.12.16.
  */
 @Entity
+//@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class Recipe {
 
     @Id
@@ -34,6 +32,7 @@ public class Recipe {
     private Author author;
 
     @OneToMany(mappedBy = "recipe",cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    //@JsonManagedReference("recipe-rating")
     private Set<Rating> ratings;
 
     public Recipe() {}

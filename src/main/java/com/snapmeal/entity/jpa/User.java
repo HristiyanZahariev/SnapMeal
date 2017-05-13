@@ -8,15 +8,12 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 import com.snapmeal.entity.enums.UserRole;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 @Entity
+//@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 @Table(name = "User", uniqueConstraints = @UniqueConstraint(columnNames = { "username" }))
 public class User {
 
@@ -55,12 +52,14 @@ public class User {
 
     @ManyToOne
     @JoinColumn(name = "dietId")
+    @JsonBackReference(value = "diet-users")
     private Diet diet;
 
     //Added because of jwt
     private boolean enabled;
 
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    //@JsonManagedReference("recipe-rating")
     private Set<Rating> ratings;
 
 

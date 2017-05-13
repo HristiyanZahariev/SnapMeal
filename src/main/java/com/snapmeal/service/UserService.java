@@ -72,6 +72,10 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
     }
 
+    public User getProfile(JwtUser jwtUser) {
+        return getNonJwtUser(jwtUser);
+    }
+
     public User getNonJwtUser(JwtUser jwtUser) {
         return userRepository.findByUsername(jwtUser.getUsername());
     }

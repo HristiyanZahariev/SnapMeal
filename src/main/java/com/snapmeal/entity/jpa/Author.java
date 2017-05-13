@@ -1,5 +1,9 @@
 package com.snapmeal.entity.jpa;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -7,6 +11,7 @@ import java.util.Set;
  * Created by hristiyan on 25.12.16.
  */
 @Entity
+//@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class Author {
 
     @Id
