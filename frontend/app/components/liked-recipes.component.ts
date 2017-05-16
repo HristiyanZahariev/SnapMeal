@@ -31,7 +31,7 @@ export class LikedRecipes  {
 
 	public ngAfterViewInit	(): void {
 		this.userService.getLikedRecipes().subscribe(res => {
-			this.recipes = <Recipe>value.json()
+			this.recipes = <Recipe>res.json()
 		});      
     }
 

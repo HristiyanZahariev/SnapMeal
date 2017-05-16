@@ -157,12 +157,13 @@ public class RecipeService {
             if (recipeRepository.findById(Long.valueOf(id)) != null) {
                 for (Rating rating : recipeRepository.findById(Long.valueOf(id)).getRatings()) {
                     recipes.add(rating);
+                    //api object pojo
                 }
             }
 
         }
 
-        return recipes;
+        return recipes;//.stream().mapToDouble();
     }
 
     public Page<RecipeEs> getRecipeByTags(List<Tags> tags, JwtUser currentJwtUser) {

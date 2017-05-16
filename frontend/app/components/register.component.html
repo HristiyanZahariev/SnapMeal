@@ -2,16 +2,41 @@
   <video class="bgvid" autoplay="autoplay" muted="muted" preload="auto" loop>
       <source src="http://coverr.co/s3/mp4/Egg-Shop.mp4" type="video/webm">
   </video>
-  <div class="inner-container">
     <div class="box">
-	<h1>Registration</h1>
-	<div class="registration">
-		<p>Choose username: <input type="text" name="username" [(ngModel)]="username">
-		<p>Add password: <input type="text" name="password" [(ngModel)]="password">
-		<p>Add email: <input type="text" name="email" [(ngModel)]="email">
-
-		<button (click)="createUser(username, password, email)">Register</button></p>
-	</div>
-    </div>
+    <form name="form" class="registration_form" (ngSubmit)="f.form.valid && register()" #f="ngForm" validate>
+        <div [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+            <label for="firstname" class="supporting_input">First Name</label>
+            <input type="text" class="form-control" name="firstname" [(ngModel)]="user.firstname" #firstname="ngModel" required />
+            <label *ngIf="f.submitted && !firstname.valid" class="supporting_input_error">First Name is required</label>
+        </div>
+        <div [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+            <label for="lastname" class="supporting_input">Last Name</label>
+            <input type="text" class="form-control" name="lastname" [(ngModel)]="user.lastname" #lastname="ngModel" required />
+            <label *ngIf="f.submitted && !lastname.valid" class="supporting_input_error">Last Name is required</label>
+        </div>
+             <div [ngClass]="{ 'has-error': f.submitted && !email.valid }">
+            <label for="email" class="supporting_input">Email</label>
+            <input type="email" placeholder="Enter your email" class="form-control" name="email" [(ngModel)]="user.email" ngControl="email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" #email="ngModel" required />
+            <label *ngIf="f.submitted && !email.valid" class="supporting_input_error">Email is invalid</label>
+        </div>
+        <div [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+            <label for="username" class="supporting_input">Username</label>
+            <input type="text" class="form-control" minlength="4" name="username" [(ngModel)]="user.username" #username="ngModel" required />
+            <label *ngIf="f.submitted && !username.valid" class="supporting_input_error">Username is required (Minimum 4 letters)</label>
+        </div>
+        <div [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+            <label for="password" class="supporting_input">Password</label>
+            <input type="password"  class="form-control" name="password" [(ngModel)]="user.password" #password="ngModel" required />
+            <label *ngIf="f.submitted && !password.valid" class="supporting_input_error">Password is required</label>
+        </div>
+        <div [ngClass]="{ 'has-error': f.submitted && !passwordConfirmation.valid }">
+            <label for="passwordConfirmation" class="supporting_input">Password Confirmation</label>
+            <input type="password"  class="form-control" name="passwordConfirmation" [(ngModel)]="confirmation.password" #passwordConfirmation="ngModel" required validateEqual="password" />
+            <label *ngIf="f.submitted && !passwordConfirmation.valid" class="supporting_input_error">Passwords dont match :(</label>
+        </div>
+        <div>
+            <button [disabled]="loading" type="submit" class="btn btn-primary">Register</button>
+        </div>
+    </form>
   </div>
 </div>

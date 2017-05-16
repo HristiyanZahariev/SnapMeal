@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { UserService } from '../services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   moduleId: module.id,
@@ -9,29 +10,58 @@ import { UserService } from '../services/user.service';
 })
 
 export class RegisterComponent  { 
-	username: string;
-	email: string;
-	password: string;
+	user: any = {};
+	loading: boolean = false;
+	confirmation: any = {};
+	pazzword = "passowrd"
 
-	constructor(private userService: UserService) {
-		this.userService = userService;
+	constructor(private userService: UserService, private router: Router) {
+		//this.userService = userService;
 	}
 
-	createUser(username: string, password: string, email: string) {
-		let user = {
-			username: username, 
-			password: password, 
-			email: email
-		}
+	register() {
+        this.loading = true;
+        this.userService.create(this.user)
+            .subscribe(
+                data => {
+                    this.router.navigate(['/login']);
+                },
+                error => {
+                    this.loading = false;
+                });
+    }
 
-		console.log(user);
-	    this.userService.createUser(user).subscribe(
-	       data => {
-	         return true;
-	       },
-	       error => {
-	         console.error("Error saving User!");
-	       }
-	    );
-	}
+}
+
+export interface User {
+    username: string;
+    email: string;
+    firstname?: any;
+    lastname?: any;
+    ratings: any[];
+}
+
+export interface Ingredient {
+    id: string;
+    name: string;
+}
+
+export interface Content {
+    id: string;
+    name: string;
+    description: string;
+    rating: number;
+    ingredient: Ingredient[];
+}
+
+export interface Recipe {
+    content: Content[];
+    last: boolean;
+    totalPages: number;
+    totalElements: number;
+    first: boolean;
+    sort?: any;
+    numberOfElements: number;
+    size: number;
+    number: number;
 }
