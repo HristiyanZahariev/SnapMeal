@@ -13,18 +13,16 @@ import {FileUploaderComponent} from './file-uploader.component';
 
 @Component({
   moduleId: module.id,
-  selector: 'user',
-  templateUrl: 'user.component.html',
+  selector: 'liked-recipes',
+  templateUrl: 'liked-recipes.component.html',
   providers: [UserService]
 })
 
-export class UserComponent  { 
+export class LikedRecipes  { 
 
-	user: User
-	recipes: Recipe;
-	overview: boolean;
-	settings: boolean;
-	likedRecipes: boolean;
+    @Input("user_id") 
+    userId: number;
+    recipes: Recipe;
 
 
 	constructor(private userService: UserService) {
@@ -32,42 +30,11 @@ export class UserComponent  {
 	}
 
 	public ngAfterViewInit	(): void {
-		this.userService.getUserProfile().subscribe(res => {
-			console.log(res);
-			this.user = res;
-		});
 		this.userService.getLikedRecipes().subscribe(res => {
-			this.recipes = <Recipe>res.json()
-			console.log(this.recipes)
-		});
+			this.recipes = <Recipe>value.json()
+		});      
     }
 
-    userSettings() {
-    	this.settings = true;
-    	this.overview = false;
-    	this.likedRecipes = false;
-    }
-
-    userOverview() {
-    	this.overview = true;
-    	this.settings = false;
-    	this.likedRecipes = false;
-    }
-
-    userLikedRecipes() {
-    	this.likedRecipes = true;
-    	this.overview = false;
-    	this.settings = false;
-    }
-
-}
-
-export interface User {
-    username: string;
-    email: string;
-    firstname?: any;
-    lastname?: any;
-    ratings: any[];
 }
 
 export interface Ingredient {
@@ -94,4 +61,5 @@ export interface Recipe {
     size: number;
     number: number;
 }
+
 

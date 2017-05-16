@@ -67,7 +67,7 @@ export class FileUploaderComponent {
             .subscribe(value => {
                 this.recipes = <Recipe>value.json();
                 this.requestSent = false
-                console.log(this.recipes.content)
+                console.log(this.recipes)
             });
     }
 

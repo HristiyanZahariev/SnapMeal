@@ -52,6 +52,9 @@ public class ImageRecognizerController {
         String text = imageRecognitionService.getCaptionText(recognizedContent);
         System.out.println(text);
 
-        return Response.ok(recipeService.getRecipesByDescription(text, currentJwtUser)).build();
+        List<String> ids = recipeService.getRecipesByDescription(text, currentJwtUser);
+
+
+        return Response.ok(recipeService.getRecipesByIds(ids)).build();
     }
 }

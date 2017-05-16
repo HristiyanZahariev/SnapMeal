@@ -10,20 +10,23 @@ import java.io.Serializable;
  * Created by hristiyan on 22.02.17.
  */
 @Entity
+@JsonAutoDetect
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
+//@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 @IdClass(RatingId.class)
 public class Rating {
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
     //@JsonBackReference("recipe-rating")
     @JoinColumn(name = "recipe_id", referencedColumnName = "id")
+    //@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Recipe recipe;
 
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
     //@JsonBackReference("user-rating")
     @JoinColumn(name = "user_id", referencedColumnName = "id")
+    //@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private User user;
 
     private float value;

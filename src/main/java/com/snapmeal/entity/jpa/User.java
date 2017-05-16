@@ -13,6 +13,8 @@ import com.snapmeal.entity.enums.UserRole;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
+@JsonAutoDetect
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 //@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 @Table(name = "User", uniqueConstraints = @UniqueConstraint(columnNames = { "username" }))
 public class User {
@@ -60,6 +62,7 @@ public class User {
 
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     //@JsonManagedReference("recipe-rating")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Set<Rating> ratings;
 
 
@@ -67,6 +70,7 @@ public class User {
     private String newPassword;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER, orphanRemoval = true)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Set<UserAuthority> authorities;
 
     public Long getId() {

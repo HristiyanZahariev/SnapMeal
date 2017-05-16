@@ -13,6 +13,8 @@ import java.util.Set;
  * Created by hristiyan on 25.12.16.
  */
 @Entity
+@JsonAutoDetect
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 //@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class Diet {
 
@@ -25,10 +27,12 @@ public class Diet {
     @JsonIgnore
     @OneToMany(mappedBy = "diet", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonManagedReference(value = "diet-users")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Set<User> users;
 
-    @JsonProperty("ingredient")
+    @JsonProperty(value="ingredient", access = JsonProperty.Access.WRITE_ONLY)
     @ManyToMany(fetch = FetchType.EAGER)
+
     @JoinTable(name = "DietIngredient", joinColumns = { @JoinColumn(name = "dietId") },
             inverseJoinColumns = { @JoinColumn(name = "ingredientId") })
     private Collection<Ingredient> ingredients;

@@ -40,4 +40,8 @@ export class UserService {
 		return this.authHttp.get('http://localhost:8080/snapmeal/user/profile')
 			.map(res => res.json())
 	}
+
+	getLikedRecipes() {
+		return this.authHttp.get('http://localhost:8080/snapmeal/user/recipes')
+	}
 }

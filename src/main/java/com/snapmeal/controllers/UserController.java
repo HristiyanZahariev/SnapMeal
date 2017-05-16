@@ -81,5 +81,14 @@ public class UserController {
         return Response.status(200).entity(userInstance.getProfile(jwtUser)).build();
     }
 
+    @GET
+    @Path("/recipes")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getRecipes() {
+        final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        JwtUser jwtUser = ((UserAuthentication) authentication).getDetails();
+        return Response.status(200).entity(userInstance.getRecipes(jwtUser)).build();
+    }
+
 
 }

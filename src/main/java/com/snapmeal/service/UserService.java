@@ -3,9 +3,12 @@ package com.snapmeal.service;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
 import com.snapmeal.entity.jpa.Diet;
+import com.snapmeal.entity.jpa.Rating;
+import com.snapmeal.entity.jpa.Recipe;
 import com.snapmeal.entity.jpa.User;
 import com.snapmeal.entity.enums.UserRole;
 import com.snapmeal.repository.jpa.DietRepository;
+import com.snapmeal.repository.jpa.RecipeRepository;
 import com.snapmeal.repository.jpa.UserRepository;
 import com.snapmeal.security.JwtUser;
 import com.snapmeal.security.JwtUserFactory;
@@ -21,6 +24,7 @@ import org.apache.mahout.cf.taste.recommender.RecommendedItem;
 import org.apache.mahout.cf.taste.recommender.UserBasedRecommender;
 import org.apache.mahout.cf.taste.similarity.UserSimilarity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.security.authentication.AccountStatusUserDetailsChecker;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -30,7 +34,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -44,6 +51,9 @@ public class UserService implements UserDetailsService {
 
     @Autowired
     private DietRepository dietRepository;
+
+    @Autowired
+    private RecipeRepository recipeRepository;
 
     public List<User> getAllUsers() {
         return userRepository.findAll();
@@ -74,6 +84,17 @@ public class UserService implements UserDetailsService {
 
     public User getProfile(JwtUser jwtUser) {
         return getNonJwtUser(jwtUser);
+    }
+
+    public List getRecipes(JwtUser jwtUser) {
+        User user = getNonJwtUser(jwtUser);
+        List recipes = new ArrayList<>();
+        for (Rating rating : user.getRatings()) {
+            recipes.add(rating);
+        }
+
+        System.out.println(recipes.toString());
+        return recipes;
     }
 
     public User getNonJwtUser(JwtUser jwtUser) {

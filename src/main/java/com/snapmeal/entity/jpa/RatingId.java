@@ -1,18 +1,19 @@
 package com.snapmeal.entity.jpa;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 
 import java.io.Serializable;
 
 /**
  * Created by hristiyan on 23.02.17.
  */
-
-@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
+@JsonAutoDetect
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+//@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class RatingId implements Serializable {
+    //@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Long recipe;
+   // @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Long user;
 
     public RatingId() {

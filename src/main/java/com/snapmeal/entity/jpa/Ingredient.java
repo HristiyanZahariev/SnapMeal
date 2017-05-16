@@ -1,9 +1,6 @@
 package com.snapmeal.entity.jpa;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -13,6 +10,8 @@ import java.util.Set;
  * Created by hristiyan on 16.12.16.
  */
 @Entity
+@JsonAutoDetect
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 //@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class Ingredient {
 
@@ -23,9 +22,11 @@ public class Ingredient {
     private String name;
 
     @ManyToMany(mappedBy = "ingredient", fetch = FetchType.EAGER)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Set<Recipe> recipes;
 
     @ManyToMany(mappedBy = "ingredients", fetch = FetchType.EAGER)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Set<Diet> diets;
 
     public Ingredient() {

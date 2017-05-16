@@ -1,23 +1,23 @@
 <div *ngIf="recipes">
     <md-grid-list cols="4" rowHeight="500px">
         <md-grid-tile
-            *ngFor="let recipe of recipes.content"
+            *ngFor="let recipe of recipes"
             [colspan]="2"
             [rowspan]="1"
             [style.background]="lightblue">
-            {{recipe.name}} <br />
+            {{recipe.recipe.name}} <br />
             <img src="http://i.imgur.com/U0keZyj.png" alt="Smiley face" width="150" height="150">
-            {{recipe.description}} <br />
-            <div *ngFor="let ingredient of recipe.ingredient">
+            {{recipe.recipe.description}} <br />
+            <div *ngFor="let ingredient of recipe.recipe.ingredients">
                 <strong>{{ingredient.name}}</strong>
             </div>
             <!-- <div class="raiting"> -->
-                <rating [(ngModel)]="recipe.rating"
+                <rating [(ngModel)]="recipe.value"
                         [max]="5"
-                        (click)="setRecipeRating(recipe.rating, recipe.id)"
+                        (click)="setRecipeRating(recipe.value, recipe.recipe.id)"
                         [titles]="['one', 'two', 'three', 'four', 'five']">
                 </rating>
-                {{recipe.rating}}
+                {{recipe.value}}
             <!-- </div> -->
         </md-grid-tile>
     </md-grid-list>

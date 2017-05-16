@@ -105,7 +105,7 @@ public class RecipeService {
 
     }
 
-    public Page<RecipeEs> getRecipesByDescription(String description, JwtUser currentJwtUser) throws JsonProcessingException {
+    public List<String> getRecipesByDescription(String description, JwtUser currentJwtUser) throws JsonProcessingException {
         NativeSearchQueryBuilder nativeSearchQueryBuilder = new NativeSearchQueryBuilder();
         User currentUser = userRepository.findByUsername(currentJwtUser.getUsername());
         System.out.println(currentUser);
@@ -140,8 +140,29 @@ public class RecipeService {
         System.out.println("nativeQuery" + nativeSearchQuery.getQuery());
 
         Page<RecipeEs> results = elasticsearchTemplate.queryForPage(nativeSearchQuery, RecipeEs.class);
+        List<String> ids = new ArrayList<String>();
 
-        return results;
+        for (RecipeEs result : results) {
+            ids.add(result.getId());
+        }
+
+        return ids;
+    }
+
+    public Set<Rating> getRecipesByIds(List<String> ids) {
+        Set<Rating> recipes = new HashSet<Rating>();
+        List<Recipe> allRecipes = new ArrayList<>();
+        for (String id : ids) {
+
+            if (recipeRepository.findById(Long.valueOf(id)) != null) {
+                for (Rating rating : recipeRepository.findById(Long.valueOf(id)).getRatings()) {
+                    recipes.add(rating);
+                }
+            }
+
+        }
+
+        return recipes;
     }
 
     public Page<RecipeEs> getRecipeByTags(List<Tags> tags, JwtUser currentJwtUser) {
@@ -209,8 +230,8 @@ public class RecipeService {
         System.out.println(rating);
 
 
-        user.setRatings(recipeRating);
-        recipe.setRatings(recipeRating);
+
+        recipe.getRatings().add(rating);
         recipeEs.setRatings(ratingsEs);
 
         recipeRepository.save(recipe);

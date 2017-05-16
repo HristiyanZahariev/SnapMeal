@@ -12,6 +12,8 @@ import java.util.Set;
  * Created by hristiyan on 11.12.16.
  */
 @Entity
+@JsonAutoDetect
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 //@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class Recipe {
 
@@ -21,16 +23,18 @@ public class Recipe {
     private String name;
     private String description;
 
-    @JsonProperty("ingredient")
+    @JsonProperty(value="ingredient", access = JsonProperty.Access.WRITE_ONLY)
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "RecipeIngredient", joinColumns = { @JoinColumn(name = "recipeId") },
             inverseJoinColumns = { @JoinColumn(name = "ingredientId") })
     private Set<Ingredient> ingredient;
 
     @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne(fetch = FetchType.EAGER)
     private Author author;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "recipe",cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     //@JsonManagedReference("recipe-rating")
     private Set<Rating> ratings;
