@@ -25,13 +25,14 @@ import {MdGridListModule} from '@angular/material';
 import {FileUploaderComponent} from './components/file-uploader.component';
 import {RecipeComponent} from './components/recipe.component';
 import {UserComponent} from './components/user.component';
-import {EqualValidator} from './directives/equal-validator.directive'
+import {EqualValidator} from './directives/equal-validator.directive';
+import {MdProgressBarModule} from '@angular/material';
 
 
 
 
 @NgModule({
-  imports:      [ BrowserModule, FormsModule, HttpModule, routing, RatingModule, TagInputModule, MdButtonModule, MdCheckboxModule, BrowserAnimationsModule, MdProgressSpinnerModule, MdGridListModule ],
+  imports:      [ BrowserModule, FormsModule, HttpModule, routing, RatingModule, TagInputModule, MdButtonModule, MdCheckboxModule, BrowserAnimationsModule, MdProgressSpinnerModule, MdGridListModule, MdProgressBarModule ],
   declarations: [ AppComponent, HomeComponent, AboutComponent, RegisterComponent, LoginComponent, HeaderComponent, FooterComponent, FileUploaderComponent, RecipeComponent, UserComponent, EqualValidator],
   bootstrap:    [ AppComponent ],
   providers: [ 

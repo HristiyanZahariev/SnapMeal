@@ -1,5 +1,6 @@
 import { Component} from '@angular/core';
 import { AuthService } from '../services/auth.service';
+import {MdProgressBarModule} from '@angular/material';
 
 
 @Component({
@@ -12,6 +13,7 @@ import { AuthService } from '../services/auth.service';
 export class LoginComponent {
 
   credentials: Credentials;
+  loading = false;
 
   constructor(private auth: AuthService) {}
 
@@ -21,7 +23,8 @@ export class LoginComponent {
         password: password, 
         email: email
     }
-    this.auth.login(user);
+    this.loading = true;
+    this.auth.login(user); 
   }
 
   logOut() {
