@@ -2,10 +2,7 @@ package com.snapmeal.service;
 
 
 import com.mysql.cj.jdbc.MysqlDataSource;
-import com.snapmeal.entity.jpa.Diet;
-import com.snapmeal.entity.jpa.Rating;
-import com.snapmeal.entity.jpa.Recipe;
-import com.snapmeal.entity.jpa.User;
+import com.snapmeal.entity.jpa.*;
 import com.snapmeal.entity.enums.UserRole;
 import com.snapmeal.repository.jpa.DietRepository;
 import com.snapmeal.repository.jpa.RecipeRepository;
@@ -88,12 +85,16 @@ public class UserService implements UserDetailsService {
 
     public List getRecipes(JwtUser jwtUser) {
         User user = getNonJwtUser(jwtUser);
-        List recipes = new ArrayList<>();
+        Recipe currentRecipe = new Recipe();
+        List<RecipeAPI> recipes = new ArrayList<>();
         for (Rating rating : user.getRatings()) {
-            recipes.add(rating);
+            System.out.println(rating.getRecipe().getId());
+            RecipeAPI recipeAPI = new RecipeAPI();
+            currentRecipe = recipeRepository.findById(rating.getRecipe().getId());
+            recipeAPI.setRecipe(currentRecipe);
+            recipeAPI.setRating(currentRecipe.getRatings().stream().mapToDouble(Rating::hashCode).average().orElse(0.0));
+            recipes.add(recipeAPI);
         }
-
-        System.out.println(recipes.toString());
         return recipes;
     }
 

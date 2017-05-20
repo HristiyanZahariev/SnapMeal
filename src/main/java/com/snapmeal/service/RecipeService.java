@@ -149,21 +149,21 @@ public class RecipeService {
         return ids;
     }
 
-    public Set<Rating> getRecipesByIds(List<String> ids) {
-        Set<Rating> recipes = new HashSet<Rating>();
-        List<Recipe> allRecipes = new ArrayList<>();
+    public List<RecipeAPI> getRecipesByIds(List<String> ids) {
+        List<RecipeAPI> recipes = new ArrayList<>();
+
         for (String id : ids) {
-
             if (recipeRepository.findById(Long.valueOf(id)) != null) {
-                for (Rating rating : recipeRepository.findById(Long.valueOf(id)).getRatings()) {
-                    recipes.add(rating);
-                    //api object pojo
-                }
+                RecipeAPI recipeAPI = new RecipeAPI();
+                Recipe currentRecipe = new Recipe();
+                currentRecipe = recipeRepository.findById(Long.valueOf(id));
+                recipeAPI.setRecipe(currentRecipe);
+                recipeAPI.setRating((currentRecipe.getRatings().stream().mapToDouble(Rating::hashCode)).average().getAsDouble());
+                recipes.add(recipeAPI);
             }
-
         }
 
-        return recipes;//.stream().mapToDouble();
+        return recipes;
     }
 
     public Page<RecipeEs> getRecipeByTags(List<Tags> tags, JwtUser currentJwtUser) {

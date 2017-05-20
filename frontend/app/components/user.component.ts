@@ -25,6 +25,7 @@ export class UserComponent  {
 	overview: boolean;
 	settings: boolean;
 	likedRecipes: boolean;
+	diets: boolean;
 
 
 	constructor(private userService: UserService) {
@@ -46,16 +47,26 @@ export class UserComponent  {
     	this.settings = true;
     	this.overview = false;
     	this.likedRecipes = false;
+    	this.diets = false;
     }
 
     userOverview() {
     	this.overview = true;
     	this.settings = false;
     	this.likedRecipes = false;
+    	this.diets = false;
     }
 
     userLikedRecipes() {
     	this.likedRecipes = true;
+    	this.overview = false;
+    	this.settings = false;
+		this.diets = false;    	
+    }
+
+    userDiets() {
+    	this.diets = true;
+    	this.likedRecipes = false;
     	this.overview = false;
     	this.settings = false;
     }
