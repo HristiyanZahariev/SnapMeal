@@ -158,7 +158,7 @@ public class RecipeService {
                 Recipe currentRecipe = new Recipe();
                 currentRecipe = recipeRepository.findById(Long.valueOf(id));
                 recipeAPI.setRecipe(currentRecipe);
-                recipeAPI.setRating((currentRecipe.getRatings().stream().mapToDouble(Rating::hashCode)).average().getAsDouble());
+                recipeAPI.setRating(currentRecipe.getRatings().stream().mapToDouble(d->d.getValue()).average().orElse(0.0));
                 recipes.add(recipeAPI);
             }
         }

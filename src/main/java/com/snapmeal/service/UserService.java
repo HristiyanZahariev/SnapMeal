@@ -87,12 +87,13 @@ public class UserService implements UserDetailsService {
         User user = getNonJwtUser(jwtUser);
         Recipe currentRecipe = new Recipe();
         List<RecipeAPI> recipes = new ArrayList<>();
+        List<Rating> ratings = new ArrayList<>();
         for (Rating rating : user.getRatings()) {
             System.out.println(rating.getRecipe().getId());
             RecipeAPI recipeAPI = new RecipeAPI();
             currentRecipe = recipeRepository.findById(rating.getRecipe().getId());
             recipeAPI.setRecipe(currentRecipe);
-            recipeAPI.setRating(currentRecipe.getRatings().stream().mapToDouble(Rating::hashCode).average().orElse(0.0));
+            recipeAPI.setRating(currentRecipe.getRatings().stream().mapToDouble(d->d.getValue()).average().orElse(0.0));
             recipes.add(recipeAPI);
         }
         return recipes;
