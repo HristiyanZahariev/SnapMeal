@@ -60,7 +60,7 @@ public class User {
     //Added because of jwt
     private boolean enabled;
 
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     //@JsonManagedReference("recipe-rating")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Set<Rating> ratings;

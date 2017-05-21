@@ -25,7 +25,7 @@ export class RecipeComponent  {
 	searchTags: any;
 	picture: any
 	@Input("recipes") 
-	recipes: Recipe;
+	response: RecipeAPI;
 
 	constructor(private recipeService: RecipeService) {
         this.recipeService = recipeService;
@@ -40,27 +40,19 @@ export class RecipeComponent  {
 }
 
 export interface Ingredient {
-    id: string;
+    id: number;
     name: string;
-}
-
-export interface Content {
-    id: string;
-    name: string;
-    description: string;
-	rating: number;
-    ingredient: Ingredient[];
 }
 
 export interface Recipe {
-    content: Content[];
-    last: boolean;
-    totalPages: number;
-    totalElements: number;
-    first: boolean;
-    sort?: any;
-    numberOfElements: number;
-    size: number;
-    number: number;
+    id: number;
+    name: string;
+    description: string;
+    author?: any;
+    ingredients: Ingredient[];
 }
 
+export interface RecipeAPI {
+    recipe: Recipe;
+    rating: number;
+}

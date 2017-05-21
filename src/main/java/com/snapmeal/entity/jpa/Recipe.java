@@ -35,7 +35,7 @@ public class Recipe {
     private Author author;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @OneToMany(mappedBy = "recipe",cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     //@JsonManagedReference("recipe-rating")
     private Set<Rating> ratings;
 

@@ -48,10 +48,7 @@ import org.springframework.util.CollectionUtils;
 import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
-import java.util.stream.Collectors;
-import java.util.stream.DoubleStream;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
+import java.util.stream.*;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
@@ -210,34 +207,51 @@ public class RecipeService {
     public void rateRecipe(Long recipeId, float value, JwtUser jwtUser) {
         Rating rating = new Rating();
         RatingEs ratingEs = new RatingEs();
-        User user = userRepository.findByUsername(jwtUser.getUsername());
+        boolean existent = false;
+        User user = userRepository.findById(jwtUser.getId());
+        System.out.println(user.getId());
+        System.out.println(recipeId);
         Recipe recipe = recipeRepository.findById(recipeId);
-        RecipeEs recipeEs = recipeEsRepository.findById(recipeId.toString());
+        //RecipeEs recipeEs = recipeEsRepository.findById(recipeId.toString());
         Set<Rating> recipeRating = new ObjectArraySet<>();
         Long userId = user.getId();
 
-        rating.setRecipe(recipe);
         rating.setUser(user);
+        rating.setRecipe(recipe);
         rating.setValue(value);
 
-        ratingEs.setValue(value);
-        ratingEs.setUserId(userId);
+        for (Iterator<Rating> iterator = recipe.getRatings().iterator(); iterator.hasNext();) {
+            Rating rating1 =  iterator.next();
+            System.out.println("Recipe: " + rating1.getRecipe().getId() + "WITH VALUE: " + rating1.getValue());
+            if (rating1.getUser().getId() == userId) {
+                iterator.remove();
+                System.out.println("SHOULD BE REMOVED: " + rating1.getRecipe().getId() + "WITH VALUE: " + rating1.getValue());
+                System.out.println("XZCZXCASC");
+            } else {
+                recipeRating.add(rating1);
+            }
+        }
 
-        recipeRating.removeIf(r -> r.getUser().equals(userId) && r.getRecipe() == recipe);
+
+        for (Rating dsadsad : recipeRating) {
+            System.out.println("SHOULD NOT BE REMOVED: " + dsadsad.getRecipe().getId() + "WITH VALUE: " + dsadsad.getValue());
+        }
+
         recipeRating.add(rating);
 
-        ratingsEs.removeIf(r -> r.getUserId().equals(userId));
-        ratingsEs.add(ratingEs);
-        System.out.println(rating);
+        for (Rating xczxcas : recipeRating) {
+            System.out.println("SHOULD NOT BE REMOVED2: " + xczxcas.getRecipe().getId() + "WITH VAL2UE: " + xczxcas.getValue());
+        }
 
 
+        recipe.setRatings(recipeRating);
+        user.setRatings(recipeRating);
 
-        recipe.getRatings().add(rating);
-        recipeEs.setRatings(ratingsEs);
-
-        recipeRepository.save(recipe);
         userRepository.save(user);
-        recipeEsRepository.save(recipeEs);
+        recipeRepository.save(recipe);
+        //recipeEsRepository.save(recipeEs);
+
+
     }
 
     public double getPearsonScore (User user1, User user2) {
