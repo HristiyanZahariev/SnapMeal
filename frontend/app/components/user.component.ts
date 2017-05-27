@@ -9,6 +9,7 @@ import {MdButtonModule} from '@angular/material';
 import {MdProgressSpinnerModule} from '@angular/material';
 import {MdGridListModule} from '@angular/material';
 import {FileUploaderComponent} from './file-uploader.component';
+import { DialogRef, ModalComponent } from 'angular2-modal';
 
 
 @Component({

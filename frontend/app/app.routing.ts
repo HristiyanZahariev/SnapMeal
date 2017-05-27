@@ -5,6 +5,7 @@ import {HomeComponent} from './components/home.component';
 import {UserComponent} from './components/user.component';
 import {AboutComponent} from './components/about.component';
 import {RegisterComponent} from './components/register.component';
+import {RecipeProfile} from './components/recipe-profile.component'
 import {LoginComponent} from './components/login.component';
 import { AuthGuard } from './services/auth-guard.service';
 import {AuthGuardLogged} from './services/auth-guard-logged.service'
@@ -33,6 +34,11 @@ export const AppRoutes:Routes = [
 		path: 'profile',
 		component: UserComponent,
 		canActivate: [AuthGuard] 
+	},
+	{
+		path: 'recipe/:id',
+		component: RecipeProfile,
+		canActivate: [AuthGuard]
 	}
 
 ];

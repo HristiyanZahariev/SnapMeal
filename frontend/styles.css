@@ -748,8 +748,15 @@ input.submit-button {
   padding-top: 5%;
 }
 
-/*wrapper*/
+/*uploader on the main page*/
 
-#wrapper {
+.uploader {
+    display: block;
+    text-align: center;
+    line-height: 150%;
+    font-size: .85em;
+}
 
+.ng2-tag-input[_ngcontent-c1] {
+  min-height: 60px;
 }

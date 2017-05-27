@@ -3,6 +3,15 @@
  * Adjust as necessary for your application needs.
  */
 (function (global) {
+   var ngVer = '@2.0.0-rc.5'; // lock in the angular package version; do not let it float to current!
+  var routerVer = '@3.0.0-rc.1'; // lock router version
+  var formsVer = '@0.3.0'; // lock forms version
+  var routerDeprecatedVer = '@2.0.0-rc.2'; // temporarily until we update all the guides
+  
+  var angular2ModalVer = '@2.0.3';
+  var plugin = 'bootstrap'; // js-native / vex
+  
+  global.angular2ModalVer = angular2ModalVer;
   System.config({
     paths: {
       // paths serve as alias
@@ -32,7 +41,11 @@
       'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js',
       "angular2-jwt": "node_modules/angular2-jwt/angular2-jwt.js",
       "ngx-rating": "node_modules/ngx-rating",
-      'ng2-tag-input' : 'node_modules/ng2-tag-input/dist/ng2-tag-input.bundle.js'
+      'ng2-tag-input' : 'node_modules/ng2-tag-input/dist/ng2-tag-input.bundle.js',
+      'angular2-modal': 'node_modules/angular2-modal',
+      'angular2-modal/plugins/bootstrap': 'node_modules/angular2-modal/bundles/angular2-modal.bootstrap.umd.js',
+      'moment': 'node_modules/moment/moment.js',
+      'ng2-bootstrap': 'node_modules/ng2-bootstrap/bundles/ngx-bootstrap.umd.js'
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
@@ -55,10 +68,13 @@
       main: 'progress-circle.js', 
       defaultExtension: 'js' 
     },
-      rxjs: {
-        defaultExtension: 'js'
-      }
-
+    'angular2-modal': { 
+      defaultExtension: 'js', 
+      main: '/bundles/angular2-modal.umd.js' 
+    },
+    rxjs: {
+      defaultExtension: 'js'
     }
+  }
   });
 })(this);

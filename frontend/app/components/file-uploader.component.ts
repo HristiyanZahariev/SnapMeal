@@ -5,7 +5,6 @@ import { RecipeService } from '../services/recipe.service';
     moduleId: module.id,
     selector: 'file-uploader',
     templateUrl: 'file-uploader.component.html',
-    inputs:['activeColor','baseColor','overlayColor'],
     providers: [RecipeService]
 })
 export class FileUploaderComponent {
@@ -14,9 +13,6 @@ export class FileUploaderComponent {
         this.recipeService = recipeService;
     }
 
-    activeColor: string = 'green';
-    baseColor: string = '#ccc';
-    overlayColor: string = 'rgba(255,255,255,0.5)';
     recipes: Recipe
     typing: boolean = true;
     dropping: boolean = false;
@@ -45,7 +41,6 @@ export class FileUploaderComponent {
     
     handleImageLoad() {
         this.imageLoaded = true;
-        //this.iconColor = this.overlayColor;
     }
 
     handleInputChange(e: any) {
@@ -62,13 +57,13 @@ export class FileUploaderComponent {
         this.loaded = false;
         reader.onload = this._handleReaderLoaded.bind(this);
         reader.readAsDataURL(file);
-        this.recipeService
-            .searchRecipesWithPicture(file)
-            .subscribe(value => {
-                this.recipes = <Recipe>value.json();
-                this.requestSent = false
-                console.log(this.recipes)
-            });
+        // this.recipeService
+        //     .searchRecipesWithPicture(file)
+        //     .subscribe(value => {
+        //         this.recipes = <Recipe>value.json();
+        //         this.requestSent = false
+        //         console.log(this.recipes)
+        //     });
     }
 
     handleTyping(e: any) {

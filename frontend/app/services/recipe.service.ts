@@ -30,11 +30,21 @@ export class RecipeService {
 		return this.authHttp.post(url, this.body);
 	}
 
+	getRecipeBy(id: number) {
+		let url = "http://localhost:8080/snapmeal/recipe/" + id;
+		return this.authHttp.get(url);
+	}
+
 	searchRecipesWithTags(userInput: any[]) {
 		let body = JSON.stringify(userInput);
 		let headers = new Headers({ 'Content-Type': 'application/json' });
 		let options = new RequestOptions({ headers: headers });
 		let url = "http://localhost:8080/snapmeal/recipe/search"
 		return this.authHttp.post(url, body, options);
+	}
+
+	getRecipeProfile(recipeId: number) {
+		let url = "http://localhost:8080/snapmeal/recipe/" + recipeId;
+		return this.authHttp.get(url);
 	}
 }

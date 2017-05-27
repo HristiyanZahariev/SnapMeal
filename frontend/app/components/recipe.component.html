@@ -1,24 +1,43 @@
 <div *ngIf="response">
-    <md-grid-list cols="4" rowHeight="500px">
-        <md-grid-tile
-            *ngFor="let recipes of response"
-            [colspan]="2"
-            [rowspan]="1"
-            [style.background]="lightblue">
-            {{recipes.recipe.name}} <br />
-            <img src="http://i.imgur.com/U0keZyj.png" alt="Smiley face" width="150" height="150">
-            {{recipes.recipe.description}} <br />
-            <div *ngFor="let ingredient of recipes.recipe.ingredients">
-                <strong>{{ingredient.name}}</strong>
+    <div class="container">    
+      <div class="row">
+        <div class="col-sm-4" *ngFor="let recipes of response">
+            <div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title pull-left">{{recipes.recipe.name}}</h4>
+                    <button type="submit" class="close pull-right" (click)="lgModal.hide()" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <strong>{{recipes.recipe.description}}</strong>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="raiting">
-                <rating [(ngModel)]="recipes.rating"
-                        [max]="5"
-                        (click)="setRecipeRating(recipes.rating, recipes.recipe.id)"
-                        [titles]="['one', 'two', 'three', 'four', 'five']">
-                </rating>
-                {{recipes.rating}}
+
+            <div class="panel panel-primary">
+                <div class="panel-heading" (click)="lgModal.show()">{{recipes.recipe.name}}</div>
+                <div class="panel-body" (click)="lgModal.show()">
+                    <img src="http://www.eatingonadime.com/wp-content/uploads/2017/04/honey-glazed-salmon-square-300x300.jpg" class="img-responsive" style="width:100%" alt="Image">
+                    <span text-align="center"> Ingredients </span>
+                    <div *ngFor="let ingredient of recipes.recipe.ingredients">
+                        {{ingredient.name}}
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <rating [(ngModel)]="recipes.rating"
+                            [max]="5"
+                            (click)="setRecipeRating(recipes.rating, recipes.recipe.id)"
+                            [titles]="['one', 'two', 'three', 'four', 'five']">
+                    </rating>
+                    {{recipes.rating}}
+                </div>
             </div>
-        </md-grid-tile>
-    </md-grid-list>
+        </div>
+    </div>
 </div>
+
+ 

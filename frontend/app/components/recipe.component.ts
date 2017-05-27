@@ -10,6 +10,9 @@ import {MdProgressSpinnerModule} from '@angular/material';
 import {MdGridListModule} from '@angular/material';
 import {FileUploaderComponent} from './file-uploader.component';
 import { RecipeService } from '../services/recipe.service';
+import { Router } from '@angular/router';
+import { ModalModule } from 'ngx-bootstrap';
+import {RecipeProfile} from './recipe-profile.component';
 
 
 @Component({
@@ -27,7 +30,7 @@ export class RecipeComponent  {
 	@Input("recipes") 
 	response: RecipeAPI;
 
-	constructor(private recipeService: RecipeService) {
+	constructor(private recipeService: RecipeService, private router: Router) {
         this.recipeService = recipeService;
     }
 
@@ -37,6 +40,16 @@ export class RecipeComponent  {
 			console.log(res);
 		});
 	}
+
+    getRecipeProfile(recipeId: number) {
+        this.recipeService.getRecipeProfile(recipeId).subscribe(
+            data => {
+                this.router.navigate(['/recipe/', recipeId]);
+            },
+            error => {
+                console.log(error);
+            });
+    }
 }
 
 export interface Ingredient {
