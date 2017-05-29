@@ -32,12 +32,12 @@ public class RecipeController {
     //SHOULD REWORK !!!!
     @Autowired
     UserService userService;
-    
+
     @GET
     @Path("/all")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllRecipes() {
-       return Response.ok(recipeInstance.getAllRecipes()).build();
+        return Response.ok(recipeInstance.getAllRecipes()).build();
     }
 
     @GET
@@ -87,8 +87,8 @@ public class RecipeController {
 
         User user1 = userService.findUserById(user1Id);
         User user2 = userService.findUserById(user2Id);
-        //recipeInstance.getRecommendations(user1Id);
-        return Response.ok(recipeInstance.getRecommendations(user1Id)).build();
+        List<Long> ids = recipeInstance.getRecommendations(user1Id);
+        return Response.ok(recipeInstance.getRecipesFromIdsUser(ids, user1)).build();
     }
 
 }

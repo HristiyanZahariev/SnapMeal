@@ -55,6 +55,6 @@ public class ImageRecognizerController {
         List<String> ids = recipeService.getRecipesByDescription(text, currentJwtUser);
 
 
-        return Response.ok(recipeService.getRecipesByIds(ids)).build();
+        return Response.ok(recipeService.getRecipesByIds(ids, text)).build();
     }
 }

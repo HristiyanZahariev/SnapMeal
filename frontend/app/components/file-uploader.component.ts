@@ -13,7 +13,7 @@ export class FileUploaderComponent {
         this.recipeService = recipeService;
     }
 
-    recipes: Recipe
+    response: RecipeAPI[];
     typing: boolean = true;
     dropping: boolean = false;
     dragging: boolean = false;
@@ -22,6 +22,7 @@ export class FileUploaderComponent {
     imageLoaded: boolean = false;
     imageSrc: string = '';
     searchTags: any;
+    searchedFor: string;
     
     handleDragEnter() {
         this.dragging = true;
@@ -57,13 +58,17 @@ export class FileUploaderComponent {
         this.loaded = false;
         reader.onload = this._handleReaderLoaded.bind(this);
         reader.readAsDataURL(file);
-        // this.recipeService
-        //     .searchRecipesWithPicture(file)
-        //     .subscribe(value => {
-        //         this.recipes = <Recipe>value.json();
-        //         this.requestSent = false
-        //         console.log(this.recipes)
-        //     });
+        this.recipeService
+            .searchRecipesWithPicture(file)
+            .subscribe(value => {
+                this.response = <RecipeAPI[]>value.json();
+                this.requestSent = false
+                console.log(this.response)
+                this.response.forEach((recipe: any) => {
+                    this.searchedFor = recipe.searchedFor;
+                });
+                console.log(this.searchedFor);
+            });
     }
 
     handleTyping(e: any) {
@@ -86,44 +91,24 @@ export class FileUploaderComponent {
         });
     }
     
-    // _setActive() {
-    //     this.borderColor = this.activeColor;
-    //     if (this.imageSrc.length === 0) {
-    //         this.iconColor = this.activeColor;
-    //     }
-    // }
-    
-    // _setInactive() {
-    //     this.borderColor = this.baseColor;
-    //     if (this.imageSrc.length === 0) {
-    //         this.iconColor = this.baseColor;
-    //     }
-    // }
-    
 }
 
 export interface Ingredient {
-    id: string;
+    id: number;
     name: string;
-}
-
-export interface Content {
-    id: string;
-    name: string;
-    description: string;
-    rating: number;
-    ingredient: Ingredient[];
 }
 
 export interface Recipe {
-    content: Content[];
-    last: boolean;
-    totalPages: number;
-    totalElements: number;
-    first: boolean;
-    sort?: any;
-    numberOfElements: number;
-    size: number;
-    number: number;
+    id: number;
+    name: string;
+    description: string;
+    author?: any;
+    ingredients: Ingredient[];
+}
+
+export interface RecipeAPI {
+    recipe: Recipe;
+    rating: number;
+    searchedFor: string;
 }
 

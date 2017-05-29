@@ -7,6 +7,7 @@ public class RecipeAPI {
 
     private Recipe recipe;
     private Double rating;
+    private String searchedFor;
 
     public RecipeAPI() {
     }
@@ -25,6 +26,14 @@ public class RecipeAPI {
 
     public void setRating(Double rating) {
         this.rating = rating;
+    }
+
+    public String getSearchedFor() {
+        return searchedFor;
+    }
+
+    public void setSearchedFor(String searchedFor) {
+        this.searchedFor = searchedFor;
     }
 
     @Override

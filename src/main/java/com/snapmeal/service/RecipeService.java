@@ -121,7 +121,6 @@ public class RecipeService {
                     .mustNot((nestedQuery("ingredient", termsQuery("ingredient.name", ingredientNames))));
 
             nativeSearchQueryBuilder.withQuery(queryBuilder);
-            //nativeSearchQueryBuilder.withPageable(new PageRequest(limit * (page - 1), limit));
             //nativeSearchQueryBuilder.withMinScore(minScore);
         }
         else {
@@ -132,7 +131,7 @@ public class RecipeService {
             //nativeSearchQueryBuilder.withMinScore(minScore);
         }
 
-        NativeSearchQuery nativeSearchQuery = nativeSearchQueryBuilder.build();
+        NativeSearchQuery nativeSearchQuery = nativeSearchQueryBuilder.withPageable(new PageRequest(2, 5)).build();
 
         System.out.println("nativeQuery" + nativeSearchQuery.getQuery());
 
@@ -146,7 +145,7 @@ public class RecipeService {
         return ids;
     }
 
-    public List<RecipeAPI> getRecipesByIds(List<String> ids) {
+    public List<RecipeAPI> getRecipesByIds(List<String> ids, String description) {
         List<RecipeAPI> recipes = new ArrayList<>();
 
         for (String id : ids) {
@@ -156,10 +155,10 @@ public class RecipeService {
                 currentRecipe = recipeRepository.findById(Long.valueOf(id));
                 recipeAPI.setRecipe(currentRecipe);
                 recipeAPI.setRating(currentRecipe.getRatings().stream().mapToDouble(d->d.getValue()).average().orElse(0.0));
+                recipeAPI.setSearchedFor(description);
                 recipes.add(recipeAPI);
             }
         }
-
         return recipes;
     }
 
@@ -254,109 +253,166 @@ public class RecipeService {
 
     }
 
-    public double getPearsonScore (User user1, User user2) {
-
-        List<Recipe> user1Recipes =  user1.getRatings().stream()
-                .map(rating -> rating.getRecipe())
-                .collect(Collectors.toList());
-
-        List<Recipe> user2Recipes = user2.getRatings().stream()
-                .map(rating -> rating.getRecipe())
-                .collect(Collectors.toList());
 
 
-        List<Recipe> recipesRatedFromBothUsers = new ArrayList<Recipe>(user1Recipes);
-        recipesRatedFromBothUsers.addAll(user2Recipes);
+    public double getPearsonScore (User currentUser, User user2) {
 
-        Set<Recipe> combined = new HashSet<Recipe>(user1Recipes);
-        combined.addAll(user2Recipes);
+        if (currentUser.getRatings() != null) {
+            List<Recipe> currentUserRecipes = currentUser.getRatings().stream()
+                    .map(rating -> rating.getRecipe())
+                    .collect(Collectors.toList());
 
-        for(Recipe s:combined)
-        {
-            recipesRatedFromBothUsers.remove(s);
-        }
+            List<Long> user2RecipesIds = user2.getRatings().stream()
+                    .map(rating -> rating.getRecipe().getId())
+                    .collect(Collectors.toList());
 
-        int n = recipesRatedFromBothUsers.size();
+            List<Recipe> recipesRatedFromBothUsers = new ArrayList<>();
 
-        if (n == 0) return 0;
-
-        List<Rating> user1Ratings = new ArrayList<>();
-        List<Rating> user2Ratings = new ArrayList<>();
-
-        for (Recipe r : recipesRatedFromBothUsers) {
-            if (r.getRatings() != null) {
-                for (Rating rating : r.getRatings()) {
-                    if (rating.getUser().getId() == user1.getId())
-                        user1Ratings.add(rating);
-                    else if (rating.getUser().getId() == user2.getId())
-                        user2Ratings.add(rating);
+            for (Recipe user1RatedRecipe : currentUserRecipes) {
+                if (user2RecipesIds.contains(user1RatedRecipe.getId())) { //couldnt manage to get duplicated recipes when user2Recipes was of type Recipe
+                    recipesRatedFromBothUsers.add(user1RatedRecipe);
                 }
             }
+
+            int n = recipesRatedFromBothUsers.size();
+
+            if (n == 0) return 0;
+
+            List<Rating> user1Ratings = new ArrayList<>();
+            List<Rating> user2Ratings = new ArrayList<>();
+
+            for (Recipe r : recipesRatedFromBothUsers) {
+                if (r.getRatings() != null) {
+                    for (Rating rating : r.getRatings()) {
+                        if (rating.getUser().getId() == currentUser.getId())
+                            user1Ratings.add(rating);
+                        else if (rating.getUser().getId() == user2.getId())
+                            user2Ratings.add(rating);
+                    }
+                }
+            }
+
+            double[] ratingUser1 = user1Ratings.stream().mapToDouble(rating -> rating.getValue()).toArray();
+            double sum1 = DoubleStream.of(ratingUser1).sum();
+
+            double sum1pow = 0;
+            for (int i = 0; i < ratingUser1.length; i++) {
+                sum1pow += Math.pow(ratingUser1[i], 2);
+            }
+
+            double[] ratingUser2 = user2Ratings.stream().mapToDouble(rating -> rating.getValue()).toArray();
+            double sum2 = DoubleStream.of(ratingUser2).sum();
+
+            double sum2pow = 0;
+            for (int i = 0; i < ratingUser2.length; i++) {
+                sum2pow += Math.pow(ratingUser2[i], 2);
+            }
+
+            double sumProducts = 0;
+            for (int i = 0; i < ratingUser1.length; i++) {
+                sumProducts += ratingUser1[i] * ratingUser2[i];
+            }
+
+            int numberOfElements = recipesRatedFromBothUsers.size()*2;
+
+            // Calculate Pearson score
+            double num = (numberOfElements*sumProducts) - (sum1 * sum2);
+
+            double den = Math.sqrt((numberOfElements*sum1pow - Math.pow(sum1, 2)) * (numberOfElements*sum2pow - Math.pow(sum2, 2)));
+
+            if (den == 0) return 0;
+
+            double result = num / den;
+            return result;
+        } else {
+            return -2;
         }
-
-        double[] ratingUser1 = user1Ratings.stream().mapToDouble(rating -> rating.getValue()).toArray();
-        double sum1 = DoubleStream.of(ratingUser1).sum();
-
-        double sum1pow = 0;
-        for (int i=0; i<ratingUser1.length; i++) {
-            sum1pow += Math.pow(ratingUser1[i], 2);
-        }
-
-        double[] ratingUser2 = user2Ratings.stream().mapToDouble(rating -> rating.getValue()).toArray();
-        double sum2 = DoubleStream.of(ratingUser2).sum();
-
-        double sum2pow = 0;
-        for (int i=0; i < ratingUser2.length; i++) {
-            sum2pow += Math.pow(ratingUser2[i], 2);
-        }
-
-        double sumProducts = 0;
-        for (int i = 0; i < ratingUser1.length; i++) {
-            sumProducts += ratingUser1[i] * ratingUser2[i];
-        }
-
-        // Calculate Pearson score
-        double num = sumProducts-((sum1*sum2)/n);
-        double den = Math.sqrt((sum1pow-Math.pow(sum1, 2)/n)*(sum2pow-Math.pow(sum2, 2)/n));
-
-        if (den == 0) return 0;
-
-        double result = num/den;
-        return result;
     }
 
     public List<Long> getRecommendations(Long currentUserId) {
         List<User> allUsers = userRepository.findAll();
         User currentUser = userRepository.findById(currentUserId);
-        double[] similarity = new double[allUsers.size()];
-        for (int i=0; i < allUsers.size(); i++) {
-            if (currentUserId != allUsers.get(i).getId()) {
-                similarity[i] = getPearsonScore(currentUser, allUsers.get(i));
-            }
-        }
-        int maxSimilarity = 0;
-        for (int i=1; i < similarity.length; i++ ) {
-            double holder = similarity[i];
-            if (holder > similarity[i-1]) {
-                maxSimilarity = i;
-            }
-        }
+        int bestMatchingUser = getBestMatchingUser(currentUser, allUsers);
+
+        List<Long> currentUserRecipes = new ArrayList<>();
+        currentUserRecipes.addAll(currentUser.getRatings().stream()
+                .map(rating -> rating.getRecipe().getId())
+                .collect(Collectors.toList()));
+
+        List<Long> recipes = getRecommendedRecipes(bestMatchingUser, allUsers);
+        return recipes;
+
+    }
+
+    public List<Long> getRecommendedRecipes(int bestMatchingUser, List<User> allUsers) {
         List<Long> similarRecipes = new ArrayList<>();
         List<Long> currentUserRecipes = new ArrayList<>();
+        List<Long> tenSimilarRecipes = new ArrayList<>();
 
-        similarRecipes.addAll(allUsers.get(maxSimilarity - 1).getRatings()
-                                            .stream()
-                                            .map(rating -> rating.getRecipe().getId())
-                                            .collect(Collectors.toList()));
+        similarRecipes.addAll(allUsers.get(bestMatchingUser+1).getRatings()
+                .stream()
+                .map(rating -> rating.getRecipe().getId())
+                .collect(Collectors.toList()));
 
-        currentUserRecipes.addAll(currentUser.getRatings().stream()
-                                            .map(rating -> rating.getRecipe().getId())
-                                            .collect(Collectors.toList()));
 
         similarRecipes.removeAll(currentUserRecipes);
 
-        return similarRecipes;
+        for (Long similarRecipe : similarRecipes) {
+            if (tenSimilarRecipes.size() < 10) {
+                tenSimilarRecipes.add(similarRecipe);
+            }
+        }
+
+        return tenSimilarRecipes;
     }
 
+    public int getBestMatchingUser(User currentUser, List<User> allUsers) {
+        double[] similarity = new double[allUsers.size()];
 
+        for (int i=0; i < allUsers.size(); i++) {
+            if (currentUser.getId() != allUsers.get(i).getId()) {
+                similarity[i] = getPearsonScore(currentUser, allUsers.get(i));
+            }
+        }
+
+        int bestMatchingUser = 0;
+        double maxCoeficient = 0;
+        for (int i=1; i < similarity.length; i++ ) {
+            double coeficient = similarity[i];
+
+            if (coeficient > maxCoeficient) {
+                maxCoeficient = coeficient;
+                bestMatchingUser = i;
+            }
+        }
+        System.out.println(bestMatchingUser+1);
+        return bestMatchingUser+1;
+    }
+
+    public List<RecipeAPI> getRecipesFromIdsUser(List<Long> ids, User currentUser) {
+        List<RecipeAPI> recipes = new ArrayList<>();
+        for (Long id : ids) {
+            Recipe recipe = recipeRepository.findById(id);
+            if (currentUser.getDiet() != null) {
+                Collection<Ingredient> dietIngredients = currentUser.getDiet().getIngredients();
+                Collection<Ingredient> allIngredients = ingredientRepository.findAll();
+                //Getting the !allowed ingredients
+                allIngredients.removeAll(dietIngredients);
+
+                if (allIngredients.contains(recipe.getIngredients()) == false) {
+                    RecipeAPI recipeAPI = new RecipeAPI();
+                    recipeAPI.setRecipe(recipe);
+                    recipeAPI.setRating(recipe.getRatings().stream().mapToDouble(d -> d.getValue()).average().orElse(0.0));
+                    recipes.add(recipeAPI);
+                }
+            } else {
+                RecipeAPI recipeAPI = new RecipeAPI();
+                recipeAPI.setRecipe(recipe);
+                recipeAPI.setRating(recipe.getRatings().stream().mapToDouble(d->d.getValue()).average().orElse(0.0));
+                recipes.add(recipeAPI);
+            }
+
+        }
+        return recipes;
+    }
 }
