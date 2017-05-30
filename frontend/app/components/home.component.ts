@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { UserService } from '../services/user.service';
+import { RecipeService } from '../services/recipe.service';
 import { AuthService } from '../services/auth.service';
 import { AuthGuard } from '../services/auth-guard.service';
 import { AuthHttp, tokenNotExpired } from 'angular2-jwt';
@@ -17,7 +18,8 @@ import { CarouselModule } from 'ng2-bootstrap'
   templateUrl: 'home.component.html',	
   providers: [
   	[UserService],
-  	[AuthGuard]
+  	[AuthGuard],
+  	[RecipeService]
   ]
 })
 export class HomeComponent  { 
@@ -25,23 +27,21 @@ export class HomeComponent  {
 	requestSent: boolean;
 	showUsers: boolean;
 	diet: any;
+	response: RecipeAPI[];
 	starsCount: any[];
 	searchTags: any;
 	picture: any
+	loading: boolean = false;
+	errors: boolean = false;
 
 	@ViewChild("fileInput") fileInput: any;
 	recipes: Recipe;
 
-	constructor(private userService: UserService) {
+	constructor(private userService: UserService, private recipeService: RecipeService) {
 		this.showUsers = false;
 		this.userService = userService;
 		this.picture = false;
 		this.requestSent = false;
-
-		this.userService.getCurrentUser().subscribe(user => {
-			this.user = user;
-			console.log(() => localStorage.getItem("id_token"));
-		});
 	}
 
 	toogleUsers() {
@@ -62,37 +62,39 @@ export class HomeComponent  {
 		}
 	}
 
+	ngOnInit() {
+		this.loading = true;
+		this.recipeService.getRecommendedRecipes().subscribe(
+			(data: any) => {
+				this.response = <RecipeAPI[]>data.json();
+				this.loading = false;
+			},
+			(err: any) => { 
+				this.errors = true;
+				this.loading = false;
+				console.log(this.errors)
+			}
+		);
 
-	selectDietPlan() {
-		console.log(this.diet)
-		this.userService.selectDietPlan(this.diet).subscribe(res => {
-			console.log(res);
-		});	
-	} 
+	}
 }
 
 export interface Ingredient {
-    id: string;
+    id: number;
     name: string;
-}
-
-export interface Content {
-    id: string;
-    name: string;
-    description: string;
-	rating: number;
-    ingredient: Ingredient[];
 }
 
 export interface Recipe {
-    content: Content[];
-    last: boolean;
-    totalPages: number;
-    totalElements: number;
-    first: boolean;
-    sort?: any;
-    numberOfElements: number;
-    size: number;
-    number: number;
+    id: number;
+    name: string;
+    description: string;
+    author?: any;
+    ingredients: Ingredient[];
+}
+
+export interface RecipeAPI {
+    recipe: Recipe;
+    rating: number;
+    searchedFor: string;
 }
 

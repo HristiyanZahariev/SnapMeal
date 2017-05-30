@@ -35,6 +35,11 @@ export class RecipeService {
 		return this.authHttp.get(url);
 	}
 
+	getRecommendedRecipes() {
+		let url = "http://localhost:8080/snapmeal/recipe/recommend";
+		return this.authHttp.get(url);
+	}
+
 	searchRecipesWithTags(userInput: any[]) {
 		let body = JSON.stringify(userInput);
 		let headers = new Headers({ 'Content-Type': 'application/json' });

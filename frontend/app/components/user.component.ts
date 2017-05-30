@@ -27,6 +27,7 @@ export class UserComponent  {
 	settings: boolean;
 	likedRecipes: boolean;
 	diets: boolean;
+    diet: string;
 
 
 	constructor(private userService: UserService) {
@@ -43,6 +44,14 @@ export class UserComponent  {
 			console.log(this.recipes)
 		});
     }
+
+    selectDietPlan() {
+        console.log(this.diet)
+        this.userService.selectDietPlan(this.diet).subscribe(res => {
+            console.log(res);
+        });    
+    } 
+
 
     userSettings() {
     	this.settings = true;

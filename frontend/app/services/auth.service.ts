@@ -7,23 +7,25 @@ import { Router } from '@angular/router';
 @Injectable()
 export class AuthService {
 
+  ifError: boolean = false;
   constructor(private http: Http, private router: Router) {}
 
   login(user: any) {
     this.http.post('http://localhost:8080/snapmeal/login', user)
-      .subscribe((res) => {
+      .subscribe(
         // We're assuming the response will be an object
         // with the JWT on an id_token key
-        let headers = res.headers;
-        console.log(headers.get("X-AUTH-TOKEN"));
-        let jjwt = headers.get("X-AUTH-TOKEN");
-        localStorage.setItem('id_token', jjwt);
-        // data => console.log(data),
-        // error => console.log(error)
+        (data) => {
+          let headers = data.headers;
+          let jjwt = headers.get("X-AUTH-TOKEN");
+          localStorage.setItem('id_token', jjwt);
+          this.router.navigateByUrl('');
+        },
+        (err) => {
+           this.ifError = true;
+        });
 
         //not sure if this gotta be here
-        this.router.navigateByUrl('');
-      });
   }
 
   loggedIn() {

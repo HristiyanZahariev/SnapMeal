@@ -1,12 +1,14 @@
 package com.snapmeal.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.mysql.cj.jdbc.MysqlDataSource;
 import com.mysql.cj.mysqlx.protobuf.MysqlxCrud;
+import com.snapmeal.entity.RecipeJsonApi;
 import com.snapmeal.entity.elasticsearch.RatingEs;
 import com.snapmeal.entity.elasticsearch.RecipeEs;
 
@@ -19,6 +21,7 @@ import com.snapmeal.security.JwtUser;
 import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectArraySet;
 import org.apache.hadoop.yarn.webapp.hamlet.HamletSpec;
+import org.apache.mahout.cf.taste.common.NoSuchItemException;
 import org.apache.mahout.cf.taste.common.TasteException;
 import org.apache.mahout.cf.taste.impl.model.jdbc.MySQLJDBCDataModel;
 import org.apache.mahout.cf.taste.impl.neighborhood.NearestNUserNeighborhood;
@@ -82,7 +85,7 @@ public class RecipeService {
     private String scoreMode = "max";
 
     private int limit = 0;
-    ObjectMapper mapper = new ObjectMapper();
+    ObjectMapper mapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
     Gson gson = new Gson();
 
@@ -94,11 +97,16 @@ public class RecipeService {
         return recipeEsRepository.findById(id);
     }
 
-    public CompletableFuture<Recipe> createRecipe(RecipeEs recipeEs) throws IOException {
-        recipeEsRepository.save(recipeEs);
-        String recipeJson = mapper.writeValueAsString(recipeEs);
+    public RecipeEs createRecipe(RecipeJsonApi recipeEs) throws IOException {
+        String recipeJson = mapper.writer().withoutAttribute("ingredient").writeValueAsString(recipeEs);
+        System.out.println(recipeJson);
         Recipe recipe = mapper.readValue(recipeJson, Recipe.class);
-        return recipeRepository.save(recipe);
+        recipeRepository.save(recipe);
+
+        String recipeEsJson = mapper.writer().withoutAttribute("recipesIngredient").writeValueAsString(recipeEs);
+        System.out.println(recipeEsJson);
+        RecipeEs recipeEss = mapper.readValue(recipeEsJson, RecipeEs.class);
+        return recipeEsRepository.save(recipeEss);
 
     }
 
@@ -152,7 +160,18 @@ public class RecipeService {
             if (recipeRepository.findById(Long.valueOf(id)) != null) {
                 RecipeAPI recipeAPI = new RecipeAPI();
                 Recipe currentRecipe = new Recipe();
+                List<IngredientAPI> ingredients = new ArrayList<>();
                 currentRecipe = recipeRepository.findById(Long.valueOf(id));
+                for (RecipeIngredient recipeIngredient : currentRecipe.getRecipeIngredients()) {
+                    IngredientAPI ingredientAPI = new IngredientAPI();
+                    ingredientAPI.setName(recipeIngredient.getIngredient().getName());
+                    ingredientAPI.setAmount(recipeIngredient.getAmount());
+                    ingredientAPI.setCarbs(recipeIngredient.getCarbs());
+                    ingredientAPI.setFats(recipeIngredient.getFats());
+                    ingredientAPI.setProteins(recipeIngredient.getProteins());
+                    ingredients.add(ingredientAPI);
+                }
+                recipeAPI.setIngredients(ingredients);
                 recipeAPI.setRecipe(currentRecipe);
                 recipeAPI.setRating(currentRecipe.getRatings().stream().mapToDouble(d->d.getValue()).average().orElse(0.0));
                 recipeAPI.setSearchedFor(description);
@@ -168,6 +187,10 @@ public class RecipeService {
         List<String> userTags = tags.stream()
                 .map((tags1 -> tags1.getName()))
                 .distinct().collect(Collectors.toList());
+
+        for (String userTag : userTags) {
+            System.out.println(userTag);
+        }
         if (currentUser.getDiet() != null) {
             //Ingredients allowed to be used for the diet
             Collection<Ingredient> dietIngredients = currentUser.getDiet().getIngredients();
@@ -175,13 +198,13 @@ public class RecipeService {
             //Getting the !allowed ingredients
             allIngredients.removeAll(dietIngredients);
             System.out.println("ASDSADSADSADASASD" + allIngredients.toString());
-            List<String> ingredientNames = allIngredients.
+            List<String> unallowedIngredients = allIngredients.
                     stream()
                     .map((ingredient -> ingredient.getName()))
                     .distinct().collect(Collectors.toList());
             QueryBuilder queryBuilder = QueryBuilders.boolQuery()
                     .must((nestedQuery("ingredient", termsQuery("ingredient.name", userTags))))
-                    .mustNot((nestedQuery("ingredient", termsQuery("ingredient.name", ingredientNames))));
+                    .mustNot((nestedQuery("ingredient", termsQuery("ingredient.name", unallowedIngredients))));
 
             nativeSearchQueryBuilder.withQuery(queryBuilder);
         }
@@ -332,24 +355,28 @@ public class RecipeService {
     public List<Long> getRecommendations(Long currentUserId) {
         List<User> allUsers = userRepository.findAll();
         User currentUser = userRepository.findById(currentUserId);
-        int bestMatchingUser = getBestMatchingUser(currentUser, allUsers);
-
+        User bestMatchingUser = getBestMatchingUser(currentUser, allUsers);
+        if (bestMatchingUser.getId() == null) {
+            System.out.println("We cant give you recommendations :( ");
+            throw new ArithmeticException("We cannot find any recipes for you :(");
+        }
+        System.out.println("BEST MATCHING: " + bestMatchingUser);
         List<Long> currentUserRecipes = new ArrayList<>();
         currentUserRecipes.addAll(currentUser.getRatings().stream()
                 .map(rating -> rating.getRecipe().getId())
                 .collect(Collectors.toList()));
 
-        List<Long> recipes = getRecommendedRecipes(bestMatchingUser, allUsers);
+        List<Long> recipes = getRecommendedRecipes(bestMatchingUser);
         return recipes;
 
     }
 
-    public List<Long> getRecommendedRecipes(int bestMatchingUser, List<User> allUsers) {
+    public List<Long> getRecommendedRecipes(User bestMatchingUser) {
         List<Long> similarRecipes = new ArrayList<>();
         List<Long> currentUserRecipes = new ArrayList<>();
         List<Long> tenSimilarRecipes = new ArrayList<>();
 
-        similarRecipes.addAll(allUsers.get(bestMatchingUser+1).getRatings()
+        similarRecipes.addAll(bestMatchingUser.getRatings()
                 .stream()
                 .map(rating -> rating.getRecipe().getId())
                 .collect(Collectors.toList()));
@@ -366,27 +393,27 @@ public class RecipeService {
         return tenSimilarRecipes;
     }
 
-    public int getBestMatchingUser(User currentUser, List<User> allUsers) {
+    public User getBestMatchingUser(User currentUser, List<User> allUsers) {
         double[] similarity = new double[allUsers.size()];
 
-        for (int i=0; i < allUsers.size(); i++) {
+        for (int i=1; i < allUsers.size(); i++) {
             if (currentUser.getId() != allUsers.get(i).getId()) {
                 similarity[i] = getPearsonScore(currentUser, allUsers.get(i));
             }
         }
 
-        int bestMatchingUser = 0;
+        User bestMatchingUser = new User();
         double maxCoeficient = 0;
         for (int i=1; i < similarity.length; i++ ) {
             double coeficient = similarity[i];
-
+            System.out.println("COEFICIENTS: " + coeficient);
             if (coeficient > maxCoeficient) {
                 maxCoeficient = coeficient;
-                bestMatchingUser = i;
+                bestMatchingUser = allUsers.get(i);
             }
         }
-        System.out.println(bestMatchingUser+1);
-        return bestMatchingUser+1;
+        System.out.println("BEST MATCHING USER: " + bestMatchingUser);
+        return bestMatchingUser;
     }
 
     public List<RecipeAPI> getRecipesFromIdsUser(List<Long> ids, User currentUser) {
@@ -396,10 +423,15 @@ public class RecipeService {
             if (currentUser.getDiet() != null) {
                 Collection<Ingredient> dietIngredients = currentUser.getDiet().getIngredients();
                 Collection<Ingredient> allIngredients = ingredientRepository.findAll();
+                Set<Ingredient> recipeIngredients = new HashSet<>();
+                for (RecipeIngredient recipeIngredient : recipe.getRecipeIngredients()) {
+                    recipeIngredients.add(recipeIngredient.getIngredient());
+                }
                 //Getting the !allowed ingredients
                 allIngredients.removeAll(dietIngredients);
 
-                if (allIngredients.contains(recipe.getIngredients()) == false) {
+
+                if (allIngredients.contains(recipeIngredients) == false) {
                     RecipeAPI recipeAPI = new RecipeAPI();
                     recipeAPI.setRecipe(recipe);
                     recipeAPI.setRating(recipe.getRatings().stream().mapToDouble(d -> d.getValue()).average().orElse(0.0));

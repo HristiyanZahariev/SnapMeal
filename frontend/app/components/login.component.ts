@@ -14,6 +14,7 @@ export class LoginComponent {
 
   credentials: Credentials;
   loading = false;
+  ifError = false;
 
   constructor(private auth: AuthService) {}
 
@@ -24,7 +25,7 @@ export class LoginComponent {
         email: email
     }
     this.loading = true;
-    this.auth.login(user); 
+    this.auth.login(user)
   }
 
   logOut() {

@@ -50,6 +50,7 @@ public class UserController {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createUser(User user) {
+        System.out.println("dasdsadasdas");
         return Response.ok(userInstance.createUser(user))
                 .build();
 

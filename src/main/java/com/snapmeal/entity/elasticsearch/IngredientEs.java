@@ -12,6 +12,10 @@ public class IngredientEs {
     @Id
     private String id;
     private String name;
+//    private String amount;
+//    private double proteins;
+//    private double fats;
+//    private double carbs;
 
     public IngredientEs() {
     }
@@ -31,6 +35,38 @@ public class IngredientEs {
     public void setName(String name) {
         this.name = name;
     }
+
+//    public String getAmount() {
+//        return amount;
+//    }
+//
+//    public void setAmount(String amount) {
+//        this.amount = amount;
+//    }
+//
+//    public double getProteins() {
+//        return proteins;
+//    }
+//
+//    public void setProteins(double proteins) {
+//        this.proteins = proteins;
+//    }
+//
+//    public double getFats() {
+//        return fats;
+//    }
+//
+//    public void setFats(double fats) {
+//        this.fats = fats;
+//    }
+//
+//    public double getCarbs() {
+//        return carbs;
+//    }
+//
+//    public void setCarbs(double carbs) {
+//        this.carbs = carbs;
+//    }
 
     @Override
     public boolean equals(Object o) {

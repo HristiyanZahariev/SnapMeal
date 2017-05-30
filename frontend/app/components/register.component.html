@@ -6,12 +6,12 @@
     <form name="form" class="registration_form" (ngSubmit)="f.form.valid && register()" #f="ngForm" validate>
         <div [ngClass]="{ 'has-error': f.submitted && !username.valid }">
             <label for="firstname" class="supporting_input">First Name</label>
-            <input type="text" class="form-control" name="firstname" [(ngModel)]="user.firstname" #firstname="ngModel" required />
+            <input type="text" class="form-control" name="firstname" [(ngModel)]="user.firstname" #firstname="ngModel" placeholder="Enter your first name" required />
             <label *ngIf="f.submitted && !firstname.valid" class="supporting_input_error">First Name is required</label>
         </div>
         <div [ngClass]="{ 'has-error': f.submitted && !username.valid }">
             <label for="lastname" class="supporting_input">Last Name</label>
-            <input type="text" class="form-control" name="lastname" [(ngModel)]="user.lastname" #lastname="ngModel" required />
+            <input type="text" class="form-control" placeholder="Enter your second name" name="lastname" [(ngModel)]="user.lastname" #lastname="ngModel" required />
             <label *ngIf="f.submitted && !lastname.valid" class="supporting_input_error">Last Name is required</label>
         </div>
              <div [ngClass]="{ 'has-error': f.submitted && !email.valid }">
@@ -21,17 +21,17 @@
         </div>
         <div [ngClass]="{ 'has-error': f.submitted && !username.valid }">
             <label for="username" class="supporting_input">Username</label>
-            <input type="text" class="form-control" minlength="4" name="username" [(ngModel)]="user.username" #username="ngModel" required />
+            <input type="text" class="form-control" placeholder="Enter your username" minlength="4" name="username" [(ngModel)]="user.username" #username="ngModel" required />
             <label *ngIf="f.submitted && !username.valid" class="supporting_input_error">Username is required (Minimum 4 letters)</label>
         </div>
         <div [ngClass]="{ 'has-error': f.submitted && !password.valid }">
             <label for="password" class="supporting_input">Password</label>
-            <input type="password"  class="form-control" name="password" [(ngModel)]="user.password" #password="ngModel" required />
+            <input type="password"  class="form-control" name="password" placeholder="Enter your password" [(ngModel)]="user.password" #password="ngModel" required />
             <label *ngIf="f.submitted && !password.valid" class="supporting_input_error">Password is required</label>
         </div>
         <div [ngClass]="{ 'has-error': f.submitted && !passwordConfirmation.valid }">
             <label for="passwordConfirmation" class="supporting_input">Password Confirmation</label>
-            <input type="password"  class="form-control" name="passwordConfirmation" [(ngModel)]="confirmation.password" #passwordConfirmation="ngModel" required validateEqual="password" />
+            <input type="password"  class="form-control" name="passwordConfirmation" placeholder="Confirm our password" [(ngModel)]="confirmation.password" #passwordConfirmation="ngModel" required validateEqual="password" />
             <label *ngIf="f.submitted && !passwordConfirmation.valid" class="supporting_input_error">Passwords dont match :(</label>
         </div>
         <div>

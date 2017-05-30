@@ -60,6 +60,10 @@ public class UserService implements UserDetailsService {
         return userRepository.findOne(id);
     }
 
+    public User findByName(String username) {
+        return userRepository.findByUsername(username);
+    }
+
     public User createUser(User user) {
         user.grantRole(UserRole.USER);
         System.out.println(user);
@@ -89,9 +93,22 @@ public class UserService implements UserDetailsService {
         List<RecipeAPI> recipes = new ArrayList<>();
         List<Rating> ratings = new ArrayList<>();
         for (Rating rating : user.getRatings()) {
-            System.out.println(rating.getRecipe().getId());
             RecipeAPI recipeAPI = new RecipeAPI();
             currentRecipe = recipeRepository.findById(rating.getRecipe().getId());
+            List<IngredientAPI> ingredients = new ArrayList<>();
+
+            for (RecipeIngredient recipeIngredient : currentRecipe.getRecipeIngredients()) {
+                IngredientAPI ingredientAPI = new IngredientAPI();
+                System.out.println(recipeIngredient.getIngredient().getName());
+                ingredientAPI.setName(recipeIngredient.getIngredient().getName());
+                ingredientAPI.setAmount(recipeIngredient.getAmount());
+                ingredientAPI.setCarbs(recipeIngredient.getCarbs());
+                ingredientAPI.setFats(recipeIngredient.getFats());
+                ingredientAPI.setProteins(recipeIngredient.getProteins());
+                ingredients.add(ingredientAPI);
+            }
+
+            recipeAPI.setIngredients(ingredients);
             recipeAPI.setRecipe(currentRecipe);
             recipeAPI.setRating(currentRecipe.getRatings().stream().mapToDouble(d->d.getValue()).average().orElse(0.0));
             recipes.add(recipeAPI);

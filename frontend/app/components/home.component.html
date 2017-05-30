@@ -7,49 +7,17 @@
 <hr>
 <div class="container-fluid">
 <br/>
-<div class="dietSelection">
-    	<input type="radio" name="diet" value="vegan" [(ngModel)]="diet" (change)="selectDietPlan()">Vegan<br />
-    	<input type="radio" name="diet" value="vegetarian" [(ngModel)]="diet" (change)="selectDietPlan()">Vegetarian<br />
-    	<input type="radio" name="diet" value="null"																																																												 [(ngModel)]="diet" (change)="selectDietPlan()">Ya dont wanna a diet mate<br />
-</div>
     <!-- /.row -->
 
     <hr>
-
-    <div class="row">
-        <div class="col-md-4">
-            <img class="img-circle img-responsive img-center" src="http://placehold.it/300x300" alt="">
-            <h2>Marketing Box #1</h2>
-            <p>These marketing boxes are a great place to put some information. These can contain summaries of what the company does, promotional information, or anything else that is relevant to the company. These will usually be below-the-fold.</p>
-        </div>
-        <div class="col-md-4">
-            <img class="img-circle img-responsive img-center" src="http://placehold.it/300x300" alt="">
-            <h2>Marketing Box #2</h2>
-            <p>The images are set to be circular and responsive. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</p>
-        </div>
-        <div class="col-md-4">
-            <img class="img-circle img-responsive img-center" src="http://placehold.it/300x300" alt="">
-            <h2>Marketing Box #3</h2>
-            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</p>
-        </div>
-       <div class="col-md-4">
-            <img class="img-circle img-responsive img-center" src="http://placehold.it/300x300" alt="">
-            <h2>Marketing Box #3</h2>
-            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</p>
-        </div>
-       <div class="col-md-4">
-            <img class="img-circle img-responsive img-center" src="http://placehold.it/300x300" alt="">
-            <h2>Marketing Box #3</h2>
-            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</p>
-        </div>
-       <div class="col-md-4">
-            <img class="img-circle img-responsive img-center" src="http://placehold.it/300x300" alt="">
-            <h2>Marketing Box #3</h2>
-            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</p>
-        </div>
-
+    <div *ngIf="loading">
+        <md-spinner></md-spinner>
     </div>
-    <!-- /.row -->
-
+    <div *ngIf="response && !loading">
+        <recipe [recipes]=response></recipe>
+    </div>
+    <div *ngIf="errors && !loading">
+        <img src="https://media.npr.org/assets/img/2016/03/29/ap_090911089838_sq-3271237f28995f6530d9634ff27228cae88e3440-s1100-c15.jpg">
+    </div>
     <hr>
 </div>

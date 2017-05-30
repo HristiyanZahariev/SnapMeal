@@ -1,17 +1,18 @@
 <div *ngIf="dropping">
-    <label class="uploader" ondragover="return false;"
+    <label class="uploader" 
+        (drop)="handleDrop($event)" 
+        (click)="handleTyping($event)"
+        ondragover="return false;"
         [class.loaded]="loaded" 
         (dragenter)="handleDragEnter()"
-        (dragleave)="handleDragLeave()"
-        (drop)="handleDrop($event)"
-        (click)="handleTyping($event)">
+        (dragleave)="handleDragLeave()">
         <img 
             [src]="imageSrc" 
             (load)="handleImageLoad()" 
             [class.loaded]="imageLoaded"/>
         
         <input type="file" name="file" accept="image/*" class="inputfile">
-        <div *ngIf="requestSent">
+        <div *ngIf="requestSent && !contentLoaded">
             <md-spinner></md-spinner>
         </div>
 
@@ -28,3 +29,22 @@
     <button md-raised-button (click)="recipesWithKeyWords(searchTags)">Search</button>
 </div>
 <recipe [recipes]=response></recipe>
+
+<div *ngIf="ifMobile()">
+    <div *ngIf="typing">
+        <tag-input [(ngModel)]='searchTags' [identifyBy]="'id'" [displayBy]="'name'" placeholder="Enter ingredients By clicking Enter you can add multiple ingredients or drag a photo"     
+        [class.loaded]="loaded" 
+        (dragenter)="handleDragEnter()"
+        (dragleave)="handleDragLeave()"
+        (drop)="handleDrop($event)"
+        (click)="handleTyping($event)">
+        </tag-input>
+        <button md-raised-button (click)="recipesWithKeyWords(searchTags)">Search</button>
+    </div>
+
+    <input #fileInput type="file" name="file" accept="image/*">
+    <button md-raised-button (click)="submitPicture()">Search</button>
+    <recipe [recipes]=response></recipe>
+
+
+</div>

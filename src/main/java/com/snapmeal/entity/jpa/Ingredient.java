@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -13,17 +14,25 @@ import java.util.Set;
 @JsonAutoDetect
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 //@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
-public class Ingredient {
+public class Ingredient implements java.io.Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
 
-    @ManyToMany(mappedBy = "ingredient", fetch = FetchType.EAGER)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private Set<Recipe> recipes;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.ingredient")
+    private Set<RecipeIngredient> recipeIngredients;
+//    private double proteins;
+//    private double fats;
+//    private double carbs;
+
+//    @ManyToMany(mappedBy = "ingredient", fetch = FetchType.EAGER)
+//    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+//    private Set<Recipe> recipes;
+
 
     @ManyToMany(mappedBy = "ingredients", fetch = FetchType.EAGER)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
@@ -47,14 +56,14 @@ public class Ingredient {
     public void setName(String name) {
         this.name = name;
     }
-
-    public Set<Recipe> getRecipes() {
-        return recipes;
-    }
-
-    public void setRecipes(Set<Recipe> recipes) {
-        this.recipes = recipes;
-    }
+//
+//    public Set<Recipe> getRecipes() {
+//        return recipes;
+//    }
+//
+//    public void setRecipes(Set<Recipe> recipes) {
+//        this.recipes = recipes;
+//    }
 
     public Set<Diet> getDiets() {
         return diets;
@@ -64,24 +73,65 @@ public class Ingredient {
         this.diets = diets;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Ingredient that = (Ingredient) o;
-
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        return recipes != null ? recipes.equals(that.recipes) : that.recipes == null;
-
+    public Set<RecipeIngredient> getRecipeIngredients() {
+        return recipeIngredients;
     }
 
-    @Override
-    public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (recipes != null ? recipes.hashCode() : 0);
-        return result;
+    public void setRecipeIngredients(Set<RecipeIngredient> recipeIngredients) {
+        this.recipeIngredients = recipeIngredients;
     }
+
+    //
+//    public String getAmount() {
+//        return amount;
+//    }
+//
+//    public void setAmount(String amount) {
+//        this.amount = amount;
+//    }
+//
+//    public double getProteins() {
+//        return proteins;
+//    }
+//
+//    public void setProteins(double proteins) {
+//        this.proteins = proteins;
+//    }
+//
+//    public double getFats() {
+//        return fats;
+//    }
+//
+//    public void setFats(double fats) {
+//        this.fats = fats;
+//    }
+//
+//    public double getCarbs() {
+//        return carbs;
+//    }
+//
+//    public void setCarbs(double carbs) {
+//        this.carbs = carbs;
+//    }
+
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//
+//        Ingredient that = (Ingredient) o;
+//
+//        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+//        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+//        return recipes != null ? recipes.equals(that.recipes) : that.recipes == null;
+//
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        int result = id != null ? id.hashCode() : 0;
+//        result = 31 * result + (name != null ? name.hashCode() : 0);
+//        result = 31 * result + (recipes != null ? recipes.hashCode() : 0);
+//        return result;
+//    }
 }

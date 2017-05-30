@@ -8,6 +8,9 @@
     </video> -->
     <div class="box">
       <h1>Login</h1>
+      <div *ngIf="auth.ifError">
+        <span> Wrong Creds</span>
+      </div>
       <input type="text" name="username" [(ngModel)]="username" placeholder="Username"/>
       <input type="password" name="password" [(ngModel)]="password" placeholder="Password"/>
       <button (click)="onLogin(username, password, email)">Login</button>

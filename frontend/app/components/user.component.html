@@ -42,7 +42,7 @@
                             Liked Recipes </a>
                         </li>
                         <li>
-                            <a (click)="userdiets()">
+                            <a (click)="userDiets()">
                             <i class="glyphicon glyphicon-apple"></i>
                             Diets </a>
                         </li>
@@ -63,6 +63,13 @@
                     <div *ngIf="recipes">
                         <recipe [recipes]=recipes></recipe>
                     </div>
+                </div>
+                <div *ngIf="diets">
+                    <div class="dietSelection">
+                        <input type="radio" name="diet" value="vegan" [(ngModel)]="diet" (change)="selectDietPlan()">Vegan<br />
+                        <input type="radio" name="diet" value="vegetarian" [(ngModel)]="diet" (change)="selectDietPlan()">Vegetarian<br />
+                        <input type="radio" name="diet" value="null"                                                                                                                                                                                                                                                 [(ngModel)]="diet" (change)="selectDietPlan()">No diets<br />
+</div>
                 </div>
             </div>
         </div>

@@ -3,7 +3,10 @@ package com.snapmeal.entity.elasticsearch;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.snapmeal.entity.jpa.Recipe;
+import com.snapmeal.entity.jpa.RecipeIngredient;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
@@ -16,6 +19,7 @@ import java.util.List;
  * Created by hristiyan on 11.12.16.
  */
 @Document(indexName = "snapmeal", type = "recipes")
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class RecipeEs {
 
     @Id
@@ -26,6 +30,10 @@ public class RecipeEs {
 
     @Field(type = FieldType.Nested)
     private List<RatingEs> ratings;
+
+    private List<String> steps;
+    private String imageUrl;
+    private int servings;
 
     @Field( type = FieldType.Nested)
     @JsonProperty("ingredient")
@@ -80,6 +88,31 @@ public class RecipeEs {
     public void setRatings(List<RatingEs> ratings) {
         this.ratings = ratings;
     }
+
+    public List<String> getSteps() {
+        return steps;
+    }
+
+    public void setSteps(List<String> steps) {
+        this.steps = steps;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public int getServings() {
+        return servings;
+    }
+
+    public void setServings(int servings) {
+        this.servings = servings;
+    }
+
 
     @Override
     public boolean equals(Object o) {

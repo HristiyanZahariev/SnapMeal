@@ -1,7 +1,12 @@
 package com.snapmeal.controllers;
 
+import com.snapmeal.entity.RecipeJsonApi;
 import com.snapmeal.entity.elasticsearch.RecipeEs;
+import com.snapmeal.entity.jpa.Ingredient;
+import com.snapmeal.entity.jpa.Recipe;
+import com.snapmeal.entity.jpa.RecipeIngredient;
 import com.snapmeal.entity.jpa.User;
+import com.snapmeal.repository.jpa.RecipeRepository;
 import com.snapmeal.security.JwtUser;
 import com.snapmeal.security.UserAuthentication;
 import com.snapmeal.service.RecipeService;
@@ -16,6 +21,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,6 +34,8 @@ public class RecipeController {
     @Autowired
     RecipeService recipeInstance;
 
+    @Autowired
+    RecipeRepository recipeRepository;
 
     //SHOULD REWORK !!!!
     @Autowired
@@ -63,7 +71,7 @@ public class RecipeController {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response createRecipe(RecipeEs recipe) throws IOException {
+    public Response createRecipe(RecipeJsonApi recipe) throws IOException {
         return Response.ok(recipeInstance.createRecipe(recipe)).build();
 
     }
@@ -78,17 +86,17 @@ public class RecipeController {
         return Response.ok(recipeInstance.getRecipeByTags(tags, jwtUser)).build();
     }
 
-    @POST
+    @GET
     @Path("/recommend")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getRecommendations(@QueryParam("user1Id") long user1Id,
-                                       @QueryParam("user2Id") long user2Id) {
+    public Response getRecommendations() {
 
-        User user1 = userService.findUserById(user1Id);
-        User user2 = userService.findUserById(user2Id);
-        List<Long> ids = recipeInstance.getRecommendations(user1Id);
-        return Response.ok(recipeInstance.getRecipesFromIdsUser(ids, user1)).build();
+        final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        JwtUser jwtUser = ((UserAuthentication) authentication).getDetails();
+        User currentUser = userService.getNonJwtUser(jwtUser);
+        List<Long> ids = recipeInstance.getRecommendations(currentUser.getId());
+        return Response.ok(recipeInstance.getRecipesFromIdsUser(ids, currentUser)).build();
     }
 
 }

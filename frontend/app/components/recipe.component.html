@@ -21,9 +21,9 @@
             <div class="panel panel-primary">
                 <div class="panel-heading" (click)="lgModal.show()">{{recipes.recipe.name}}</div>
                 <div class="panel-body" (click)="lgModal.show()">
-                    <img src="http://www.eatingonadime.com/wp-content/uploads/2017/04/honey-glazed-salmon-square-300x300.jpg" class="img-responsive" style="width:100%" alt="Image">
+                    <img src="{{recipes.recipe.imageUrl}}" style="width:100%" alt="Image">
                     <span text-align="center"> Ingredients </span>
-                    <div *ngFor="let ingredient of recipes.recipe.ingredients">
+                    <div *ngFor="let ingredient of recipes.ingredients">
                         {{ingredient.name}}
                     </div>
                 </div>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { RecipeService } from '../services/recipe.service';
 
 @Component({
@@ -14,12 +14,14 @@ export class FileUploaderComponent {
     }
 
     response: RecipeAPI[];
+    @ViewChild("fileInput") fileInput: any;
     typing: boolean = true;
     dropping: boolean = false;
     dragging: boolean = false;
     requestSent: boolean = false;
     loaded: boolean = false;
     imageLoaded: boolean = false;
+    contentLoaded: boolean = false;
     imageSrc: string = '';
     searchTags: any;
     searchedFor: string;
@@ -44,6 +46,31 @@ export class FileUploaderComponent {
         this.imageLoaded = true;
     }
 
+    submitPicture() {
+        let fi = this.fileInput.nativeElement;
+        if (fi.files && fi.files[0]) {
+            let fileToUpload = fi.files[0];
+            this.recipeService
+                .searchRecipesWithPicture(fileToUpload)
+                .subscribe(value => {
+                    this.response = <RecipeAPI[]>value.json();
+                    console.log(this.response)
+                    this.response.forEach((recipe: any) => {
+                        this.searchedFor = recipe.searchedFor;
+                        this.contentLoaded = true
+                    });
+                    console.log(this.searchedFor);
+                });
+        }
+    }
+
+    ifMobile() { 
+        if (window.innerWidth <= 800 && window.innerHeight <= 600){ return true; } 
+        else {
+            return false; 
+    }    
+}
+
     handleInputChange(e: any) {
         var file = e.dataTransfer ? e.dataTransfer.files[0] : e.target.files[0];
 
@@ -57,15 +84,16 @@ export class FileUploaderComponent {
 
         this.loaded = false;
         reader.onload = this._handleReaderLoaded.bind(this);
+        this.requestSent = true
         reader.readAsDataURL(file);
         this.recipeService
             .searchRecipesWithPicture(file)
             .subscribe(value => {
                 this.response = <RecipeAPI[]>value.json();
-                this.requestSent = false
                 console.log(this.response)
                 this.response.forEach((recipe: any) => {
                     this.searchedFor = recipe.searchedFor;
+                    this.contentLoaded = true
                 });
                 console.log(this.searchedFor);
             });
