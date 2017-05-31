@@ -19,6 +19,15 @@ export class UserService {
 
 	}
 
+	getCurrentDietPlan() {
+		return this.authHttp.get(this.host_url + '/user/current/diet');
+
+	}
+
+	getAllDiets() {
+		return this.authHttp.get(this.host_url + '/diet/all');
+	}
+
 	create(user: any) {
 		let body = JSON.stringify(user);
 		let headers = new Headers({ 'Content-Type': 'application/json' });

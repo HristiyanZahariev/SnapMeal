@@ -87,6 +87,11 @@ public class UserService implements UserDetailsService {
         return getNonJwtUser(jwtUser);
     }
 
+    public String getCurrentDiet(JwtUser jwtUser) {
+        User user = getNonJwtUser(jwtUser);
+        return user.getDiet().getName();
+    }
+
     public List getRecipes(JwtUser jwtUser) {
         User user = getNonJwtUser(jwtUser);
         Recipe currentRecipe = new Recipe();

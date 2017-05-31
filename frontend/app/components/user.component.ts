@@ -27,16 +27,19 @@ import { ModalModule } from 'ngx-bootstrap';
 export class UserComponent  { 
 
 	user: User
-	recipes: RecipeAPI;
+	recipes: RecipeAPI[];
     recipesToLike: RecipeAPI[];
-	overview: boolean;
+    recommendedRecipes: RecipeAPI[];
+    diets: Diet[];
+	overview: boolean = true;
 	settings: boolean;
 	likedRecipes: boolean;
-	diets: boolean;
-    diet: string;
+	userDiets: boolean;
+    diet: string = "";
     loading: boolean = false
     errors: boolean = false
-    recommendedRecipes: boolean
+    recommendedRecipe: boolean
+    recommendedRecipesFailed: boolean = false;
 
 
 
@@ -46,18 +49,40 @@ export class UserComponent  {
 
 	public ngOnInit	(): void {
 		this.userService.getUserProfile().subscribe(res => {
-			console.log(res);
 			this.user = res;
+            console.log(this.user)
 		});
+
+        this.userService.getCurrentDietPlan().subscribe(res => {
+            this.diet = res.text();
+        })
 		this.userService.getLikedRecipes().subscribe(res => {
-			this.recipes = <Recipe>res.json()
-			console.log(this.recipes)
+			this.recipes = <RecipeAPI[]>res.json()
+			if (this.recipes.length == 0) {
+                this.errors = true;
+            }
 		});
+        this.userService.getAllDiets().subscribe(res => {
+            this.diets = <Diet[]>res.json()
+            console.log(this.diets)
+        })
+
+        this.recipeService.getRecommendedRecipes().subscribe(
+            (data: any) => {
+                this.recommendedRecipes = <RecipeAPI[]>data.json();
+                this.loading = false;
+            },
+            (err: any) => { 
+                this.recommendedRecipesFailed = true;
+                this.loading = false;
+                this.errors = true
+            }
+        );
     }
 
-    selectDietPlan() {
+    selectDietPlan(userDiet: string) {
         console.log(this.diet)
-        this.userService.selectDietPlan(this.diet).subscribe(res => {
+        this.userService.selectDietPlan(userDiet).subscribe(res => {
             console.log(res);
         });    
     } 
@@ -81,24 +106,24 @@ export class UserComponent  {
     	this.settings = true;
     	this.overview = false;
     	this.likedRecipes = false;
-    	this.diets = false;
-        this.recommendedRecipes = false;
+    	this.userDiets = false;
+        this.recommendedRecipe = false;
     }
 
     userRecommendedRecipes() {
         this.settings = false;
         this.overview = false;
         this.likedRecipes = false;
-        this.diets = false;
-        this.recommendedRecipes = true;
+        this.userDiets = false;
+        this.recommendedRecipe = true;
     }
 
     userOverview() {
     	this.overview = true;
     	this.settings = false;
     	this.likedRecipes = false;
-    	this.diets = false;
-        this.recommendedRecipes = false;
+    	this.userDiets = false;
+        this.recommendedRecipe = false;
 
     }
 
@@ -106,16 +131,16 @@ export class UserComponent  {
     	this.likedRecipes = true;
     	this.overview = false;
     	this.settings = false;
-		this.diets = false;
-        this.recommendedRecipes = false;    	
+		this.userDiets = false;
+        this.recommendedRecipe = false;    	
     }
 
-    userDiets() {
-    	this.diets = true;
+    userDietsFunc() {
+    	this.userDiets = true;
     	this.likedRecipes = false;
     	this.overview = false;
     	this.settings = false;
-        this.recommendedRecipes = false;
+        this.recommendedRecipe = false;
     }
 
 }
@@ -129,27 +154,25 @@ export interface User {
 }
 
 export interface Ingredient {
-    id: string;
+    id: number;
     name: string;
-}
-
-export interface Content {
-    id: string;
-    name: string;
-    description: string;
-    rating: number;
-    ingredient: Ingredient[];
 }
 
 export interface Recipe {
-    content: Content[];
-    last: boolean;
-    totalPages: number;
-    totalElements: number;
-    first: boolean;
-    sort?: any;
-    numberOfElements: number;
-    size: number;
-    number: number;
+    id: number;
+    name: string;
+    description: string;
+    author?: any;
+    ingredients: Ingredient[];
 }
 
+export interface RecipeAPI {
+    recipe: Recipe;
+    rating: number;
+}
+
+export interface Diet {
+    id: number;
+    name: string;
+    description: string;
+}

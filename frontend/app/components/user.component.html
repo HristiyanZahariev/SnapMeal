@@ -5,7 +5,7 @@
             <div class="profile-sidebar">
                 <!-- SIDEBAR USERPIC -->
                 <div class="profile-userpic">
-                    <img src="http://i.imgur.com/VFXUyND.jpg" class="img-responsive" alt="">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjVl7eosjUFvCHhTiM-Zsv2VlMBYVxtvxEeQToDnC81JyC5nyb9w" class="img-responsive" alt="">
                 </div>
                 <div class="profile-usertitle">
                     <div class="profile-usertitle-name">
@@ -22,11 +22,6 @@
                             Overview </a>
                         </li>
                         <li>
-                            <a (click)="userSettings()">
-                            <i class="glyphicon glyphicon-user"></i>
-                            Account Settings </a>
-                        </li>
-                        <li>
                             <a (click)="userRecommendedRecipes()">
                            <i class="glyphicon glyphicon-user"></i>
                             Recommended recipes</a>
@@ -37,7 +32,7 @@
                             Liked Recipes </a>
                         </li>
                         <li>
-                            <a (click)="userDiets()">
+                            <a (click)="userDietsFunc()">
                             <i class="glyphicon glyphicon-apple"></i>
                             Diets </a>
                         </li>
@@ -52,22 +47,53 @@
                 
                 </div>
                 <div *ngIf="overview">
-                    <p>Overview</p>
+                    <div *ngIf="user">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Your firstname</div>
+                            <div class="panel-body">{{user.firstname}}</div>
+                        </div>
+
+                       <div class="panel panel-default">
+                            <div class="panel-heading">Your lastname</div>
+                            <div class="panel-body">{{user.lastname}}</div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Your email</div>
+                            <div class="panel-body">{{user.email}}</div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Your username</div>
+                            <div class="panel-body">{{user.username}}</div>
+                        </div>
+                    </div>
                 </div>
                 <div *ngIf="likedRecipes">
                     <div *ngIf="recipes">
                         <recipe [recipes]=recipes></recipe>
                     </div>
-                </div>
-                <div *ngIf="diets">
-                    <div class="dietSelection">
-                        <input type="radio" name="diet" value="vegan" [(ngModel)]="diet" (change)="selectDietPlan()">Vegan<br />
-                        <input type="radio" name="diet" value="vegetarian" [(ngModel)]="diet" (change)="selectDietPlan()">Vegetarian<br />
-                        <input type="radio" name="diet" value="null"                                                                                                                                                                                                                                                 [(ngModel)]="diet" (change)="selectDietPlan()">No diets<br />
+                    <div *ngIf="errors">
+                        You havent liked any recipes yet :(.
                     </div>
                 </div>
-                <div *ngIf="recommendedRecipes">
-                    <div>
+                <div *ngIf="userDiets">
+                    <div *ngIf="diets">
+                        <div *ngFor="let userDiet of diets">
+                            <div class="radio">
+                                <label><input type="radio" name="diet" value="userDiet.name" (change)="selectDietPlan(userDiet.name)"  [checked]="diet === diet" >{{userDiet.name}}</label>
+                            </div>
+                            {{userDiet.description}}
+                        </div>
+                    </div>
+                    <div class="radio">
+                        <label><input type="radio" name="diet" value="" (change)="selectDietPlan()"  [checked]="diet === diet" >No diet</label>
+                    </div>
+                </div>
+                <div *ngIf="recommendedRecipe">
+                    <div *ngIf="recommendedRecipes">
+                        <recipe [recipes]=recommendedRecipes></recipe>
+                    </div>
+                    <div *ngIf="recommendedRecipesFailed">
                         We couldnt get recommentations for you. Please click 
                         <a (click)="getRandomRecipes()">here</a>
                     </div>

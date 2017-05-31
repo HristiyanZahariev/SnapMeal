@@ -35,9 +35,7 @@ public class ImageRecognizerController {
     @Path("/upload")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     public Response searchRecipesWithPicture(
-            @FormDataParam("image") InputStream fileInputStream,
-            @QueryParam("from") int from,
-            @QueryParam("to") int to) throws Exception {
+            @FormDataParam("image") InputStream fileInputStream) throws Exception {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         JwtUser currentJwtUser = ((UserAuthentication) authentication).getDetails();
@@ -54,7 +52,7 @@ public class ImageRecognizerController {
         String text = imageRecognitionService.getCaptionText(recognizedContent);
         System.out.println(text);
 
-        List<String> ids = recipeService.getRecipesByDescription(text, currentJwtUser, from, to);
+        List<String> ids = recipeService.getRecipesByDescription(text, currentJwtUser);
 
 
         return Response.ok(recipeService.getRecipesByIds(ids, text)).build();

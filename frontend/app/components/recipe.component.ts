@@ -12,8 +12,6 @@ import {FileUploaderComponent} from './file-uploader.component';
 import { RecipeService } from '../services/recipe.service';
 import { Router } from '@angular/router';
 import { ModalModule } from 'ngx-bootstrap';
-import {RecipeProfile} from './recipe-profile.component';
-
 
 @Component({
   moduleId: module.id,
@@ -41,15 +39,6 @@ export class RecipeComponent  {
         });
     }
 
-    getRecipeProfile(recipeId: number) {
-        this.recipeService.getRecipeProfile(recipeId).subscribe(
-            data => {
-                this.router.navigate(['/recipe/', recipeId]);
-            },
-            error => {
-                console.log(error);
-            });
-    }
 }
 
 export interface Ingredient {

@@ -77,16 +77,6 @@ public class RecipeService {
     @Autowired
     private ElasticsearchTemplate elasticsearchTemplate;
 
-    private List<RatingEs> ratingsEs = new ArrayList<RatingEs>();
-    private Set<Rating> userRating = new ObjectArraySet<>();
-
-    private float minScore = 0.12000f;
-
-    private String scoreMode = "max";
-
-    ObjectMapper mapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-
-    Gson gson = new Gson();
 
     public Iterable<Recipe> getAllRecipes() {
         return recipeRepository.findAll();
@@ -97,6 +87,7 @@ public class RecipeService {
     }
 
     public RecipeEs createRecipe(RecipeJsonApi recipeEs) throws IOException {
+        ObjectMapper mapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         String recipeJson = mapper.writer().withoutAttribute("ingredient").writeValueAsString(recipeEs);
         System.out.println(recipeJson);
         Recipe recipe = mapper.readValue(recipeJson, Recipe.class);
@@ -109,7 +100,8 @@ public class RecipeService {
 
     }
 
-    public List<String> getRecipesByDescription(String description, JwtUser currentJwtUser, int from, int to) throws JsonProcessingException {
+
+    public List<String> getRecipesByDescription(String description, JwtUser currentJwtUser) throws JsonProcessingException {
         NativeSearchQueryBuilder nativeSearchQueryBuilder = new NativeSearchQueryBuilder();
         User currentUser = userRepository.findByUsername(currentJwtUser.getUsername());
         System.out.println(currentUser);
@@ -138,7 +130,7 @@ public class RecipeService {
             //nativeSearchQueryBuilder.withMinScore(minScore);
         }
 
-        NativeSearchQuery nativeSearchQuery = nativeSearchQueryBuilder.withPageable(new PageRequest(from, to)).build();
+        NativeSearchQuery nativeSearchQuery = nativeSearchQueryBuilder.withPageable(new PageRequest(1, 29)).build();
 
         System.out.println("nativeQuery" + nativeSearchQuery.getQuery());
 
@@ -184,7 +176,8 @@ public class RecipeService {
         NativeSearchQueryBuilder nativeSearchQueryBuilder = new NativeSearchQueryBuilder();
 
         QueryBuilder queryBuilder = matchAllQuery();
-        nativeSearchQueryBuilder.withQuery(queryBuilder).withPageable(new PageRequest(0, 15));
+
+        nativeSearchQueryBuilder.withQuery(queryBuilder).withPageable(new PageRequest(1, 15));
         NativeSearchQuery nativeSearchQuery = nativeSearchQueryBuilder.build();
 
         Page<RecipeEs> results = elasticsearchTemplate.queryForPage(nativeSearchQuery, RecipeEs.class);
@@ -199,7 +192,7 @@ public class RecipeService {
         return ids;
     }
 
-    public List<String> getRecipeByTags(List<Tags> tags, JwtUser currentJwtUser, int from, int to) {
+    public List<String> getRecipeByTags(List<Tags> tags, JwtUser currentJwtUser) {
         User currentUser = userRepository.findByUsername(currentJwtUser.getUsername());
         NativeSearchQueryBuilder nativeSearchQueryBuilder = new NativeSearchQueryBuilder();
         List<String> userTags = tags.stream()
@@ -225,7 +218,7 @@ public class RecipeService {
                     .mustNot((nestedQuery("ingredient", termsQuery("ingredient.name", unallowedIngredients))));
 
             nativeSearchQueryBuilder.withQuery(queryBuilder);
-            nativeSearchQueryBuilder.withPageable(new PageRequest(from, to));
+            nativeSearchQueryBuilder.withPageable(new PageRequest(1, 50));
         }
 
         else {
@@ -233,7 +226,7 @@ public class RecipeService {
                     .must((nestedQuery("ingredient", termsQuery("ingredient.name", userTags))));
 
             nativeSearchQueryBuilder.withQuery(queryBuilder);
-            nativeSearchQueryBuilder.withPageable(new PageRequest(from, to));
+            nativeSearchQueryBuilder.withPageable(new PageRequest(1, 50));
         }
 
         NativeSearchQuery nativeSearchQuery = nativeSearchQueryBuilder.build();
@@ -377,25 +370,6 @@ public class RecipeService {
         }
     }
 
-    public List<Long> getRecommendations(Long currentUserId) {
-        List<User> allUsers = userRepository.findAll();
-        User currentUser = userRepository.findById(currentUserId);
-        User bestMatchingUser = getBestMatchingUser(currentUser, allUsers);
-        if (bestMatchingUser.getId() == null) {
-            System.out.println("We cant give you recommendations :( ");
-            throw new ArithmeticException("We cannot find any recipes for you :(");
-        }
-        System.out.println("BEST MATCHING: " + bestMatchingUser);
-        List<Long> currentUserRecipes = new ArrayList<>();
-        currentUserRecipes.addAll(currentUser.getRatings().stream()
-                .map(rating -> rating.getRecipe().getId())
-                .collect(Collectors.toList()));
-
-        List<Long> recipes = getRecommendedRecipes(bestMatchingUser);
-        return recipes;
-
-    }
-
     public List<Long> getRecommendedRecipes(User bestMatchingUser) {
         List<Long> similarRecipes = new ArrayList<>();
         List<Long> currentUserRecipes = new ArrayList<>();
@@ -416,6 +390,25 @@ public class RecipeService {
         }
 
         return tenSimilarRecipes;
+    }
+
+    public List<Long> getRecommendations(Long currentUserId) {
+        List<User> allUsers = userRepository.findAll();
+        User currentUser = userRepository.findById(currentUserId);
+        User bestMatchingUser = getBestMatchingUser(currentUser, allUsers);
+        if (bestMatchingUser.getId() == null) {
+            System.out.println("We cant give you recommendations :( ");
+            throw new ArithmeticException("We cannot find any recipes for you :(");
+        }
+        System.out.println("BEST MATCHING: " + bestMatchingUser);
+        List<Long> currentUserRecipes = new ArrayList<>();
+        currentUserRecipes.addAll(currentUser.getRatings().stream()
+                .map(rating -> rating.getRecipe().getId())
+                .collect(Collectors.toList()));
+
+        List<Long> recipes = getRecommendedRecipes(bestMatchingUser);
+        return recipes;
+
     }
 
     public User getBestMatchingUser(User currentUser, List<User> allUsers) {
@@ -440,6 +433,7 @@ public class RecipeService {
         System.out.println("BEST MATCHING USER: " + bestMatchingUser);
         return bestMatchingUser;
     }
+
 
     public List<RecipeAPI> getRecipesFromIdsUser(List<Long> ids, User currentUser) {
         List<RecipeAPI> recipes = new ArrayList<>();

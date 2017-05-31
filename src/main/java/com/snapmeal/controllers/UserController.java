@@ -91,5 +91,14 @@ public class UserController {
         return Response.status(200).entity(userInstance.getRecipes(jwtUser)).build();
     }
 
+    @GET
+    @Path("/current/diet")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getDiet() {
+        final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        JwtUser jwtUser = ((UserAuthentication) authentication).getDetails();
+        return Response.status(200).entity(userInstance.getCurrentDiet(jwtUser)).build();
+    }
+
 
 }

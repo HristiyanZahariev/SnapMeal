@@ -93,7 +93,7 @@ export class FileUploaderComponent {
         this.recongizedFile = file;
         reader.readAsDataURL(file)
         this.recipeService
-            .searchRecipesWithPicture(file, this.from, this.to)
+            .searchRecipesWithPicture(file)
             .subscribe(value => {
                 this.searchedFor = undefined;
                 this.response = <RecipeAPI[]>value.json();
@@ -125,7 +125,7 @@ export class FileUploaderComponent {
         this.searchingTag = searchTag;
         this.requestSent = true
         this.recipesWithTags = true;
-        this.recipeService.searchRecipesWithTags(searchTag, this.from, this.to)
+        this.recipeService.searchRecipesWithTags(searchTag)
              .subscribe(value => {
                 this.searchedFor = undefined;
                 this.response = <RecipeAPI[]>value.json();
@@ -138,28 +138,28 @@ export class FileUploaderComponent {
             });
     }
 
-    getMoreRecipesWithImage() {
-        this.recipesWithImage = true;
-        this.from += 10;
-        this.to += 10
-        this.recipeService.searchRecipesWithPicture(this.recongizedFile, this.from, this.to)
-            .subscribe(value => {
-                this.response = <RecipeAPI[]>value.json();
-                console.log(this.response)  
-            });
+    // getMoreRecipesWithImage() {
+    //     this.recipesWithImage = true;
+    //     this.from += 10;
+    //     this.to += 10
+    //     this.recipeService.searchRecipesWithPicture(this.recongizedFile, this.from, this.to)
+    //         .subscribe(value => {
+    //             this.response = <RecipeAPI[]>value.json();
+    //             console.log(this.response)  
+    //         });
 
-    }
+    // }
 
-    getMoreRecipesWithTags() {
-        this.recipesWithTags = true;
-        this.from += 10;
-        this.to += 10
-        this.recipeService.searchRecipesWithTags(this.searchingTag, this.from, this.to)
-            .subscribe(value => {
-                this.response = <RecipeAPI[]>value.json();
-                console.log(this.response)  
-            });
-    }
+    // getMoreRecipesWithTags() {
+    //     this.recipesWithTags = true;
+    //     this.from += 10;
+    //     this.to += 10
+    //     this.recipeService.searchRecipesWithTags(this.searchingTag, this.from, this.to)
+    //         .subscribe(value => {
+    //             this.response = <RecipeAPI[]>value.json();
+    //             console.log(this.response)  
+    //         });
+    // }
     
 }
 

@@ -6,11 +6,8 @@ import { FooterComponent } from './components/footer.component'
 @Component({
   selector: 'my-app',
   template: `
-  <div id="wrapper">
-  	<header></header>
+  	<my-header></my-header>
   	<router-outlet></router-outlet>
-  	<footer></footer>
-  </div>
   `,
 })
 

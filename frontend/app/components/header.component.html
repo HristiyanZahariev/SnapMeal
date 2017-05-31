@@ -6,15 +6,11 @@
 
         <nav *ngIf="auth.loggedIn()">
             <a [routerLink]="['/']">Home</a>
-            <a [routerLink]="['/about']">About</a>
-            <a [routerLink]="['/contact']">Contact</a>
             <a [routerLink]="['/profile']">Profile</a>
             <a [routerLink]="['/login']" (click)="logOut()">Logout</a>
         </nav>
         <nav *ngIf="!auth.loggedIn()">
             <a [routerLink]="['/']">Home</a>
-            <a [routerLink]="['/about']">About</a>
-            <a [routerLink]="['/contact']">Contact</a>
             <a [routerLink]="['/login']">Login</a>
             <a [routerLink]="['/register']">Sing Up</a>
         </nav>

@@ -5,7 +5,7 @@ import { AuthService } from '../services/auth.service'
 @Component({
     moduleId: module.id,
     templateUrl: 'header.component.html',
-    selector: 'header',
+    selector: 'my-header',
     providers: [AuthService]
 })
 

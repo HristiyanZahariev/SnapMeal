@@ -88,11 +88,10 @@ public class RecipeController {
     @Path("/search")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response getRecipeByDescription(@QueryParam("from") int from,
-                                           @QueryParam("to") int to, List<Tags> tags) {
+    public Response getRecipeByDescription(List<Tags> tags) {
         final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         JwtUser jwtUser = ((UserAuthentication) authentication).getDetails();
-        List<String> ids = recipeInstance.getRecipeByTags(tags, jwtUser, from, to);
+        List<String> ids = recipeInstance.getRecipeByTags(tags, jwtUser);
         String description = new String();
         for (Tags tag : tags) {
             description += tag.getName();

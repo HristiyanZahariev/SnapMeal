@@ -37,13 +37,14 @@
 <div class="recipes">
     <recipe [recipes]=response></recipe>
 </div>
-<div *ngIf="searchingTag && recipesWithTags">
-    <a (click)="getMoreRecipesWithTags()">Get more recipes </a>
+<!-- <div *ngIf="searchingTag && recipesWithTags">
+    <a (click)="getMoreRecipesWithTags()">Get more recipes with tags </a>
 </div>
 
 <div *ngIf="recongizedFile && recipesWithImage">
     <a (click)="getMoreRecipesWithImage()">Get more recipes </a>
-</div>
+
+</div> -->
 
 <div *ngIf="ifMobile()">
     <div *ngIf="typing">

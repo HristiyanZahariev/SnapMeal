@@ -1,7 +1,7 @@
 <div class="container">
   <div class="jumbotron">
     <h1>Welcome to SnapMeal</h1>      
-    <p>Here you can find recipes by using a picture. If you want to make a search go ahead and drag your photo to the bar </p>
+    <p>Here you can find recipes by using a picture. If you want to make a search go ahead and drag your photo to the bar. If you dont have a photo you can just type the ingredients you have in the search box below. </p>
   </div>
 <file-uploader></file-uploader>
 <div class="container-fluid">
@@ -9,4 +9,17 @@
     <div *ngIf="loading">
         <md-spinner></md-spinner>
     </div>
+    <div *ngIf="response && !loading">
+        <h3 align="center">We have recommendations for you</h3>
+        <recipe [recipes]=response></recipe>
+    </div>
+       <div *ngIf="errors && !loading">
+            <div class="jumbotron">
+                
+                <h4>We dont have recommendations for you :( </h4>      
+                <p>The recommendation system is based on recipes you have liked.... so go ahead, like something </p>
+            </div>
+       </div>
+    </div>
+    <hr>
 </div>

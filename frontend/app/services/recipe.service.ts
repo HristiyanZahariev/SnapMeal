@@ -13,13 +13,13 @@ export class RecipeService {
 	constructor(private http: Http, private authHttp: AuthHttp) {
 	}
 	// formData doesnt support authHttp 
-	searchRecipesWithPicture(imageToUpload: any, from: number, to:number) {
+	searchRecipesWithPicture(imageToUpload: any) {
 		let input = new FormData();
 		input.append("image", imageToUpload);
 		let headers = new Headers();
 		headers.set('X-AUTH-TOKEN', localStorage.getItem('id_token'));
 		let options = new RequestOptions({ headers: headers });
-		let url = this.host_url + "/image/upload?from=" + from + "&to=" + to;
+		let url = this.host_url + "/image/upload";
 		return this.http
 					.post(url, input, options);
 	}
@@ -46,11 +46,11 @@ export class RecipeService {
 		return this.authHttp.get(url);
 	}
 
-	searchRecipesWithTags(userInput: any[], from: number, to: number) {
+	searchRecipesWithTags(userInput: any[]) {
 		let body = JSON.stringify(userInput);
 		let headers = new Headers({ 'Content-Type': 'application/json' });
 		let options = new RequestOptions({ headers: headers });
-		let url = this.host_url + "/recipe/search?from=" + from + "&to=" + to;
+		let url = this.host_url + "/recipe/search";
 		return this.authHttp.post(url, body, options);
 	}
 

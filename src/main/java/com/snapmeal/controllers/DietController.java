@@ -11,6 +11,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by hristiyan on 16.02.17.
@@ -26,10 +27,9 @@ public class DietController {
     @Autowired
     DietEsRepository dietEsRepository;
 
+    @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-
-    @POST
     //Gotta rework this
     public Response createDiet(DietEs dietEs) throws IOException {
         dietEsRepository.save(dietEs);
@@ -37,6 +37,14 @@ public class DietController {
         Diet diet = mapper.readValue(dietJson, Diet.class);
         dietRepository.save(diet);
         return Response.ok(diet).build();
+    }
+
+    @GET
+    @Path("/all")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAllDiets() {
+        List<Diet> allDiets = dietRepository.findAll();
+        return Response.ok(allDiets).build();
     }
 
 
