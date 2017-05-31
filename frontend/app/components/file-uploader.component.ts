@@ -25,6 +25,12 @@ export class FileUploaderComponent {
     imageSrc: string = '';
     searchTags: any;
     searchedFor: string;
+    from: number = 1;
+    to: number = 10;
+    searchingTag: any;
+    recipesWithTags: boolean = false;
+    recipesWithImage: boolean = false;
+
     
     handleDragEnter() {
         this.dragging = true;
@@ -81,21 +87,23 @@ export class FileUploaderComponent {
             alert('invalid format');
             return;
         }
-
         this.loaded = false;
         reader.onload = this._handleReaderLoaded.bind(this);
         this.requestSent = true
-        reader.readAsDataURL(file);
+        this.recongizedFile = file;
+        reader.readAsDataURL(file)
         this.recipeService
-            .searchRecipesWithPicture(file)
+            .searchRecipesWithPicture(file, this.from, this.to)
             .subscribe(value => {
+                this.searchedFor = undefined;
                 this.response = <RecipeAPI[]>value.json();
                 console.log(this.response)
                 this.response.forEach((recipe: any) => {
                     this.searchedFor = recipe.searchedFor;
-                    this.contentLoaded = true
                 });
+                this.contentLoaded = true
                 console.log(this.searchedFor);
+                this.recipesWithImage = true;
             });
     }
 
@@ -114,9 +122,43 @@ export class FileUploaderComponent {
     }
 
     recipesWithKeyWords(searchTag: any) {
-        this.recipeService.searchRecipesWithTags(searchTag).subscribe(res => {
-            console.log(res);
-        });
+        this.searchingTag = searchTag;
+        this.requestSent = true
+        this.recipesWithTags = true;
+        this.recipeService.searchRecipesWithTags(searchTag, this.from, this.to)
+             .subscribe(value => {
+                this.searchedFor = undefined;
+                this.response = <RecipeAPI[]>value.json();
+                console.log(this.response)
+                this.contentLoaded = true
+                console.log(this.searchedFor);
+                this.requestSent = false;
+                this.contentLoaded = false;
+                this.recipesWithTags = true
+            });
+    }
+
+    getMoreRecipesWithImage() {
+        this.recipesWithImage = true;
+        this.from += 10;
+        this.to += 10
+        this.recipeService.searchRecipesWithPicture(this.recongizedFile, this.from, this.to)
+            .subscribe(value => {
+                this.response = <RecipeAPI[]>value.json();
+                console.log(this.response)  
+            });
+
+    }
+
+    getMoreRecipesWithTags() {
+        this.recipesWithTags = true;
+        this.from += 10;
+        this.to += 10
+        this.recipeService.searchRecipesWithTags(this.searchingTag, this.from, this.to)
+            .subscribe(value => {
+                this.response = <RecipeAPI[]>value.json();
+                console.log(this.response)  
+            });
     }
     
 }

@@ -7,11 +7,12 @@ import { Router } from '@angular/router';
 @Injectable()
 export class AuthService {
 
+  url = "http://localhost:8080/snapmeal"
   ifError: boolean = false;
   constructor(private http: Http, private router: Router) {}
 
   login(user: any) {
-    this.http.post('http://localhost:8080/snapmeal/login', user)
+    this.http.post(this.url + '/login', user)
       .subscribe(
         // We're assuming the response will be an object
         // with the JWT on an id_token key

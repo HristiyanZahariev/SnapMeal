@@ -6,35 +6,45 @@ import { AuthHttp, tokenNotExpired } from 'angular2-jwt';
 import {RatingModule} from "ngx-rating";
 import { TagInputModule } from 'ng2-tag-input';
 import {MdButtonModule} from '@angular/material';
+import { RecipeService } from '../services/recipe.service';
 import {MdProgressSpinnerModule} from '@angular/material';
 import {MdGridListModule} from '@angular/material';
 import {FileUploaderComponent} from './file-uploader.component';
 import { DialogRef, ModalComponent } from 'angular2-modal';
+import { ModalModule } from 'ngx-bootstrap';
 
 
 @Component({
   moduleId: module.id,
   selector: 'user',
   templateUrl: 'user.component.html',
-  providers: [UserService]
+  providers: [
+      [UserService],
+      [RecipeService]
+  ]
 })
 
 export class UserComponent  { 
 
 	user: User
-	recipes: Recipe;
+	recipes: RecipeAPI;
+    recipesToLike: RecipeAPI[];
 	overview: boolean;
 	settings: boolean;
 	likedRecipes: boolean;
 	diets: boolean;
     diet: string;
+    loading: boolean = false
+    errors: boolean = false
+    recommendedRecipes: boolean
 
 
-	constructor(private userService: UserService) {
+
+	constructor(private userService: UserService, private recipeService: RecipeService) {
 		this.userService = userService
 	}
 
-	public ngAfterViewInit	(): void {
+	public ngOnInit	(): void {
 		this.userService.getUserProfile().subscribe(res => {
 			console.log(res);
 			this.user = res;
@@ -52,12 +62,35 @@ export class UserComponent  {
         });    
     } 
 
+    getRandomRecipes() {
+        this.recipeService.getRandomRecipes().subscribe(
+            (data: any) => {
+                this.recipesToLike = <RecipeAPI[]>data.json();
+                this.loading = false;
+            },
+            (err: any) => { 
+                this.errors = true;
+                this.loading = false;
+                console.log(this.errors)
+            }
+        );
+    }
+
 
     userSettings() {
     	this.settings = true;
     	this.overview = false;
     	this.likedRecipes = false;
     	this.diets = false;
+        this.recommendedRecipes = false;
+    }
+
+    userRecommendedRecipes() {
+        this.settings = false;
+        this.overview = false;
+        this.likedRecipes = false;
+        this.diets = false;
+        this.recommendedRecipes = true;
     }
 
     userOverview() {
@@ -65,13 +98,16 @@ export class UserComponent  {
     	this.settings = false;
     	this.likedRecipes = false;
     	this.diets = false;
+        this.recommendedRecipes = false;
+
     }
 
     userLikedRecipes() {
     	this.likedRecipes = true;
     	this.overview = false;
     	this.settings = false;
-		this.diets = false;    	
+		this.diets = false;
+        this.recommendedRecipes = false;    	
     }
 
     userDiets() {
@@ -79,6 +115,7 @@ export class UserComponent  {
     	this.likedRecipes = false;
     	this.overview = false;
     	this.settings = false;
+        this.recommendedRecipes = false;
     }
 
 }

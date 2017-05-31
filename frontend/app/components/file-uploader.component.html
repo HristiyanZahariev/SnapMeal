@@ -26,9 +26,24 @@
     (drop)="handleDrop($event)"
     (click)="handleTyping($event)">
     </tag-input>
-    <button md-raised-button (click)="recipesWithKeyWords(searchTags)">Search</button>
+    <button md-raised-button (click)="recipesWithKeyWords(searchTags)" class="searchButton">Search</button>
+    <div *ngIf="requestSent && !contentLoaded">
+        <md-spinner></md-spinner>
+    </div>
 </div>
-<recipe [recipes]=response></recipe>
+<div *ngIf="searchedFor">
+    You are searched for {{searchedFor}}
+</div>
+<div class="recipes">
+    <recipe [recipes]=response></recipe>
+</div>
+<div *ngIf="searchingTag && recipesWithTags">
+    <a (click)="getMoreRecipesWithTags()">Get more recipes </a>
+</div>
+
+<div *ngIf="recongizedFile && recipesWithImage">
+    <a (click)="getMoreRecipesWithImage()">Get more recipes </a>
+</div>
 
 <div *ngIf="ifMobile()">
     <div *ngIf="typing">
@@ -40,11 +55,15 @@
         (click)="handleTyping($event)">
         </tag-input>
         <button md-raised-button (click)="recipesWithKeyWords(searchTags)">Search</button>
+        <div *ngIf="requestSent && !contentLoaded">
+            <md-spinner></md-spinner>
+        </div>
     </div>
 
     <input #fileInput type="file" name="file" accept="image/*">
     <button md-raised-button (click)="submitPicture()">Search</button>
+    <div *ngIf="searchedFor">
+      You are searched for {{searchedFor}}
+    </div>
     <recipe [recipes]=response></recipe>
-
-
 </div>

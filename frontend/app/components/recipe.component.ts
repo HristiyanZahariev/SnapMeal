@@ -22,24 +22,24 @@ import {RecipeProfile} from './recipe-profile.component';
   providers: [RecipeService]
 })
 export class RecipeComponent  { 
-	requestSent: boolean;
-	diet: any;
-	starsCount: any[];
-	searchTags: any;
-	picture: any
-	@Input("recipes") 
-	response: RecipeAPI;
+    requestSent: boolean;
+    diet: any;
+    starsCount: any[];
+    searchTags: any;
+    picture: any
+    @Input("recipes") 
+    response: RecipeAPI;
 
-	constructor(private recipeService: RecipeService, private router: Router) {
+    constructor(private recipeService: RecipeService, private router: Router) {
         this.recipeService = recipeService;
     }
 
 
-	setRecipeRating(recipeRating: number, recipeId: number) :void {
-		this.recipeService.setRecipeRating(recipeRating, recipeId).subscribe(res => {
-			console.log(res);
-		});
-	}
+    setRecipeRating(recipeRating: number, recipeId: number) :void {
+        this.recipeService.setRecipeRating(recipeRating, recipeId).subscribe(res => {
+            console.log(res);
+        });
+    }
 
     getRecipeProfile(recipeId: number) {
         this.recipeService.getRecipeProfile(recipeId).subscribe(

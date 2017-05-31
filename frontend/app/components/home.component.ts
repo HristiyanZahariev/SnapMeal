@@ -28,6 +28,7 @@ export class HomeComponent  {
 	showUsers: boolean;
 	diet: any;
 	response: RecipeAPI[];
+	recipesToLike: RecipeAPI[];
 	starsCount: any[];
 	searchTags: any;
 	picture: any
@@ -75,7 +76,21 @@ export class HomeComponent  {
 				console.log(this.errors)
 			}
 		);
+	}
 
+	getRandomRecipes() {
+		this.recipeService.getRandomRecipes().subscribe(
+			(data: any) => {
+				this.recipesToLike = <RecipeAPI[]>data.json();
+				this.loading = false;
+				console.log(this.recipesToLike);
+			},
+			(err: any) => { 
+				this.errors = true;
+				this.loading = false;
+				console.log(this.errors)
+			}
+		);
 	}
 }
 

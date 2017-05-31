@@ -84,7 +84,6 @@ public class RecipeService {
 
     private String scoreMode = "max";
 
-    private int limit = 0;
     ObjectMapper mapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
     Gson gson = new Gson();
@@ -110,7 +109,7 @@ public class RecipeService {
 
     }
 
-    public List<String> getRecipesByDescription(String description, JwtUser currentJwtUser) throws JsonProcessingException {
+    public List<String> getRecipesByDescription(String description, JwtUser currentJwtUser, int from, int to) throws JsonProcessingException {
         NativeSearchQueryBuilder nativeSearchQueryBuilder = new NativeSearchQueryBuilder();
         User currentUser = userRepository.findByUsername(currentJwtUser.getUsername());
         System.out.println(currentUser);
@@ -139,7 +138,7 @@ public class RecipeService {
             //nativeSearchQueryBuilder.withMinScore(minScore);
         }
 
-        NativeSearchQuery nativeSearchQuery = nativeSearchQueryBuilder.withPageable(new PageRequest(2, 5)).build();
+        NativeSearchQuery nativeSearchQuery = nativeSearchQueryBuilder.withPageable(new PageRequest(from, to)).build();
 
         System.out.println("nativeQuery" + nativeSearchQuery.getQuery());
 
@@ -181,7 +180,26 @@ public class RecipeService {
         return recipes;
     }
 
-    public Page<RecipeEs> getRecipeByTags(List<Tags> tags, JwtUser currentJwtUser) {
+    public List<String> getRandomRecipes() {
+        NativeSearchQueryBuilder nativeSearchQueryBuilder = new NativeSearchQueryBuilder();
+
+        QueryBuilder queryBuilder = matchAllQuery();
+        nativeSearchQueryBuilder.withQuery(queryBuilder).withPageable(new PageRequest(0, 15));
+        NativeSearchQuery nativeSearchQuery = nativeSearchQueryBuilder.build();
+
+        Page<RecipeEs> results = elasticsearchTemplate.queryForPage(nativeSearchQuery, RecipeEs.class);
+
+        List<String> ids = new ArrayList<String>();
+
+        for (RecipeEs result : results) {
+            ids.add(result.getId());
+            System.out.println(result.getId());
+        }
+
+        return ids;
+    }
+
+    public List<String> getRecipeByTags(List<Tags> tags, JwtUser currentJwtUser, int from, int to) {
         User currentUser = userRepository.findByUsername(currentJwtUser.getUsername());
         NativeSearchQueryBuilder nativeSearchQueryBuilder = new NativeSearchQueryBuilder();
         List<String> userTags = tags.stream()
@@ -203,10 +221,11 @@ public class RecipeService {
                     .map((ingredient -> ingredient.getName()))
                     .distinct().collect(Collectors.toList());
             QueryBuilder queryBuilder = QueryBuilders.boolQuery()
-                    .must((nestedQuery("ingredient", termsQuery("ingredient.name", userTags))))
+                    .must((nestedQuery("ingredient", termsQuery("ingredient.name", userTags).boost(2.000f))))
                     .mustNot((nestedQuery("ingredient", termsQuery("ingredient.name", unallowedIngredients))));
 
             nativeSearchQueryBuilder.withQuery(queryBuilder);
+            nativeSearchQueryBuilder.withPageable(new PageRequest(from, to));
         }
 
         else {
@@ -214,7 +233,7 @@ public class RecipeService {
                     .must((nestedQuery("ingredient", termsQuery("ingredient.name", userTags))));
 
             nativeSearchQueryBuilder.withQuery(queryBuilder);
-            nativeSearchQueryBuilder.withPageable(new PageRequest(0, 1000));
+            nativeSearchQueryBuilder.withPageable(new PageRequest(from, to));
         }
 
         NativeSearchQuery nativeSearchQuery = nativeSearchQueryBuilder.build();
@@ -223,7 +242,13 @@ public class RecipeService {
 
         Page<RecipeEs> results = elasticsearchTemplate.queryForPage(nativeSearchQuery, RecipeEs.class);
 
-        return results;
+        List<String> ids = new ArrayList<String>();
+
+        for (RecipeEs result : results) {
+            ids.add(result.getId());
+        }
+
+        return ids;
     }
 
     public void rateRecipe(Long recipeId, float value, JwtUser jwtUser) {

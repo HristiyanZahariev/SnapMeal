@@ -69,6 +69,7 @@ public class User {
     @Transient
     private String newPassword;
 
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER, orphanRemoval = true)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Set<UserAuthority> authorities;

@@ -734,3 +734,23 @@ input.submit-button {
 .searcher {
   padding-top: 20px;
 }
+
+.searchButton {
+    padding: 20px;
+    margin: -20px -50px; 
+    position:relative;
+    top:50%; 
+    left:50%;
+}
+
+.randomRecipes {
+  padding-top: 30px;
+}
+
+.recipes {
+  padding-top: 30px;
+}
+
+.searchedFor {
+  text-align: center;
+}

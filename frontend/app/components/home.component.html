@@ -1,23 +1,12 @@
-<carousel>
-  <slide>
-  </slide>
-</carousel>
-
+<div class="container">
+  <div class="jumbotron">
+    <h1>Welcome to SnapMeal</h1>      
+    <p>Here you can find recipes by using a picture. If you want to make a search go ahead and drag your photo to the bar </p>
+  </div>
 <file-uploader></file-uploader>
-<hr>
 <div class="container-fluid">
 <br/>
-    <!-- /.row -->
-
-    <hr>
     <div *ngIf="loading">
         <md-spinner></md-spinner>
     </div>
-    <div *ngIf="response && !loading">
-        <recipe [recipes]=response></recipe>
-    </div>
-    <div *ngIf="errors && !loading">
-        <img src="https://media.npr.org/assets/img/2016/03/29/ap_090911089838_sq-3271237f28995f6530d9634ff27228cae88e3440-s1100-c15.jpg">
-    </div>
-    <hr>
 </div>

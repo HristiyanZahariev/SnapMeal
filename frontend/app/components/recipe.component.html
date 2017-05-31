@@ -1,7 +1,7 @@
 <div *ngIf="response">
     <div class="container">    
       <div class="row">
-        <div class="col-sm-4" *ngFor="let recipes of response">
+        <div class="col-sm-4" *ngFor="let recipes of response" max-height="100px">
             <div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
               <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -13,6 +13,12 @@
                   </div>
                   <div class="modal-body">
                     <strong>{{recipes.recipe.description}}</strong>
+                      <div *ngFor="let ingredient of recipes.ingredients">
+                        {{ingredient.name}} - {{ingredient.amount}}, contains: {{ingredient.proteins}} proteins, {{ingredient.carbs}} carbs and {{ingredient.fats}} fats
+                    </div>
+                    <div>
+                        For {{recipes.recipe.servings}} servings
+                    </div>
                   </div>
                 </div>
               </div>
@@ -21,9 +27,8 @@
             <div class="panel panel-primary">
                 <div class="panel-heading" (click)="lgModal.show()">{{recipes.recipe.name}}</div>
                 <div class="panel-body" (click)="lgModal.show()">
-                    <img src="{{recipes.recipe.imageUrl}}" style="width:100%" alt="Image">
-                    <span text-align="center"> Ingredients </span>
-                    <div *ngFor="let ingredient of recipes.ingredients">
+                    <img src="{{recipes.recipe.imageUrl}}" width="310px" height="300px" alt="Image">
+                    <div *ngFor="let ingredient of recipes.ingredients" height="50px">
                         {{ingredient.name}}
                     </div>
                 </div>

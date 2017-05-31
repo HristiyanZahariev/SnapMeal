@@ -8,48 +8,54 @@ import 'rxjs/add/operator/map';
 export class RecipeService {
 
 	body: any;
+	host_url = "http://localhost:8080/snapmeal"
 
 	constructor(private http: Http, private authHttp: AuthHttp) {
 	}
 	// formData doesnt support authHttp 
-	searchRecipesWithPicture(imageToUpload: any) {
+	searchRecipesWithPicture(imageToUpload: any, from: number, to:number) {
 		let input = new FormData();
 		input.append("image", imageToUpload);
 		let headers = new Headers();
 		headers.set('X-AUTH-TOKEN', localStorage.getItem('id_token'));
 		let options = new RequestOptions({ headers: headers });
-
+		let url = this.host_url + "/image/upload?from=" + from + "&to=" + to;
 		return this.http
-					.post("http://localhost:8080/snapmeal/image/upload", input, options);
+					.post(url, input, options);
 	}
 
 	setRecipeRating(recipeRating: number, recipeId: number) {
-		let url = "http://localhost:8080/snapmeal/recipe/rating?recipe_id=" + recipeId + "&rating=" + recipeRating;
+		let url = this.host_url + "/recipe/rating?recipe_id=" + recipeId + "&rating=" + recipeRating;
 		console.log(url);
 		this.body = null;
 		return this.authHttp.post(url, this.body);
 	}
 
 	getRecipeBy(id: number) {
-		let url = "http://localhost:8080/snapmeal/recipe/" + id;
+		let url = this.host_url + "/recipe/" + id;
+		return this.authHttp.get(url);
+	}
+
+	getRandomRecipes() {
+		let url = this.host_url + "/recipe/random"
 		return this.authHttp.get(url);
 	}
 
 	getRecommendedRecipes() {
-		let url = "http://localhost:8080/snapmeal/recipe/recommend";
+		let url = this.host_url + "/recipe/recommend";
 		return this.authHttp.get(url);
 	}
 
-	searchRecipesWithTags(userInput: any[]) {
+	searchRecipesWithTags(userInput: any[], from: number, to: number) {
 		let body = JSON.stringify(userInput);
 		let headers = new Headers({ 'Content-Type': 'application/json' });
 		let options = new RequestOptions({ headers: headers });
-		let url = "http://localhost:8080/snapmeal/recipe/search"
+		let url = this.host_url + "/recipe/search?from=" + from + "&to=" + to;
 		return this.authHttp.post(url, body, options);
 	}
 
 	getRecipeProfile(recipeId: number) {
-		let url = "http://localhost:8080/snapmeal/recipe/" + recipeId;
+		let url = this.host_url + "/recipe/" + recipeId;
 		return this.authHttp.get(url);
 	}
 }

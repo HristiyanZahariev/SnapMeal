@@ -13,6 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.InputStream;
@@ -35,7 +36,8 @@ public class ImageRecognizerController {
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     public Response searchRecipesWithPicture(
             @FormDataParam("image") InputStream fileInputStream,
-            @FormDataParam("image") FormDataContentDisposition contentDispositionHeader) throws Exception {
+            @QueryParam("from") int from,
+            @QueryParam("to") int to) throws Exception {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         JwtUser currentJwtUser = ((UserAuthentication) authentication).getDetails();
@@ -52,7 +54,7 @@ public class ImageRecognizerController {
         String text = imageRecognitionService.getCaptionText(recognizedContent);
         System.out.println(text);
 
-        List<String> ids = recipeService.getRecipesByDescription(text, currentJwtUser);
+        List<String> ids = recipeService.getRecipesByDescription(text, currentJwtUser, from, to);
 
 
         return Response.ok(recipeService.getRecipesByIds(ids, text)).build();
